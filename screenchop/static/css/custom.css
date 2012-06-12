@@ -1,0 +1,230 @@
+body {
+    background-color: #eee;
+}
+
+.navbar-inner {
+    /* IE10 */ 
+    background-image: -ms-linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    /* Opera */ 
+    background-image: -o-linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0066CC), color-stop(1, #006391));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(top, #0066CC 0%, #0089C9 100%);
+
+    /* Proposed W3C Markup */ 
+    background-image: linear-gradient(top, #0066CC 0%, #006391 100%);
+}
+
+.navbar .brand {
+    color: #ddd;
+}
+
+.navbar .nav > li > a {
+    color: #ddd;
+}
+
+.navbar .nav > li > a:hover {
+    color: #fff;
+}
+
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+    background-color: transparent;
+}
+
+.navbar .divider-vertical {
+    width: 1px;
+    height: 40px;
+    margin: 0 9px;
+    overflow: hidden;
+    background-color: 
+    #006391;
+    border-right: 1px solid 
+    #006391;
+
+}
+
+.navbarupload {
+    margin-right: 280px !important;
+}
+
+
+#results {
+    width: 880px;
+    background-color: #ddd;
+    padding: 10px;
+    margin-top: 30px;
+    clear: left;
+    /*min-height: 600px;*/
+}
+
+#mininav {
+    float: left;
+    width: 100%;
+    border-bottom: 0px solid #000;
+    overflow: hidden;
+    position: relative;
+}
+
+#mininav ul {
+    clear: left; 
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: 3%;
+}
+
+#mininav ul li {
+    display: block;
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    right: 3%;
+}
+
+#mininav ul li a {
+    display: block;
+    margin: 0 0 0 1px;
+    padding: 3px 10px;
+    background: #ddd;
+    color: #000;
+    text-decoration: none;
+    line-height: 1.3em;
+}
+
+#mininav ul li a:hover {
+    background: #369;
+    color: #fff;
+}
+
+#mininav ul li a.active,
+#mininav ul li a.active:hover {
+    color: #fff;
+    background: #000;
+    font-weight: bold;
+}
+
+/* Dropscript Styles */
+
+/*-------------------------
+	Dropbox Element
+--------------------------*/
+
+#dropbox{
+	/* background:url('../img/background_tile_3.jpg'); */
+	    /* IE10 */ 
+    background-image: -ms-linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    /* Opera */ 
+    background-image: -o-linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0066CC), color-stop(1, #006391));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(top, #0066CC 0%, #0089C9 100%);
+
+    /* Proposed W3C Markup */ 
+    background-image: linear-gradient(top, #0066CC 0%, #006391 100%);
+
+	border-radius:3px;
+	position: relative;
+	margin:80px auto 90px;
+	min-height: 290px;
+	overflow: hidden;
+	padding-bottom: 40px;
+    width: 897px;
+
+	box-shadow:0 0 4px rgba(0,0,0,0.3) inset,0 -3px 2px rgba(0,0,0,0.1);
+}
+
+#dropbox .message{
+	font-size: 20px;
+	font-weight: bold;
+    text-align: center;
+    padding-top:160px;
+    display: block;
+    color: #DDD;
+}
+
+#dropbox .message i{
+	color:#ccc;
+	font-size:10px;
+}
+
+#dropbox:before{
+	border-radius:3px 3px 0 0;
+}
+
+/*-------------------------
+	Image Previews
+--------------------------*/
+
+#dropbox .preview{
+	width:220px;
+	height: 215px;
+	float:left;
+	margin: 55px 0 0 60px;
+	position: relative;
+	text-align: center;
+}
+
+#dropbox .preview img{
+	max-width: 220px;
+	max-height:180px;
+	border:3px solid #fff;
+	display: block;
+
+	box-shadow:0 0 2px #000;
+}
+
+#dropbox .imageHolder{
+	display: inline-block;
+	position:relative;
+}
+
+#dropbox .uploaded{
+	position: absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background: url('../img/done.png') no-repeat center center rgba(255,255,255,0.5);
+	display: none;
+}
+
+#dropbox .preview.done .uploaded{
+	display: block;
+}
+
+/*-------------------------
+	Progress Bars
+--------------------------*/
+
+#dropbox .progress {
+	width:100%;
+}
+
+#dropbox .bar {
+	position: absolute;
+	left:0;
+	width:0;
+}
+
+#dropbox .preview.done .bar {
+	width:100% !important;
+}
