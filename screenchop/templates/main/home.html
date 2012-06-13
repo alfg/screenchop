@@ -50,17 +50,28 @@
             </ul>
             <ul class="nav pull-right navbarupload">
                 <li>
+                    <div>
+                        <a class="btn btn-success" href="uploads">Upload</a>
+                    </div>
+                </li>
                 
-                    <div class="btn-group">
-                        <a class="btn btn-primary" href="uploads"><i class="icon-user icon-white"></i> Upload</a>
+                {% if 'username' in session %}
+                <li>
+                    <div class="user-nav btn-group">
+                        <a class="btn btn-primary" href="account"><i class="icon-user icon-white"></i> {{ session.username }}</a>
                         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+                            <li><a href="logout"><i class="icon-eye-close"></i> Logout</a></li>
                         </ul>
-                    </div>
-                
-                
+                    </div>    
                 </li>
+                {% else %}
+                <li>
+                    <div>
+                        <a class="btn btn-primary user-nav" href="login">Login</a>
+                    </div>
+                </li>
+                {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div>

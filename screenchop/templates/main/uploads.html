@@ -72,36 +72,35 @@
 
             <div class="span8">
                 <div id="contents" class="offset3">
-                
-                
-<form class="well" action="upload" method="POST" enctype="multipart/form-data">
-  <label>Upload a Screenshot</label>
-  <input type="text" class="span3" placeholder="Type something…">
-  <span class="help-block">Example block-level help text here.</span>
-  <input class="input-file" id="fileInput" type="file" name="imageupload" />
-  <br>
-  <input type="hidden" name="uploadType" value="single-upload" />
-  <button type="submit" class="btn">Submit</button>
-</form>
+                    
+                    {% if error %}
+                    <div class="alert alert-error">
+                       <a class="close" data-dismiss="alert" href="#">×</a>
+                        <h4 class="alert-heading">Invalid File</h4>
+                    </div>
+                    {% endif %}
+                    
+                    <form class="well" action="upload" method="POST" enctype="multipart/form-data">
+                      <label>Upload a Screenshot</label>
+                      <input type="text" class="span3" placeholder="Type something…">
+                      <span class="help-block">Example block-level help text here.</span>
+                      <input class="input-file" id="fileInput" type="file" name="imageupload" />
+                      <br>
+                      <input type="hidden" name="uploadType" value="single-upload" />
+                      <button type="submit" class="btn">Submit</button>
+                    </form>
 
 
-<div id="dropbox">
-<span class="message">Drop images here to upload.</span>
-</div>
+                    <div id="dropbox">
+                    <span class="message">Drop images here to upload.</span>
+                    </div>
 
 
 
                 </div>
             </div>
 
-            <div class="span2">
-                <h4>Trending</h4>
-                <ul class="unstyled">
-                    <li><h3><a href="#">#TERA</a></h3></li>
-                    <li><h3><a href="#">#SWTOR</a></h3></li>
-                    <li><h3><a href="#">#SWTOR</a></h3></li>
-                </ul>
-            </div>
+
         </div>
     </div> <!-- /container -->
 

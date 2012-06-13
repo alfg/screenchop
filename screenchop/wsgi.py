@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+from screenchop import urls
+from screenchop import config
+
+# app = GUnicorn Hook
+app = urls.app

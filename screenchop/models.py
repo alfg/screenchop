@@ -23,4 +23,9 @@ class Post(Document):
     rating = FloatField()
     width = StringField()
     height = StringField()
+    
+class User(Document):
+    userid = StringField()
+    username = StringField()
+    password = StringField()
 

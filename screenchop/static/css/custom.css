@@ -52,7 +52,11 @@ body {
 }
 
 .navbarupload {
-    margin-right: 280px !important;
+    margin-right: 297px !important;
+}
+
+.navbarupload .user-nav {
+    margin-left: 10px;
 }
 
 
