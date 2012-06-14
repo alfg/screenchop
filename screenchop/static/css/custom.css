@@ -52,7 +52,7 @@ body {
 }
 
 .navbarupload {
-    margin-right: 297px !important;
+    margin-right: 290px !important;
 }
 
 .navbarupload .user-nav {
@@ -117,6 +117,16 @@ body {
     color: #fff;
     background: #000;
     font-weight: bold;
+}
+
+.loginBoxInput {
+    color: #666;
+    text-align: left;
+    width: 150px;
+}
+
+div#login-message {
+    color: red;
 }
 
 /* Dropscript Styles */

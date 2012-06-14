@@ -1,9 +1,135 @@
 
-
-</div> <!-- End of Main Container -->
-
+    <!-- Le javascript
+    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../static/js/jquery-1.7.2.min.js"></script>
     <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/jglance-min.js"></script>
+    <!-- <script src="../static/js/gallery.js"></script> -->
+
+<!-- Load photos -->
+<script>
+var photos = [
+
+{% for p in post %}
+   {filename:'{{ p.filename }}',width:640,height:360,caption:"{{ p.caption }}",thumbnail:'{{ s3ThumbsURL }}{{ p.thumbnail }}'},
+{% endfor %}
+
+];
+
+var jg = new JGlance({
+        container: $('#results'),
+        maxPerRow: 4,
+        photoErrorCallback: function (photo, img) {
+            img.attr( 'src', 'http://placehold.it/350x150' ).addClass( 'broken-image' );
+        }
+    });
+// we pass the photos via 'push' method
+jg.push( photos );
+</script>
+
+<!-- Script to keep navbar on screen when scrolling -->
+<script>
+$(document).scroll(function(){
+    // If has not activated (has no attribute "data-top"
+    if (!$('.subnav').attr('data-top')) {
+        // If already fixed, then do nothing
+        if ($('.subnav').hasClass('subnav-fixed')) return;
+        // Remember top position
+        var offset = $('.subnav').offset()
+        $('.subnav').attr('data-top', offset.top);
+    }
+
+    if ($('.subnav').attr('data-top') - $('.subnav').outerHeight() <= $(this).scrollTop())
+        $('.subnav').addClass('subnav-fixed');
+    else
+        $('.subnav').removeClass('subnav-fixed');
+});
+</script>
+<script>
+    $('#example').tooltip({placement: 'right'})
+</script>
+
+<!-- Login Modal -->
+<div class="modal hide" id="login-form">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Register or Sign in</h3>
+    </div>
+    <div class="modal-body">
+            
+            <p><input id="user" class="loginBoxInput" type="text" name="username" value="username" autocomplete="off"></p>
+            <p><input id="pass" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
+            <p><input id="pass-clear" class="loginBoxInput" type="text" name="password" value="password" autocomplete="off"></p>
+            <p><div id="login-message"></div></p>
+        
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <button type="submit" id="submit" class="btn btn-primary">Sign in</button>
+    </div>
+
+</div>
+
+<!-- User/Pass Login Script -->
+<script> 
+$(document).ready(function() {
+ 
+	$('#pass-clear').show();
+	$('#pass').hide();
+ 
+	$('#pass-clear').focus(function() {
+		$('#pass-clear').hide();
+		$('#pass').show();
+		$('#pass').focus();
+	});
+	$('#pass').blur(function() {
+		if($('#pass').val() == '') {
+			$('#pass-clear').show();
+			$('#pass').hide();
+		}
+	});
+
+	$('#user').each(function() {
+		var default_value = this.value;
+		$(this).focus(function() {
+			if(this.value == default_value) {
+				this.value = '';
+			}
+		});
+		$(this).blur(function() {
+			if(this.value == '') {
+				this.value = default_value;
+			}
+		});
+	});
+
+ 
+});
+</script>
+
+<!-- Check User/Pass -->
+<script>
+	function submitIt() {
+	
+	var user = $("#user").val();
+	var pass = $("#pass").val();
+
+    $.ajax({
+               type: "POST",
+               url: "login",
+               data: { username : user, password : pass }
+                }).done(function( msg ) {
+                $('#login-message').html(msg);
+                });
+                }
+    
+    $("#submit").click(submitIt);
+</script>
 
 
+
+<!-- End of Document -->
+  </body>
+</html>

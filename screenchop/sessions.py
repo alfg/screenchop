@@ -16,12 +16,12 @@ def login():
         try:
             user = User.objects.get(username=username)
         except:
-            return 'user does not exist'
+            return 'User does not exist.'
         
         if user.password == password:
             session['username'] = username
         else:
-            return 'Invalid Password'
+            return 'Invalid Password.'
         
         
         return redirect(url_for('home'))
