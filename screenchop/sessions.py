@@ -23,8 +23,7 @@ def login():
         else:
             return 'Invalid Password.'
         
-        
-        return redirect(url_for('home'))
+        return 'Success'
     return '''
         <form action="" method="post">
             <p><input type=text name=username>

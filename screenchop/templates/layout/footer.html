@@ -2,12 +2,17 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../static/js/jquery-1.7.2.min.js"></script>
-    <script src="../static/js/bootstrap.js"></script>
-    <script src="../static/js/jglance-min.js"></script>
+    <script src="../static/js/lib/jquery-1.7.2.min.js"></script>
+    <script src="../static/js/lib/bootstrap.js"></script>
+    <script src="../static/js/lib/jglance-min.js"></script>
+    <script src="../static/js/lib/jquery.filedrop.js"></script>
+    <script src="../static/js/lib/dropscript.js"></script>
+    <script src="../static/js/custom/login.js"></script>
+    <script src="../static/js/custom/nav.js"></script>
+    <script src="../static/js/custom/tooltips.js"></script>
     <!-- <script src="../static/js/gallery.js"></script> -->
 
-<!-- Load photos -->
+<!-- Load JGlance photos -->
 <script>
 var photos = [
 
@@ -26,28 +31,6 @@ var jg = new JGlance({
     });
 // we pass the photos via 'push' method
 jg.push( photos );
-</script>
-
-<!-- Script to keep navbar on screen when scrolling -->
-<script>
-$(document).scroll(function(){
-    // If has not activated (has no attribute "data-top"
-    if (!$('.subnav').attr('data-top')) {
-        // If already fixed, then do nothing
-        if ($('.subnav').hasClass('subnav-fixed')) return;
-        // Remember top position
-        var offset = $('.subnav').offset()
-        $('.subnav').attr('data-top', offset.top);
-    }
-
-    if ($('.subnav').attr('data-top') - $('.subnav').outerHeight() <= $(this).scrollTop())
-        $('.subnav').addClass('subnav-fixed');
-    else
-        $('.subnav').removeClass('subnav-fixed');
-});
-</script>
-<script>
-    $('#example').tooltip({placement: 'right'})
 </script>
 
 <!-- Login Modal -->
@@ -71,62 +54,6 @@ $(document).scroll(function(){
     </div>
 
 </div>
-
-<!-- User/Pass Login Script -->
-<script> 
-$(document).ready(function() {
- 
-	$('#pass-clear').show();
-	$('#pass').hide();
- 
-	$('#pass-clear').focus(function() {
-		$('#pass-clear').hide();
-		$('#pass').show();
-		$('#pass').focus();
-	});
-	$('#pass').blur(function() {
-		if($('#pass').val() == '') {
-			$('#pass-clear').show();
-			$('#pass').hide();
-		}
-	});
-
-	$('#user').each(function() {
-		var default_value = this.value;
-		$(this).focus(function() {
-			if(this.value == default_value) {
-				this.value = '';
-			}
-		});
-		$(this).blur(function() {
-			if(this.value == '') {
-				this.value = default_value;
-			}
-		});
-	});
-
- 
-});
-</script>
-
-<!-- Check User/Pass -->
-<script>
-	function submitIt() {
-	
-	var user = $("#user").val();
-	var pass = $("#pass").val();
-
-    $.ajax({
-               type: "POST",
-               url: "login",
-               data: { username : user, password : pass }
-                }).done(function( msg ) {
-                $('#login-message').html(msg);
-                });
-                }
-    
-    $("#submit").click(submitIt);
-</script>
 
 
 

@@ -1,4 +1,4 @@
-    <div class="navbar">
+    <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -6,37 +6,37 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project</a>
+          <a class="brand" href="/">Screenchop!</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
-
-                  <li class="dropdown" id="menu1">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
-                      Menu
-                      <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Item</a></li>
-                      <li><a href="#">Item</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Item</a></li>
-                    </ul>
-                  </li>
-
-                  <li class="dropdown" id="menu2">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu2">
-                      Menu2
-                      <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Item</a></li>
-                      <li><a href="#">Item</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Item</a></li>
-                    </ul>
-                  </li>
-
+              <li class="active"><a href="/">Screens</a></li>
+              <li><a href="#about">Tags</a></li>
+              <li><a href="#contact">Friends</a></li>
+            </ul>
+            <ul class="nav pull-right navbarupload">
+                <li>
+                    <div>
+                        <a class="btn btn-success" href="uploads">Upload</a>
+                    </div>
+                </li>
+                
+                {% if 'username' in session %}
+                <li>
+                    <div class="user-nav btn-group">
+                        <a class="btn btn-primary" href="account"><i class="icon-user icon-white"></i> {{ session.username }}</a>
+                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="logout"><i class="icon-eye-close"></i> Logout</a></li>
+                        </ul>
+                    </div>    
+                </li>
+                {% else %}
+                <li>
+                    <div>
+                        <a class="btn btn-primary user-nav" href="#login-form" data-toggle="modal">Login</a>
+                    </div>
+                </li>
+                {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div>
