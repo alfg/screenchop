@@ -13,14 +13,22 @@
     <!-- <script src="../static/js/gallery.js"></script> -->
 
 <!-- Load JGlance photos -->
-<script>
-var photos = [
 
-{% for p in post %}
-   {filename:'{{ p.filename }}',width:640,height:360,caption:"{{ p.caption }}",thumbnail:'{{ s3ThumbsURL }}{{ p.thumbnail }}'},
-{% endfor %}
-
-];
+<script type="text/javascript">
+// Requests json data for gallery images
+var photos = (function () {
+    var photos = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': 'api',
+        'dataType': "json",
+        'success': function (data) {
+            photos = data.images;
+        }
+    });
+    return photos;
+})(); 
 
 var jg = new JGlance({
         container: $('#results'),
