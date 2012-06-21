@@ -8,6 +8,6 @@ setup(name='screenchop',
       author='Alf',
       author_email='alf.g.jr@gmail.com',
       packages=['screenchop'],
-      install_requires=['Flask', 'mongoengine', 'boto']
+      install_requires=['Flask', 'mongoengine', 'boto', 'flask-bcrypt']
 )
 

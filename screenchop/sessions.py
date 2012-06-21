@@ -2,6 +2,8 @@ from flask import Flask
 from flask import request, redirect, url_for, session
 from flask import render_template
 
+from flaskext.bcrypt import check_password_hash
+
 from screenchop.models import *
 from screenchop import config
 
@@ -16,12 +18,12 @@ def login():
         try:
             user = User.objects.get(username=username)
         except:
-            return 'User does not exist.'
+            return 'Invalid Username and/or Password.'
         
-        if user.password == password:
+        if check_password_hash(user.password, password) == True:
             session['username'] = username
         else:
-            return 'Invalid Password.'
+            return 'Invalid Username and/or Password.'
         
         return 'Success'
     return '''
