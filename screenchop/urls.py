@@ -9,6 +9,7 @@ from screenchop import config
 #import views
 from screenchop.views import home
 from screenchop.controllers import upload
+from screenchop.api import images
 from screenchop.sessions import login, logout
 
 
@@ -21,6 +22,9 @@ app.add_url_rule('/uploads', view_func=home.uploads)
 
 # Controllers
 app.add_url_rule('/upload', view_func=upload.upload, methods=['POST'])
+
+# APIs
+app.add_url_rule('/api', view_func=images.getMainImages, methods=['GET'])
 
 # Error Pages
 @app.errorhandler(500)
