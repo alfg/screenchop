@@ -5,41 +5,17 @@
     <script src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script src="../static/js/lib/bootstrap.js"></script>
     <script src="../static/js/lib/jglance-min.js"></script>
+    {% if active_page == "upload" %}
     <script src="../static/js/lib/jquery.filedrop.js"></script>
     <script src="../static/js/lib/dropscript.js"></script>
+    {% endif %}
     <script src="../static/js/custom/login.js"></script>
     <script src="../static/js/custom/nav.js"></script>
     <script src="../static/js/custom/tooltips.js"></script>
+    {% if active_page == "home" %}
+    <script src="../static/js/custom/gallery.js"></script>
+    {% endif %}
     <!-- <script src="../static/js/gallery.js"></script> -->
-
-<!-- Load JGlance photos -->
-
-<script type="text/javascript">
-// Requests json data for gallery images
-var photos = (function () {
-    var photos = null;
-    $.ajax({
-        'async': false,
-        'global': false,
-        'url': 'api/public/images.json',
-        'dataType': "json",
-        'success': function (data) {
-            photos = data.images;
-        }
-    });
-    return photos;
-})(); 
-
-var jg = new JGlance({
-        container: $('#results'),
-        maxPerRow: 4,
-        photoErrorCallback: function (photo, img) {
-            img.attr( 'src', 'http://placehold.it/350x150' ).addClass( 'broken-image' );
-        }
-    });
-// we pass the photos via 'push' method
-jg.push( photos );
-</script>
 
 <!-- Login Modal -->
 <div class="modal hide" id="login-form">
@@ -56,21 +32,23 @@ jg.push( photos );
             <p><input id="pass" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
             <p><input id="pass-clear" class="loginBoxInput" type="text" name="password" value="password" autocomplete="off"></p>
             <p><div id="login-message"></div></p>
+            <p><button type="submit" id="submit" class="btn btn-primary">Sign in</button></p>
             </div>
             
-            <div>
-            <h4><p>Register</h4></p>
+            <div class="pull-right register-form">
+            <p><h4>Register</h4></p>
             <p><input id="user2" class="loginBoxInput" type="text" name="username" value="username" autocomplete="off"></p>
             <p><input id="pass2" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
             <p><input id="pass-clear2" class="loginBoxInput" type="text" name="password" value="password" autocomplete="off"></p>
-            <p><div id="login-message"></div></p>
+            <p><input id="pass-verify" class="loginBoxInput" type="password" name="password-verify" autocomplete="off"></p>
+            <p><button type="submit" id="submit" class="btn btn-success">Register</button></p>
+            <p><div id="register-message"></div></p>
             </div>
             
         
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <button type="submit" id="submit" class="btn btn-primary">Sign in</button>
     </div>
 
 </div>

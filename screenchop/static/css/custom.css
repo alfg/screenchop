@@ -52,13 +52,17 @@ body {
 }
 
 .navbarupload {
-    margin-right: 290px !important;
+
 }
 
 .navbarupload .user-nav {
     margin-left: 10px;
 }
 
+.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width:900px !important;
+
+}
 
 #results {
     width: 880px;
@@ -126,7 +130,11 @@ body {
 }
 
 .login-form {
-    margin-right: 120px;
+    margin-right: 50px;
+}
+
+.register-form {
+    margin-right: 100px;
 }
 
 div#login-message {
