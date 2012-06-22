@@ -125,6 +125,10 @@ body {
     width: 150px;
 }
 
+.login-form {
+    margin-right: 120px;
+}
+
 div#login-message {
     color: red;
 }

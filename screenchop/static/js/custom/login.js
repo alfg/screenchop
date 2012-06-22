@@ -44,6 +44,35 @@ $(document).ready(function loginForm() {
 			}
 		});
 	});
+	
+	$('#pass-clear2').show();
+	$('#pass2').hide();
+ 
+	$('#pass-clear2').focus(function() {
+		$('#pass-clear2').hide();
+		$('#pass2').show();
+		$('#pass2').focus();
+	});
+	$('#pass2').blur(function() {
+		if($('#pass2').val() == '') {
+			$('#pass-clear2').show();
+			$('#pass2').hide();
+		}
+	});
+
+	$('#user2').each(function() {
+		var default_value = this.value;
+		$(this).focus(function() {
+			if(this.value == default_value) {
+				this.value = '';
+			}
+		});
+		$(this).blur(function() {
+			if(this.value == '') {
+				this.value = default_value;
+			}
+		});
+	});
 
 // Checks if Username and/or Password are valid. If valid, redirect back to front page.
 function submitLoginForm() {

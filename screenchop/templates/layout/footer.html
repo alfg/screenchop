@@ -21,7 +21,7 @@ var photos = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': 'api',
+        'url': 'api/public/images.json',
         'dataType': "json",
         'success': function (data) {
             photos = data.images;
@@ -50,10 +50,22 @@ jg.push( photos );
     </div>
     <div class="modal-body">
             
+            <div class="pull-left login-form">
+            <p><h4>Login</h4></p>
             <p><input id="user" class="loginBoxInput" type="text" name="username" value="username" autocomplete="off"></p>
             <p><input id="pass" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
             <p><input id="pass-clear" class="loginBoxInput" type="text" name="password" value="password" autocomplete="off"></p>
             <p><div id="login-message"></div></p>
+            </div>
+            
+            <div>
+            <h4><p>Register</h4></p>
+            <p><input id="user2" class="loginBoxInput" type="text" name="username" value="username" autocomplete="off"></p>
+            <p><input id="pass2" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
+            <p><input id="pass-clear2" class="loginBoxInput" type="text" name="password" value="password" autocomplete="off"></p>
+            <p><div id="login-message"></div></p>
+            </div>
+            
         
     </div>
     <div class="modal-footer">
