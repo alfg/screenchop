@@ -45,22 +45,38 @@ $(document).ready(function loginForm() {
 		});
 	});
 	
-	$('#pass-clear2').show();
-	$('#pass2').hide();
+	$('#pass-register-clear').show();
+	$('#pass-register').hide();
  
-	$('#pass-clear2').focus(function() {
-		$('#pass-clear2').hide();
-		$('#pass2').show();
-		$('#pass2').focus();
+	$('#pass-register-clear').focus(function() {
+		$('#pass-register-clear').hide();
+		$('#pass-register').show();
+		$('#pass-register').focus();
 	});
-	$('#pass2').blur(function() {
-		if($('#pass2').val() == '') {
-			$('#pass-clear2').show();
-			$('#pass2').hide();
+	$('#pass-register').blur(function() {
+		if($('#pass-register').val() == '') {
+			$('#pass-register-clear').show();
+			$('#pass-register').hide();
 		}
 	});
+	
+    $('#pass-verify-clear').show();
+	$('#pass-verify').hide();
+ 
+	$('#pass-verify-clear').focus(function() {
+		$('#pass-verify-clear').hide();
+		$('#pass-verify').show();
+		$('#pass-verify').focus();
+	});
+	$('#pass-verify').blur(function() {
+		if($('#pass-verify').val() == '') {
+			$('#pass-verify-clear').show();
+			$('#pass-verify').hide();
+		}
+	});
+	
 
-	$('#user2').each(function() {
+	$('#user-register').each(function() {
 		var default_value = this.value;
 		$(this).focus(function() {
 			if(this.value == default_value) {
@@ -97,6 +113,30 @@ $.ajax({
             }
 
 $("#submit").click(submitLoginForm);
+
+function submitRegisterForm() {
+
+var user = $("#user-register").val();
+var pass = $("#pass-register").val();
+var passVerify = $("#pass-verify").val();
+
+$.ajax({
+           type: "POST",
+           url: "register",
+           data: { username : user, password : pass, verify : passVerify }
+            }).done(function( msg ) {
+            
+            if (msg == 'Success')
+            {
+            window.location.href = "/";
+            }
+            else {
+            $('#register-message').html(msg);
+            }
+            });
+            }
+
+$("#submit2").click(submitRegisterForm);
 
 
 // End (document).ready()

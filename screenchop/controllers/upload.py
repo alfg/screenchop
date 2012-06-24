@@ -8,13 +8,15 @@ import os
 from time import strftime
 
 from flask import Flask
-from flask import request
+from flask import request, session
 from flask import abort, redirect, url_for, jsonify
 from flask import render_template
 from werkzeug import secure_filename
 
 import boto
 from boto.s3.key import Key
+
+from PIL import Image
 
 from screenchop import config
 from screenchop.models import Post
@@ -41,6 +43,10 @@ def upload():
         filename = secure_filename(image.filename)
         fileloc = config.TEMP_FILE_DIR + secure_filename(image.filename)
         
+        # Setting metadata from image using PIL
+        imageMeta = Image.open(fileloc)
+        width, height = imageMeta.size
+        
         # Connect to S3
         conn = boto.connect_s3(config.AWS_ACCESS_KEY_ID,
                                  config.AWS_SECRET_ACCESS_KEY)
@@ -62,7 +68,7 @@ def upload():
         
         # Create Post in MongoDB
         post = Post(title='test title',
-                submitter='alf',
+                submitter=session['username'],
                 caption='testing caption',
                 tags= ['tera'], 
                 comments=['asdfcomment'],
@@ -70,8 +76,8 @@ def upload():
                 filename=filename, 
                 date=strftime("%Y-%m-%d_%H-%M-%S"), 
                 rating=4, 
-                width='thiswide', 
-                height='thistall')
+                width=width, 
+                height=height)
 
         post.save()
 

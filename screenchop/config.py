@@ -24,3 +24,7 @@ BUCKET_NAME = config.get('s3', 'BUCKET_NAME')
 AWS_ACCESS_KEY_ID = config.get('s3', 'AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config.get('s3', 'AWS_SECRET_ACCESS_KEY')
 S3_THUMBS_URL = config.get('s3', 'S3_THUMBS_URL')
+
+# Gallery Configs
+MAX_IMAGES_PER_ROW = int(config.get('gallery', 'MAX_IMAGES_PER_ROW'))
+HOME_MAX_IMAGES = int(config.get('gallery', 'HOME_MAX_IMAGES'))

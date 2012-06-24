@@ -12,9 +12,10 @@ app = Flask(__name__)
 def home():
 
     s3ThumbsURL = config.S3_THUMBS_URL
-    post = Post.objects.order_by('-date')
+    galleryMaxImages = config.MAX_IMAGES_PER_ROW
 
-    return render_template('main/home.html', post=post, s3ThumbsURL=s3ThumbsURL)
+    return render_template('main/home.html', s3ThumbsURL=s3ThumbsURL,
+                        galleryMaxImages=galleryMaxImages)
     
 def uploads():
     '''

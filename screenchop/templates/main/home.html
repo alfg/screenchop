@@ -1,5 +1,11 @@
 {% set active_page = "home" %}
+
 {% include 'layout/header.html' %}
+
+<!-- Gallery config variables -->
+<script type="text/javascript"> 
+    var galleryMaxImages = {{ galleryMaxImages }};
+</script>
 
   <body>
 
@@ -8,8 +14,8 @@
     <div class="container">
         <div class="row-fluid">
 
-            <div class="">
-                <div id="contents" class="">
+            <div>
+                <div id="contents">
                 
                 <div id="mininav">
                     <ul>

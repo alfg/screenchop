@@ -21,11 +21,11 @@ class Post(Document):
     filename = StringField()
     date = StringField()
     rating = FloatField()
-    width = StringField()
-    height = StringField()
+    width = IntField()
+    height = IntField()
     
 class User(Document):
-    userid = StringField()
-    username = StringField()
+    userid = IntField(unique=True)
+    username = StringField(unique=True)
     password = StringField()
 

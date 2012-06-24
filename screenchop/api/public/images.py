@@ -14,7 +14,7 @@ import json
 def getMainImages():
 
     s3ThumbsURL = config.S3_THUMBS_URL
-    post = Post.objects.order_by('-date')
+    post = Post.objects.order_by('-date').limit(config.HOME_MAX_IMAGES)
     
     #Query list of dictionaries for a JSON object
     jsonImageQuery = [

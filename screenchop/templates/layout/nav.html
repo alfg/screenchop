@@ -14,13 +14,13 @@
               <li><a href="#contact">Friends</a></li>
             </ul>
             <ul class="nav pull-right navbarupload">
+                
+                {% if 'username' in session %}                
                 <li>
                     <div>
                         <a class="btn btn-success" href="uploads">Upload</a>
                     </div>
                 </li>
-                
-                {% if 'username' in session %}
                 <li>
                     <div class="user-nav btn-group">
                         <a class="btn btn-primary" href="account"><i class="icon-user icon-white"></i> {{ session.username }}</a>
@@ -34,8 +34,10 @@
                 <li>
                     <div>
                         <a class="btn btn-primary user-nav" href="#login-form" data-toggle="modal">Login</a>
+                        <a class="btn btn-success user-nav" href="#login-form" data-toggle="modal">Register</a>
                     </div>
                 </li>
+                
                 {% endif %}
             </ul>
           </div><!--/.nav-collapse -->

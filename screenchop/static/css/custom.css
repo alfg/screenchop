@@ -130,14 +130,16 @@ body {
 }
 
 .login-form {
-    margin-right: 50px;
+    margin-left: 60px;
+
 }
 
 .register-form {
-    margin-right: 100px;
+    margin-right: 60px;
 }
 
-div#login-message {
+div#login-message,
+div#register-message {
     color: red;
 }
 

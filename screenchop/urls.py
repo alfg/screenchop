@@ -10,7 +10,7 @@ from screenchop import config
 from screenchop.views import home
 from screenchop.controllers import upload
 from screenchop.api.public import images
-from screenchop.sessions import login, logout
+from screenchop.sessions import login, logout, register
 
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ app.add_url_rule('/uploads', view_func=home.uploads)
 
 # Controllers
 app.add_url_rule('/upload', view_func=upload.upload, methods=['POST'])
+app.add_url_rule('/register', view_func=register, methods=['POST'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])
