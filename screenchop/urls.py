@@ -22,7 +22,7 @@ app.add_url_rule('/uploads', view_func=home.uploads)
 
 # Controllers
 app.add_url_rule('/upload', view_func=upload.upload, methods=['POST'])
-app.add_url_rule('/register', view_func=register, methods=['POST'])
+app.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])
@@ -40,4 +40,3 @@ def not_found(e):
 # Sessions
 app.add_url_rule('/login', view_func=login, methods=['POST', 'GET'])
 app.add_url_rule('/logout', view_func=logout, methods=['POST', 'GET'])
-

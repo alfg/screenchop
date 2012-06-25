@@ -6,6 +6,7 @@ from flaskext.bcrypt import check_password_hash, generate_password_hash
 
 from screenchop.models import *
 from screenchop import config
+from screenchop.forms import RegistrationForm
 
 import sys, traceback
 
@@ -41,7 +42,20 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('home'))
     
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        print 'okay'
+        user = User(userid=User.objects.count() + 1,
+                    username=form.username.data,
+                    password=generate_password_hash(form.password.data))
+        user.save()
+        print user
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('main/register.html', form=form)
     
+"""
 def register():
     ''' Registration controller. Checks and validates if user exists, passwords
     match, and if password/user are populated at all. When accepting registration,
@@ -82,3 +96,4 @@ def register():
 
         
     return 'Successss'
+"""
