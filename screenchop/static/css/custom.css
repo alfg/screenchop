@@ -140,6 +140,7 @@ body {
 
 div#login-message,
 div#register-message {
+    width: 200px;
     color: red;
 }
 

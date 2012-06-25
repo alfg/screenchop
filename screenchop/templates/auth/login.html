@@ -1,0 +1,9 @@
+{% from "auth/_formhelpers.html" import render_field %}
+
+  <dl>
+    {{ render_field(loginForm.username, id="username", class="loginBoxInput") }}
+    {{ render_field(loginForm.password, id="password", class="loginBoxInput") }}
+  </dl>
+  <p><button type="submit" id="submit" class="btn btn-primary">Login</button></p>
+
+  <p><div id="login-message"><ul></ul></div></p>

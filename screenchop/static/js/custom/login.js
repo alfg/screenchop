@@ -93,8 +93,8 @@ $(document).ready(function loginForm() {
 // Checks if Username and/or Password are valid. If valid, redirect back to front page.
 function submitLoginForm() {
 
-var user = $("#user").val();
-var pass = $("#pass").val();
+var user = $("#username").val();
+var pass = $("#password").val();
 
 $.ajax({
            type: "POST",
@@ -116,14 +116,16 @@ $("#submit").click(submitLoginForm);
 
 function submitRegisterForm() {
 
-var user = $("#user-register").val();
-var pass = $("#pass-register").val();
-var passVerify = $("#pass-verify").val();
+var user = $("#userregister").val();
+var pass = $("#passregister").val();
+var passVerify = $("#passverify").val();
+var tos = $("#tos").attr('checked');
+
 
 $.ajax({
            type: "POST",
            url: "register",
-           data: { username : user, password : pass, verify : passVerify }
+           data: { username : user, password : pass, confirm : passVerify, accept_tos : tos }
             }).done(function( msg ) {
             
             if (msg == 'Success')
@@ -131,7 +133,10 @@ $.ajax({
             window.location.href = "/";
             }
             else {
-            $('#register-message').html(msg);
+                $('#register-message').empty()
+                $.each(msg.errors, function(key, value) { 
+                  $('#register-message').append("<li>" + value + "</li>"); 
+                });
             }
             });
             }
