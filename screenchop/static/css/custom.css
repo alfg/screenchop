@@ -130,12 +130,12 @@ body {
 }
 
 .login-form {
-    margin-left: 60px;
+    margin-left: 20px;
 
 }
 
 .register-form {
-    margin-right: 60px;
+    margin-right: 20px;
 }
 
 div#login-message,

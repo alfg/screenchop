@@ -9,6 +9,10 @@ from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm
 
 import sys, traceback
+from functools import wraps
+
+
+
 
 
 def login():
@@ -24,7 +28,7 @@ def login():
             return 'You shall not pass.'
         
         if check_password_hash(user.password, form.password.data) == True:
-            session['username'] = username
+            session['username'] = form.username.data
         else:
             return 'You shall not pass.'
         
@@ -63,3 +67,24 @@ def register():
     # Return POST errors in json
     return jsonify(errors=form.errors)
 
+
+
+"""
+Checks if session exists. If not, then denies access to requested page.
+Must use @requires_auth before each view function to restrict access.
+
+"""
+
+def deny_access():
+    """Sends a 401 response that enables basic auth"""
+    flash('You must login before uploading')
+    return redirect(url_for('home'))
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not "username" in session:
+            return deny_access()
+        return f(*args, **kwargs)
+    return decorated

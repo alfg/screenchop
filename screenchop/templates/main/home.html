@@ -9,9 +9,23 @@
 
   <body>
 
+
     {% include 'layout/nav.html' %}
+    
+   
 
     <div class="container">
+    
+        <!-- Display flash message if any errors -->
+        {% with message = get_flashed_messages() %}
+        {% if message %}
+        <div class="alert alert-error">
+        <button class="close" data-dismiss="alert">×</button>
+                {{ message[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        
         <div class="row-fluid">
 
             <div>
