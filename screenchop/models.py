@@ -19,6 +19,7 @@ class Post(Document):
     comments = ListField()
     thumbnail = StringField()
     filename = StringField()
+    medium = StringField()
     date = StringField()
     rating = FloatField()
     width = IntField()

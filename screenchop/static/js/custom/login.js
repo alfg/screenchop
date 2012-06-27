@@ -15,7 +15,7 @@
 
 // Dynamically clears username and password boxes when focus.
 $(document).ready(function loginForm() {
- 
+ /*
 	$('#pass-clear').show();
 	$('#pass').hide();
  
@@ -89,6 +89,7 @@ $(document).ready(function loginForm() {
 			}
 		});
 	});
+*/
 
 // Checks if Username and/or Password are valid. If valid, redirect back to front page.
 function submitLoginForm() {

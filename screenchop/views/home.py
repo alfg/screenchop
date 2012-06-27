@@ -17,20 +17,20 @@ def home():
     s3ThumbsURL = config.S3_THUMBS_URL
 
     # Configure max images to show on front page
-    galleryMaxImages = config.MAX_IMAGES_PER_ROW
+    maxPerRow = config.MAX_IMAGES_PER_ROW
 
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
 
     return render_template('main/home.html', s3ThumbsURL=s3ThumbsURL,
-                        galleryMaxImages=galleryMaxImages, regForm=regForm, loginForm=loginForm)
+                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm)
 @requires_auth
-def uploads():
+def upload():
     '''
     The uploading view
     
     '''
 
-    return render_template('main/uploads.html')
+    return render_template('main/upload.html')
 

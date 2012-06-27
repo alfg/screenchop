@@ -9,7 +9,7 @@ $(function(){
 		
 		maxfiles: 50,
     	maxfilesize: 5,
-		url: 'upload',
+		url: 'uploader',
 		data: {
 		    uploadType: 'multi-upload'
 		    },

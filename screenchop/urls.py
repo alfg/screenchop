@@ -8,7 +8,7 @@ from screenchop import config
 
 #import views
 from screenchop.views import home
-from screenchop.controllers import upload
+from screenchop.controllers import uploader
 from screenchop.api.public import images
 from screenchop.sessions import login, logout, register
 
@@ -18,10 +18,10 @@ app.secret_key = config.SESSION_KEY
 
 # All views below
 app.add_url_rule('/', view_func=home.home)
-app.add_url_rule('/uploads', view_func=home.uploads)
+app.add_url_rule('/upload', view_func=home.upload)
 
 # Controllers
-app.add_url_rule('/upload', view_func=upload.upload, methods=['POST'])
+app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])
 app.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
 
 # APIs

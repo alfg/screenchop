@@ -17,7 +17,7 @@ var photos = (function () {
 
 var jg = new JGlance({
         container: $('#results'),
-        maxPerRow: galleryMaxImages,
+        maxPerRow: maxPerRow,
         photoErrorCallback: function (photo, img) {
             img.attr( 'src', 'http://placehold.it/350x150' ).addClass( 'broken-image' );
         }

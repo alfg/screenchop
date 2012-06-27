@@ -169,7 +169,7 @@ Modify the background property if you wish to use the light box
 ***************************************************************/
 .jg_left-arrow, .jg_right-arrow {
     /* background should be pointing to the location of the arrows.png file or your own arrows */
-    background: url("/jglance/images/arrows.png") no-repeat scroll 0 0 transparent;
+    background: url("/static/img/arrows.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     display: block;
     height: 90px;

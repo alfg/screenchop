@@ -1,3 +1,6 @@
+import sys, traceback
+from functools import wraps
+
 from flask import Flask
 from flask import request, redirect, url_for, session, flash
 from flask import render_template, jsonify
@@ -7,11 +10,6 @@ from flaskext.bcrypt import check_password_hash, generate_password_hash
 from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm
-
-import sys, traceback
-from functools import wraps
-
-
 
 
 
