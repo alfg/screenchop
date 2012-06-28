@@ -172,7 +172,7 @@ div#register-message {
 
 	border-radius:3px;
 	position: relative;
-	margin:80px auto 90px;
+	margin:25px auto 90px;
 	min-height: 290px;
 	overflow: hidden;
 	padding-bottom: 40px;
@@ -190,7 +190,7 @@ div#register-message {
     color: #DDD;
 }
 
-#dropbox .message i{
+#dropbox .message em{
 	color:#ccc;
 	font-size:10px;
 }

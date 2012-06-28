@@ -21,7 +21,9 @@ from boto.s3.key import Key
 from PIL import Image
 
 from screenchop import config
+from screenchop.sessions import requires_auth
 from screenchop.models import Post
+from screenchop.util import short_url
 
 app = Flask(__name__)
 
@@ -31,11 +33,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+@requires_auth
 def uploader():
-
-    # Generate UUID.hex to use as filename
-    uid = uuid.uuid4()
-    generate_unique = uid.hex
     
     # Accept upload into object
     image = request.files['imageupload']
@@ -70,20 +69,41 @@ def uploader():
         image.thumbnail(thumbsize, Image.ANTIALIAS)
         image.save(thumbfile, "JPEG")
         
+        
+        
+        
+        # Create Post in MongoDB
+        post = Post(title='test title',
+                submitter=session['username'],
+                caption='testing caption',
+                tags= ['tera'], 
+                comments=['asdfcomment'],
+                date=strftime("%Y-%m-%d_%H-%M-%S"), 
+                rating=4, 
+                width=width, 
+                height=height)
+
+        post.save()
+        
+        # set url as a short url to store as filename to S3 and Post Document
+        url = short_url.encode_url(post.uid)
+        
+
+        
+        '''
+        The following uploads the 3 sized images to S3
+        
+        '''        
         # Connect to S3 and set Key object.
         conn = boto.connect_s3(config.AWS_ACCESS_KEY_ID,
                                  config.AWS_SECRET_ACCESS_KEY)
                                  
         b = conn.get_bucket(config.BUCKET_NAME)
-
         k = Key(b)
         
-        '''
-        The following uploads the 3 sized images to S3
         
-        '''
         # Set original file in bucket/full
-        k.key = 'full/' + generate_unique
+        k.key = 'full/' + url
         
         # Upload file to S3 and make public URL
         k.set_contents_from_filename(fullfile)
@@ -92,7 +112,7 @@ def uploader():
         
         
         # Set medium file in bucket/med
-        k.key = 'medium/' + generate_unique
+        k.key = 'medium/' + url
         
         # Upload file to S3 and make public URL
         k.set_contents_from_filename(medfile)
@@ -101,7 +121,7 @@ def uploader():
         
         
         # Set thumb file in bucket/thumbs
-        k.key = 'thumbs/' + generate_unique
+        k.key = 'thumbs/' + url
         
         # Upload file to S3 and make public URL
         k.set_contents_from_filename(thumbfile)
@@ -114,21 +134,9 @@ def uploader():
         os.remove(medfile)
         os.remove(thumbfile)
         
-        # Create Post in MongoDB
-        post = Post(title='test title',
-                submitter=session['username'],
-                caption='testing caption',
-                tags= ['tera'], 
-                comments=['asdfcomment'],
-                thumbnail=generate_unique, 
-                filename=generate_unique, 
-                medium=generate_unique,
-                date=strftime("%Y-%m-%d_%H-%M-%S"), 
-                rating=4, 
-                width=width, 
-                height=height)
+        # Atomically update Post document to Store url
+        Post.objects(id=post.id).update_one(set__filename=url)
 
-        post.save()
 
         if uploadType == 'single-upload':
             return redirect(url_for('upload'))

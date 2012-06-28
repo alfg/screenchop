@@ -20,20 +20,29 @@
                     </div>
                     {% endif %}
                     {% endwith %}
-                    
-                    <form class="well" action="uploader" method="POST" enctype="multipart/form-data">
-                      <label>Upload a Screenshot</label>
+                    <p><h2> Upload a Single File...</h2></p>
+                    <p><h6>*5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
+                    <form class="well form-inline" action="uploader" method="POST" enctype="multipart/form-data">
+                      <!--
                       <input type="text" class="span3" placeholder="Type something…">
                       <span class="help-block">Example block-level help text here.</span>
+                      -->
+                      <input type="text" class="input-medium" placeholder="Title">
+                      <input type="text" class="input-medium" placeholder="Caption">
+                      <input type="text" class="input-large" placeholder="Tags - (separated by commas)">
                       <input class="input-file" id="fileInput" type="file" name="imageupload" />
-                      <br>
-                      <input type="hidden" name="uploadType" value="single-upload" />
-                      <button type="submit" class="btn">Submit</button>
-                    </form>
 
+                      <input type="hidden" name="uploadType" value="single-upload" />
+                      <button type="submit" class="btn btn-success pull-right">Submit</button>
+                      
+                    </form>
+                    
+                    <p><h2>...Or Drag Multiple Images From Your Desktop Here!</h2></p>
+                    <p><h6>*Max 50 images per upload. 5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
 
                     <div id="dropbox">
-                    <span class="message">Drop images here to upload.</span>
+                    <span class="message">Drop images here to upload.<br />
+                    <em>You can add titles, captions and tags during upload or later!</em></span>
                     </div>
 
 
