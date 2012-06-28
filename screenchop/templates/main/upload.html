@@ -14,9 +14,9 @@
                     <!-- Display flash message if any errors -->
                     {% with message = get_flashed_messages() %}
                     {% if message %}
-                    <div class="alert alert-error">
+                    <div class="alert">
                     <button class="close" data-dismiss="alert">×</button>
-                            {{ message[0] }}
+                            <strong>{{ message[0] }}</strong>
                     </div>
                     {% endif %}
                     {% endwith %}
@@ -27,9 +27,9 @@
                       <input type="text" class="span3" placeholder="Type something…">
                       <span class="help-block">Example block-level help text here.</span>
                       -->
-                      <input type="text" class="input-medium" placeholder="Title">
-                      <input type="text" class="input-medium" placeholder="Caption">
-                      <input type="text" class="input-large" placeholder="Tags - (separated by commas)">
+                      <input type="text" class="input-medium" placeholder="Title" name="title">
+                      <input type="text" class="input-medium" placeholder="Caption" name="caption">
+                      <input type="text" class="input-large" placeholder="Tags - (separated by commas)" name="tags">
                       <input class="input-file" id="fileInput" type="file" name="imageupload" />
 
                       <input type="hidden" name="uploadType" value="single-upload" />

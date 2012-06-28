@@ -239,3 +239,41 @@ Modify the background property if you wish to use the light box
 .jg_lightbox-info {
     text-align: left;
 }
+
+.lightbox-caption {
+    background-color: #fff;
+    border: 1px solid #C1C1C1;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    color: #333;
+    margin-top: 5px;
+    padding: 10px;
+}
+
+.hovered {
+    margin: 0 10px;
+    padding: 5px;
+    color: #000;
+    background-color: #c1c1c1;
+    background-color: rgba(231,234,234,0.9);
+    -moz-white-space: nowrap;
+    -webkit-white-space: nowrap;
+    -o-white-space: nowrap;
+    -ms-white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    -moz-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    -webkit-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    -o-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    -ms-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    -moz-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}

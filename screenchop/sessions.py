@@ -49,14 +49,21 @@ def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
 
-        user = User(userid=User.objects.count() + 1,
-                    username=form.username.data,
-                    password=generate_password_hash(form.password.data))
-        user.save()
-        session['username'] = form.username.data
-        print 'user created', user
+        # Check or create if user does not exist
+        user, created = User.objects.get_or_create(username=form.username.data)
+        
+        # if created == True, then create a password, save and login session
+        if created:
+            user.password = generate_password_hash(form.password.data)
+            user.save()
+            session['username'] = form.username.data
+            flash('Thanks for registering!')
+            return 'Success'
+        else:
+            error = {"duplicate": ["Please choose another username"]}
+            return jsonify(errors=error)
+            
 
-        return 'Success'
 
     # Go home if called via GET request directly.
     elif request.method == 'GET':

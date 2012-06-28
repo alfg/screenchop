@@ -15,9 +15,24 @@ var photos = (function () {
     return photos;
 })(); 
 
+var inLightBox = function(photo) {
+    if ( !photo.caption ) { return; }
+    return $('<div />').addClass( 'lightbox-caption' ).html( photo.caption );
+};
+
+var hovered = function(photo) {
+    return $('<div />')
+                .addClass( 'hovered' )
+                .html( 'Filename: ' + photo.filename + ' | Dimensions: ' + photo.width + ' x ' + photo.height );
+};
+
 var jg = new JGlance({
         container: $('#results'),
         maxPerRow: maxPerRow,
+        enableLightBox: true,
+        lightBoxInfoCallback: inLightBox,
+        enableHoverInfo: true,
+        hoverInfoCallback: hovered,
         photoErrorCallback: function (photo, img) {
             img.attr( 'src', 'http://placehold.it/350x150' ).addClass( 'broken-image' );
         }

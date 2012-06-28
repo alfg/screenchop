@@ -33,4 +33,13 @@ def upload():
     '''
 
     return render_template('main/upload.html')
+    
+@requires_auth
+def account():
+    '''
+    The uploading view
+    
+    '''
+
+    return render_template('main/account.html')
 

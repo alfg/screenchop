@@ -40,6 +40,27 @@ def uploader():
     image = request.files['imageupload']
     uploadType = request.form['uploadType']
     
+    # If single file upload, then store some extra request.form values
+    if uploadType == 'single-upload':
+
+        # Store optional fields into variables if they exist
+        if request.form['title']:
+            title = request.form['title']
+        else:
+            title = None
+        if request.form['caption']:
+            caption = request.form['caption']
+        else:
+            caption = None
+        if request.form['tags']:
+            tags = request.form['tags']
+        else:
+            tags = None
+            
+    # Otherwise, just set them to None as there's no data.
+    else:
+        title, caption, tags = None, None, None
+    
     if image and allowed_file(image.filename):
     
         # Create temp file
@@ -73,10 +94,10 @@ def uploader():
         
         
         # Create Post in MongoDB
-        post = Post(title='test title',
+        post = Post(title=title,
                 submitter=session['username'],
-                caption='testing caption',
-                tags= ['tera'], 
+                caption=caption,
+                tags= [tags], 
                 comments=['asdfcomment'],
                 date=strftime("%Y-%m-%d_%H-%M-%S"), 
                 rating=4, 
@@ -139,6 +160,7 @@ def uploader():
 
 
         if uploadType == 'single-upload':
+            flash("File Uploaded")
             return redirect(url_for('upload'))
         else:
             return jsonify(result='success')

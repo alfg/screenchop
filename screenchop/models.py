@@ -27,7 +27,7 @@ class Post(Document):
     height = IntField()
     
 class User(Document):
-    userid = IntField(unique=True)
+    userid = SequenceField()
     username = StringField(unique=True)
     password = StringField()
 
