@@ -4,9 +4,11 @@ from flask import Flask
 from flask import request, session, redirect, url_for
 from flask import render_template, flash
 
+from flaskext.bcrypt import check_password_hash, generate_password_hash
+
 from screenchop.models import *
 from screenchop import config
-from screenchop.forms import RegistrationForm, LoginForm
+from screenchop.forms import RegistrationForm, LoginForm, AccountForm
 
 from screenchop.sessions import *
 
@@ -28,7 +30,7 @@ def home():
 @requires_auth
 def upload():
     '''
-    The uploading view
+    The Upload View
     
     '''
 
@@ -37,9 +39,19 @@ def upload():
 @requires_auth
 def account():
     '''
-    The uploading view
+    The Account View
     
     '''
-
-    return render_template('main/account.html')
+    user = User.objects.get(username = session['username'])
+    form = AccountForm(request.form)
+    if request.method == 'POST' and form.validate():
+        if check_password_hash(user.password, form.currentpass.data):
+            User.objects(username=session['username']).update(set__password=generate_password_hash(form.newpass.data))
+            flash('Account updated')
+            return redirect(url_for('account'))
+        else:
+            flash('Current password did not match. Account not updated')
+            return redirect(url_for('account'))
+        
+    return render_template('main/account.html', user=user, form=form)
 

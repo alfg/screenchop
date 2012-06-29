@@ -30,4 +30,5 @@ class User(Document):
     userid = SequenceField()
     username = StringField(unique=True)
     password = StringField()
+    email = EmailField()
 

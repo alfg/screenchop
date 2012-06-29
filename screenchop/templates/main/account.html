@@ -21,27 +21,29 @@
                     {% endif %}
                     {% endwith %}
                     
-                    <form class="well">
-                        <label>Username</label>
-                        <input type="text" class="span3" placeholder="alf" disabled>
-                        
-                        <label>Email</label>
-                        <input type="text" class="span3" placeholder="test@test.com">
-                        
-                        <label>New Password</label>
-                        <input type="password" class="span3">
-                        
-                        <label>Re-enter New Password</label>
-                        <input type="password" class="span3">
-                        
-                        <label>Current Password</label>
-                        <input type="password" class="span3">
-                        <p class="help-block">*Required to update account information.</p>     
-                        <br />
-                        <label class="checkbox">
-                        <input type="checkbox"> Receive email notifications
-                        </label>
-                        <br />
+
+                        <ul class="nav nav-pills">
+                          <li class="active"><a href="#">Profile</a></li>
+                          <li><a href="#">Uploads</a></li>
+                          <li><a href="#">Comments</a></li>
+                          <li><a href="#">Friends</a></li>
+                        </ul>
+
+                    
+                    {% from "auth/_formhelpers.html" import render_field %}
+                    <form class="well" method="post" action="/account">
+                                            
+                        {# Username and Email are disabled fields #}
+                        <dl>
+                            <dt><label>Username</label></dt>
+                            <dd><input type="text" class="span3" placeholder="{{ user.username }}" disabled></dd>
+                            <dt><label>Email</label></dt>
+                            <dd><input type="text" class="span3" placeholder="{{ user.email }}" disabled></dl></dd>
+                        <dl>
+                        {{ render_field(form.newpass) }}
+                        {{ render_field(form.confirm) }}
+                        {{ render_field(form.currentpass) }}
+                        </dl>
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
 

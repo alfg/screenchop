@@ -19,7 +19,7 @@ app.secret_key = config.SESSION_KEY
 # All views below
 app.add_url_rule('/', view_func=home.home)
 app.add_url_rule('/upload', view_func=home.upload)
-app.add_url_rule('/account', view_func=home.account)
+app.add_url_rule('/account', view_func=home.account, methods=['POST', 'GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])

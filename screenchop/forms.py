@@ -12,3 +12,14 @@ class RegistrationForm(Form):
 class LoginForm(Form):
     username = TextField('Username')
     password = PasswordField('Password')
+    
+class AccountForm(Form):
+    newpass = PasswordField('New Password', [
+        validators.Required(message='Password required'),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
+    currentpass = PasswordField('Current Password', [
+        validators.Required(message='Current password required')
+    ])
+    
