@@ -21,7 +21,7 @@ def getMainImages():
     
     #Query list of dictionaries for a JSON object
     jsonImageQuery = [
-                        {'filename' : s3FullURL + x.filename,
+                        {'filename' : x.filename,
                          'thumbnail' : s3ThumbsURL + x.filename,
                          'large' : s3MediumURL + x.filename,
                          'width' : x.width,

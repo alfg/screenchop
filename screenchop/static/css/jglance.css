@@ -32,6 +32,7 @@ html[xmlns] .jg_clearfix {
     float: left;
     position: relative;
     margin: 3px;
+    cursor: pointer;
 }
 
 .jg_result-item.last {
@@ -83,6 +84,7 @@ html[xmlns] .jg_clearfix {
 
 .jg_result-hover img {
     padding: 10px 10px 7px;
+    cursor: pointer;
 }
 
 .jg_hover-info {
@@ -275,5 +277,5 @@ Modify the background property if you wish to use the light box
     -o-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: default;
+    cursor: pointer;
 }

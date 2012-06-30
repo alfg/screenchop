@@ -26,11 +26,16 @@ var hovered = function(photo) {
                 .html( 'Filename: ' + photo.filename + ' | Dimensions: ' + photo.width + ' x ' + photo.height );
 };
 
+var click = function(photo) {
+    return window.location.href = "/chop/" + photo.filename;
+};
+
 var jg = new JGlance({
         container: $('#results'),
         maxPerRow: maxPerRow,
-        enableLightBox: true,
+        enableLightBox: false,
         lightBoxInfoCallback: inLightBox,
+        photoClickCallback: click,
         enableHoverInfo: true,
         hoverInfoCallback: hovered,
         photoErrorCallback: function (photo, img) {

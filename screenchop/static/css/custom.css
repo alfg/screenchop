@@ -257,3 +257,37 @@ div#register-message {
 #dropbox .preview.done .bar {
 	width:100% !important;
 }
+
+/* Chops Page */
+#chop-image {
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #ddd;
+}
+
+#chop-image img {
+    max-width: 890px;
+    padding: 4px;
+    line-height: 1;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px 
+    rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 1px 1px 
+    rgba(0, 0, 0, 0.075);
+}
+
+/* Social Buttons on Chops page */
+#social {
+    margin: 10px;
+}    
+div .plusone, .twitter, .fb-like {
+    font-size: 1px;
+    display: inline-block;
+}
+div .fb_reset {
+    display: inline;
+} 
