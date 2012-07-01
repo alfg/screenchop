@@ -18,7 +18,6 @@ def chop(filename):
     
     '''
     chop = Post.objects.get(filename = filename)
-    print chop
     
     # For registration/login validation
     regForm = RegistrationForm(request.form)
@@ -26,7 +25,6 @@ def chop(filename):
     
     fullURL = config.DOMAIN_URL
     shortURL = config.SHORT_DOMAIN_URL
-    print fullURL
         
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,

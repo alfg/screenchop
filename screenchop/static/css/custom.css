@@ -112,14 +112,14 @@ body {
 }
 
 #mininav ul li a:hover {
-    background: #369;
+    background: #08C;
     color: #fff;
 }
 
 #mininav ul li a.active,
 #mininav ul li a.active:hover {
-    color: #fff;
-    background: #000;
+    color: #DDD;
+    background: #08C;
     font-weight: bold;
 }
 
@@ -355,4 +355,26 @@ div#register-message {
     display: inline;
 }
 
+.vote-icons {
+    line-height: 40px;
+    color: #666;
+}
+
+.vote-icons a {
+    color: #666;
+    text-decoration: none;
+}
+
+.vote-icons a:hover {
+    color: #08c;
+}
+#social-area .votes {
+    font-size: 30px;
+    color: #08C;
+    margin-right: 4px;
+    font-weight: bold;
+    position: relative;
+    bottom: 2px;
+    
+}
 
