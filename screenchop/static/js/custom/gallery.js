@@ -27,7 +27,7 @@ var hovered = function(photo) {
 };
 
 var click = function(photo) {
-    return window.location.href = "/chop/" + photo.filename;
+    return window.location.href = "/" + photo.filename;
 };
 
 var jg = new JGlance({

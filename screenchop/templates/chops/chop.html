@@ -6,24 +6,14 @@
 
     <body>
     
-    <!-- Facebook Like requirement -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=256893091092457";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-  
-    <!-- G+ requirement -->
-    <script type="text/javascript">
-    (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
-    </script> 
+    <!-- onClick popup windows for facebook share -->
+    <script>
+    function socialPopup (url) {
+        popup = window.open(url, "social_popup",
+            "width=660,height=400,status=no,scrollbars=no,resizable=no");
+            popup.focus();
+            }
+    </script>
 
 
     {% include 'layout/nav.html' %}
@@ -51,36 +41,45 @@
                 <div>
                 
                 <div id="chop-image">
-                    <a href="#">
-                        <img class="thumbnsail" src="http://images.screenchop.com/medium/{{ chop.filename }}" alt="">
+                    <a href="http://images.screenchop.com/full/{{ chop.filename }}">
+                        <img src="http://images.screenchop.com/medium/{{ chop.filename }}" alt="">
                     </a>
                 </div>
                 
-                <div class="well">
-                <p>
-                    <h3>{{ chop.caption }}</h3>
-                </p>
+                {% if chop.caption != None %}
+                <div class="well">                
+                    <blockquote>
+                        <p>{{ chop.caption }}</p>
+                        <small>{{ chop.submitter }}</small>
+                    </blockquote>
+                </div>
+                {% else %}
+                {% endif %}
                 
+                <div id="social-area">
+                    <div class="pull-right">
+                    <input class="share-url" value="{{ shortURL }}{{ chop.filename }}">
+                    </div>
                 
-                <div id="social">
-                    <!-- +1 -->
-                    <div class="plusone">
-                    <!-- Place this tag where you want the +1 button to render -->
-                    <g:plusone size="medium" annotation="none"></g:plusone>
-                    <!-- Place this render call where appropriate -->
-                   
+                    <div class="pull-right">
+                    <ul class="share-group">
+                    <li class="primary-service">
+                         <a class="share-service-button" href="http://www.facebook.com/sharer.php?u={{ fullURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                         <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook">
+                         </a>
+                    </li><li class="primary-service">
+                         <a class="share-service-button" href="https://twitter.com/share?text={{ shortURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                         <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter">
+                         </a>
+                    </li><li class="primary-service">
+                         <a class="share-service-button" href="https://plus.google.com/share?url={{ fullURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                         <img src="../static/img/pixel.gif" alt="Google+" class="share-service-icon share-service-icon-googleplus">
+                         </a>
+                    </li></ul>
                     </div>
-                    <div class="twitter">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="dominoc">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>    
-                    </div>
-                    <div class="fb-like" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
-                    <br /><span class="input-medium uneditable-input">http://schop.co/{{ chop.filename }}</span>                
+                
                 </div>
 
-                
-                </div>
-                
-                
                 <!-- Load Disqus -->
                 <div id="disqus_thread"></div>
                 <script type="text/javascript">

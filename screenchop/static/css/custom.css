@@ -281,13 +281,78 @@ div#register-message {
 }
 
 /* Social Buttons on Chops page */
-#social {
-    margin: 10px;
-}    
-div .plusone, .twitter, .fb-like {
-    font-size: 1px;
-    display: inline-block;
+
+#social-area {
+    background: white;
+    padding: 10px;
+    height: 35px;
+    position: relative;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    -ms-box-shadow: 0 1px 1px #ccc;
+    -webkit-box-shadow: 0 1px 1px #CCC;
+    box-shadow: 0 1px 1px #CCC;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 10px;
 }
-div .fb_reset {
+
+.share-url {
+    width: 150px;
+    padding: 7px 10px;
+    background: 
+    #F6F6F6;
+    color: 
+    #666;
+    font-size: 13px;
+    border: 1px solid 
+    #B9B9B9;
+    border-top-color: 
+    #A4A4A4;
+    -moz-box-shadow: 0 1px 0 #fff,inset 0 1px 1px rgba(0,0,0,.17);
+    -ms-box-shadow: 0 1px 0 #fff,inset 0 1px 1px rgba(0,0,0,.17);
+    -webkit-box-shadow: 0 1px 0 
+    white,inset 0 1px 1px 
+    rgba(0, 0, 0, .17);
+    box-shadow: 0 1px 0 
+    white,inset 0 1px 1px 
+    rgba(0, 0, 0, .17);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.share-service-button .share-service-icon {
+    background-image: url('../img/social-icons.png');
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+.share-service-icon-facebook {
+    background-position: 0 -881px;
+}
+.share-service-icon-twitter {
+    background-position: 0 -52px;
+}
+.share-service-icon-googleplus {
+    background-position: 0 -120px;
+}
+.share-service-button {
+    cursor: pointer;
+    text-align: left;
+}
+.share-panel-services .primary-service {
+    float: left;
+    width: 35px;
+    margin-right: 5px;
+}
+.share-panel-services {
+    line-height: 0;
+}
+.share-group li {
     display: inline;
-} 
+}
+
+

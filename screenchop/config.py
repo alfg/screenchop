@@ -11,6 +11,8 @@ PORT = int(config.get('app', 'PORT'))
 DEBUG = config.get('app', 'DEBUG')
 TEMP_FILE_DIR = config.get('app', 'TEMP_FILE_DIR')
 SESSION_KEY = config.get('app', 'SESSION_KEY')
+DOMAIN_URL = config.get('app', 'DOMAIN_URL')
+SHORT_DOMAIN_URL = config.get('app', 'SHORT_DOMAIN_URL')
 
 # Mongo Configs
 MONGO_DATABASE = config.get('mongodb', 'DATABASE')

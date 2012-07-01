@@ -20,7 +20,7 @@ app.secret_key = config.SESSION_KEY
 app.add_url_rule('/', view_func=home.home)
 app.add_url_rule('/upload', view_func=home.upload)
 app.add_url_rule('/account', view_func=home.account, methods=['POST', 'GET'])
-app.add_url_rule('/chop/<filename>', view_func=chops.chop, methods=['GET'])
+app.add_url_rule('/<filename>', view_func=chops.chop, methods=['GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])

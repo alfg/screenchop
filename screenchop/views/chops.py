@@ -22,8 +22,13 @@ def chop(filename):
     
     # For registration/login validation
     regForm = RegistrationForm(request.form)
-    loginForm = LoginForm(request.form)    
+    loginForm = LoginForm(request.form)
+    
+    fullURL = config.DOMAIN_URL
+    shortURL = config.SHORT_DOMAIN_URL
+    print fullURL
         
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
-                            loginForm=loginForm)
+                            loginForm=loginForm, fullURL=fullURL,
+                            shortURL=shortURL)
 
