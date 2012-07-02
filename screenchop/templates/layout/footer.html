@@ -15,9 +15,10 @@
     {% if active_page == "home" %}
     <script src="../static/js/custom/gallery.js"></script>
     {% endif %}
+    <script src="../static/js/custom/votes.js"></script>
     <!-- <script src="../static/js/gallery.js"></script> -->
 
-{% if active_page == "home" %}
+{% if requires_loginForms == True %}
 <!-- Login Modal -->
 <div class="modal hide" id="login-form">
 

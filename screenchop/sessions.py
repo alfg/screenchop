@@ -82,7 +82,7 @@ Must use @requires_auth before each view function to restrict access.
 
 def deny_access():
     """Sends a 401 response that enables basic auth"""
-    flash('You must login before uploading')
+    flash('You must login first.')
     return redirect(url_for('home'))
 
 def requires_auth(f):

@@ -7,8 +7,8 @@ from flask import render_template
 from screenchop import config
 
 #import views
-from screenchop.views import home, chops
-from screenchop.controllers import uploader
+from screenchop.views import home, chops, account
+from screenchop.controllers import uploader, vote
 from screenchop.api.public import images
 from screenchop.sessions import login, logout, register
 
@@ -18,13 +18,18 @@ app.secret_key = config.SESSION_KEY
 
 # All views below
 app.add_url_rule('/', view_func=home.home)
+app.add_url_rule('/top', view_func=home.home_top)
+app.add_url_rule('/new', view_func=home.home_new)
 app.add_url_rule('/upload', view_func=home.upload)
-app.add_url_rule('/account', view_func=home.account, methods=['POST', 'GET'])
-app.add_url_rule('/<filename>', view_func=chops.chop, methods=['GET'])
+app.add_url_rule('/account', view_func=account.account, methods=['POST', 'GET'])
+app.add_url_rule('/account/uploads', view_func=account.account_uploads, methods=['POST', 'GET'])
+app.add_url_rule('/c/<filename>', view_func=chops.chop, methods=['GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])
 app.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
+app.add_url_rule('/upvote', view_func=vote.upvote, methods=['POST', 'GET'])
+app.add_url_rule('/downvote', view_func=vote.downvote, methods=['POST', 'GET'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])

@@ -1,4 +1,4 @@
-    {% set active_page = "upload" %}
+    {% set active_page = "account" %}
     {% include 'layout/header.html' %}
 
     <body>
@@ -24,8 +24,8 @@
 
                         <ul class="nav nav-pills">
                           <li class="active"><a href="#">Profile</a></li>
-                          <li><a href="#">Uploads</a></li>
-                          <li><a href="#">Comments</a></li>
+                          <li><a href="account/uploads">Uploads</a></li>
+                          {# <li><a href="#">Comments</a></li> #}
                           <li><a href="#">Friends</a></li>
                         </ul>
 
@@ -36,9 +36,9 @@
                         {# Username and Email are disabled fields #}
                         <dl>
                             <dt><label>Username</label></dt>
-                            <dd><input type="text" class="span3" placeholder="{{ user.username }}" disabled></dd>
+                            <dd><input type="text" placeholder="{{ user.username }}" disabled></dd>
                             <dt><label>Email</label></dt>
-                            <dd><input type="text" class="span3" placeholder="{{ user.email }}" disabled></dl></dd>
+                            <dd><input type="text" placeholder="{{ user.email }}" disabled></dl></dd>
                         <dl>
                         {{ render_field(form.newpass) }}
                         {{ render_field(form.confirm) }}

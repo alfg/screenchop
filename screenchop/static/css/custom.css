@@ -267,6 +267,7 @@ div#register-message {
 
 #chop-image img {
     max-width: 890px;
+    max-height: 600px;
     padding: 4px;
     line-height: 1;
     border: 1px solid #DDD;
@@ -365,11 +366,24 @@ div#register-message {
     text-decoration: none;
 }
 
-.vote-icons a:hover {
-    color: #08c;
+.vote-icons a.upvote-button:hover {
+    color: #51A351;
 }
+
+.vote-icons a.downvote-button:hover {
+    color: #C00;
+}
+
+.vote-icons a.upvote-button.highlighted {
+    color: #51A351;
+}
+
+.vote-icons a.downvote-button.highlighted {
+    color: #C00;
+}
+
 #social-area .votes {
-    font-size: 30px;
+    font-size: 28px;
     color: #08C;
     margin-right: 4px;
     font-weight: bold;

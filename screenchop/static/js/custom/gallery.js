@@ -6,7 +6,7 @@ var photos = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': 'api/public/images.json',
+        'url': 'api/public/images.json?sort=' + sortType,
         'dataType': "json",
         'success': function (data) {
             photos = data.images;
@@ -23,11 +23,11 @@ var inLightBox = function(photo) {
 var hovered = function(photo) {
     return $('<div />')
                 .addClass( 'hovered' )
-                .html( 'Filename: ' + photo.filename + ' | Dimensions: ' + photo.width + ' x ' + photo.height );
+                .html( 'Score: ' + photo.score );
 };
 
 var click = function(photo) {
-    return window.location.href = "/" + photo.filename;
+    return window.location.href = "/c/" + photo.filename;
 };
 
 var jg = new JGlance({

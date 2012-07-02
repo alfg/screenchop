@@ -1,6 +1,11 @@
 {% set active_page = "chop" %}
+{% set requires_loginForms = True %}
 
 {% include 'layout/header.html' %}
+
+<script type="text/javascript"> 
+    var votes = {{ votes }};
+</script>
 
 <!-- Gallery config variables -->
 
@@ -50,26 +55,29 @@
                 <div class="well">                
                     <blockquote>
                         <p>{{ chop.caption }}</p>
-                        <small>{{ chop.submitter }}</small>
+                        <small>Submitted by {{ chop.submitter }}</small>
                     </blockquote>
                 </div>
                 {% else %}
+                <span class="badge badge-info">
+                Submitted by {{ chop.submitter }}
+                </span><br /><br />
                 {% endif %}
                 
                 <div id="social-area">
                     <div class="pull-left vote-icons">
-                        <span class="votes">1234</span>
+                        <span class="votes">{{ votes }}</span>
                         <span style="font-size: 28px;">
-                            <a href="#"><i class="icon-circle-arrow-up icon-large"></i></a>
+                            <a class="upvote-button" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-up icon-large"></i></a>
                         </span>
                         <span style="font-size: 28px;">
-                            <a href="#"><i class="icon-circle-arrow-down icon-large"></i></a>
+                            <a class="downvote-button" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-down icon-large"></i></a>
                         </span>
                     </div>
                 
                 
                     <div class="pull-right">
-                    <input class="share-url" value="{{ shortURL }}{{ chop.filename }}">
+                    <input class="share-url" value="{{ shortURL }}{{ chop.filename }}" disabled>
                     </div>
                 
                     <div class="pull-right">
@@ -104,8 +112,6 @@
                         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                     })();
                 </script>
-                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         
                 
 

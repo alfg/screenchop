@@ -98,9 +98,7 @@ def uploader():
                 submitter=session['username'],
                 caption=caption,
                 tags= [tags], 
-                comments=['asdfcomment'],
                 date=strftime("%Y-%m-%d_%H-%M-%S"), 
-                rating=4, 
                 width=width, 
                 height=height)
 
@@ -160,7 +158,7 @@ def uploader():
 
 
         if uploadType == 'single-upload':
-            flash("File Uploaded")
+            flash("Screenshot upload - View here. %sc/%s" % (config.DOMAIN_URL, url), 'uploaded')
             return redirect(url_for('upload'))
         else:
             return jsonify(result='success')

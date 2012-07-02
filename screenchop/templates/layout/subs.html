@@ -1,0 +1,8 @@
+<div id="mininav">
+    <ul>
+        <li><a href="/" {% if active_sub == 'hot' %} class="active"{% endif %}>Hot</a></li>
+        <li><a href="/top" {% if active_sub == 'top' %} class="active"{% endif %}>Top</a></li>
+        <li><a href="/new" {% if active_sub == 'new' %} class="active"{% endif %}>New</a></li>
+        <li><a id="add-category" href="#" rel="tooltip" title="Add custom categories!">+</a></li>
+    </ul>
+</div>

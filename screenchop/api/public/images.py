@@ -12,12 +12,19 @@ import json
 #app = Flask(__name__)
 
 def getMainImages():
-
+    sortType = request.args.get('sort')
+    
     s3ThumbsURL = config.S3_THUMBS_URL
     s3FullURL = config.S3_FULL_URL
     s3MediumURL = config.S3_MEDIUM_URL
     
-    post = Post.objects.order_by('-date').limit(config.HOME_MAX_IMAGES)
+    if sortType == 'new':
+        post = Post.objects.order_by('-date').limit(config.HOME_MAX_IMAGES)
+    elif sortType == 'top':
+        post = Post.objects.order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+    else:
+        post = Post.objects.order_by('-date').limit(config.HOME_MAX_IMAGES)
+
     
     #Query list of dictionaries for a JSON object
     jsonImageQuery = [
@@ -26,7 +33,10 @@ def getMainImages():
                          'large' : s3MediumURL + x.filename,
                          'width' : x.width,
                          'height' : x.height,
-                         'caption' : x.caption
+                         'caption' : x.caption,
+                         'upvotes' : x.upvotes,
+                         'downvotes' : x.downvotes,
+                         'score' : x.upvotes - x.downvotes
                          } for x in post]
     
     return jsonify(images=jsonImageQuery)
