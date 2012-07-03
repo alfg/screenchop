@@ -4,7 +4,7 @@
 {% include 'layout/header.html' %}
 
 <script type="text/javascript"> 
-    var votes = {{ votes }};
+    var votes = {{ score }};
 </script>
 
 <!-- Gallery config variables -->
@@ -66,12 +66,12 @@
                 
                 <div id="social-area">
                     <div class="pull-left vote-icons">
-                        <span class="votes">{{ votes }}</span>
+                        <span class="votes">{{ score }}</span>
                         <span style="font-size: 28px;">
-                            <a class="upvote-button" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-up icon-large"></i></a>
+                            <a class="upvote-button {% for v in vote %}{% if v.upvoted %}highlighted{% endif %}{% endfor %}" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-up icon-large"></i></a>
                         </span>
                         <span style="font-size: 28px;">
-                            <a class="downvote-button" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-down icon-large"></i></a>
+                            <a class="downvote-button {% for v in vote %}{% if v.downvoted %}highlighted{% endif %}{% endfor %}" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-down icon-large"></i></a>
                         </span>
                     </div>
                 

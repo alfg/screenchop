@@ -18,6 +18,10 @@ def chop(filename):
     
     '''
     chop = Post.objects.get(filename = filename)
+    vote = Vote.objects(username=session['username'], postuid=chop.uid)
+    for v in vote:
+        print 'Upvoted: ', v.upvoted
+        print 'Downvoted: ', v.downvoted
     
     # For registration/login validation
     regForm = RegistrationForm(request.form)
@@ -26,12 +30,12 @@ def chop(filename):
     fullURL = config.DOMAIN_URL
     shortURL = config.SHORT_DOMAIN_URL
     
-    votes = int(chop.upvotes) - int(chop.downvotes)
-    print chop.upvotes
-    print chop.downvotes
-    print votes
+    score = int(chop.upvotes) - int(chop.downvotes)
+    print 'upvotes: ', chop.upvotes
+    print 'downvotes: ', chop.downvotes
+    print 'score: ', score
         
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,
-                            shortURL=shortURL, votes=votes)
+                            shortURL=shortURL, score=score, vote=vote)
 

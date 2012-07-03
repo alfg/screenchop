@@ -158,7 +158,7 @@ def uploader():
 
 
         if uploadType == 'single-upload':
-            flash("Screenshot upload - View here. %sc/%s" % (config.DOMAIN_URL, url), 'uploaded')
+            flash("Screenshot uploaded - View here. %sc/%s" % (config.DOMAIN_URL, url), 'uploaded')
             return redirect(url_for('upload'))
         else:
             return jsonify(result='success')

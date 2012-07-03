@@ -32,3 +32,9 @@ class User(Document):
     password = StringField()
     email = EmailField()
 
+class Vote(Document):
+    userid = StringField()
+    username = StringField()
+    postuid = IntField()
+    downvoted = BooleanField(default=False)
+    upvoted = BooleanField(default=False)

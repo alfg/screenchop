@@ -9,27 +9,68 @@ from time import strftime
 
 from flask import Flask
 from flask import request, session
-from flask import abort, redirect, url_for, jsonify
-from flask import render_template, flash
+
 
 from screenchop import config
 from screenchop.sessions import requires_auth
-from screenchop.models import Post
+from screenchop.models import Post, Vote
 
 app = Flask(__name__)
 
 def upvote():
     chop = request.form['chop']
-    print chop
-    #chop = Post.objects.get(filename='zaf32')
+    chopObject = Post.objects.get(filename=chop)
+    vote, created = Vote.objects.get_or_create(username=session['username'], postuid=chopObject.uid)
+    
+    if created:
+        Post.objects(filename=chop).update_one(inc__upvotes=1)
+        Vote.objects(username=session['username'],
+                postuid=chopObject.uid).update_one(set__upvoted=True,
+                                                    set__downvoted=False)
+        return 'upvoted'
+        
+    elif vote.upvoted == False and vote.downvoted == True:
+        Post.objects(filename=chop).update_one(inc__upvotes=1, dec__downvotes=1)
+        Vote.objects(username=session['username'],
+                postuid=chopObject.uid).update_one(set__upvoted=True,
+                                                    set__downvoted=False)
+        return 'upvoted2'
+        
+    else:
+        Vote.objects(username=session['username'],
+                        postuid=chopObject.uid).update_one(set__upvoted=True,
+                                                            set__downvoted=False)
+        return 'changed to upvote'
 
-    Post.objects(filename=chop).update_one(inc__upvotes=1)
-    return 'upvoted'
+    print 'Upvoted: ', vote.upvoted
+    print 'Downvoted: ', vote.downvoted
+
     
 def downvote():
     chop = request.form['chop']
-    print chop
-    #chop = Post.objects.get(filename='zaf32')
+    chopObject = Post.objects.get(filename=chop)
+    vote, created = Vote.objects.get_or_create(username=session['username'], postuid=chopObject.uid)
+    
+    if created:
+        Post.objects(filename=chop).update_one(inc__downvotes=1)
+        Vote.objects(username=session['username'],
+                postuid=chopObject.uid).update_one(set__upvoted=False,
+                                                    set__downvoted=True)
+        return 'downvoted'
+        
+    elif vote.downvoted == False and vote.upvoted == True:
+        Post.objects(filename=chop).update_one(inc__downvotes=1, dec__upvotes=1)
+        Vote.objects(username=session['username'],
+                postuid=chopObject.uid).update_one(set__upvoted=False,
+                                                    set__downvoted=True)
+        return 'downvoted2'
+        
+    else:
+        Vote.objects(username=session['username'],
+                        postuid=chopObject.uid).update_one(set__upvoted=False,
+                                                            set__downvoted=True)
+        return 'changed to downvote'
 
-    Post.objects(filename=chop).update_one(inc__downvotes=1)
-    return 'downvoted'
+    print 'Upvoted: ', vote.upvoted
+    print 'Downvoted: ', vote.downvoted
+
