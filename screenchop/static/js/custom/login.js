@@ -99,13 +99,13 @@ var pass = $("#password").val();
 
 $.ajax({
            type: "POST",
-           url: "login",
+           url: "/login",
            data: { username : user, password : pass }
             }).done(function( msg ) {
             
             if (msg == 'Success')
             {
-            window.location.href = "/";
+            location.reload();
             }
             else {
             $('#login-message').html(msg);
@@ -114,6 +114,13 @@ $.ajax({
             }
 
 $("#submit").click(submitLoginForm);
+
+$('.loginBoxEnter').keypress(function(e){
+      if(e.which == 13){
+       submitLoginForm();
+       }
+    e.preventDefault();
+      });
 
 function submitRegisterForm() {
 
@@ -125,13 +132,13 @@ var tos = $("#tos").attr('checked');
 
 $.ajax({
            type: "POST",
-           url: "register",
+           url: "/register",
            data: { username : user, password : pass, confirm : passVerify, accept_tos : tos }
             }).done(function( msg ) {
             
             if (msg == 'Success')
             {
-            window.location.href = "/";
+            location.reload();
             }
             else {
                 $('#register-message').empty()
@@ -144,6 +151,12 @@ $.ajax({
 
 $("#submit2").click(submitRegisterForm);
 
+$('.regBoxEnter').keypress(function(e){
+      if(e.which == 13){
+       submitRegisterForm();
+       }
+    e.preventDefault();
+      });
 
 // End (document).ready()
 });

@@ -1,9 +1,9 @@
 {% from "auth/_formhelpers.html" import render_field %}
 
   <dl>
-    {{ render_field(regForm.username, id="userregister", class="loginBoxInput") }}
-    {{ render_field(regForm.password, id="passregister", class="loginBoxInput") }}
-    {{ render_field(regForm.confirm, id="passverify", class="loginBoxInput") }}
+    {{ render_field(regForm.username, id="userregister", class="loginBoxInput regBoxEnter") }}
+    {{ render_field(regForm.password, id="passregister", class="loginBoxInput regBoxEnter") }}
+    {{ render_field(regForm.confirm, id="passverify", class="loginBoxInput regBoxEnter") }}
     {{ render_field(regForm.accept_tos, id="tos") }}
   </dl>
   <p><button type="submit" id="submit2" class="btn btn-success">Register</button></p>

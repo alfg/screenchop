@@ -4,6 +4,7 @@ from flask import Flask
 from flask import request, session, redirect, url_for
 from flask import render_template, flash
 
+
 from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm
@@ -18,10 +19,14 @@ def chop(filename):
     
     '''
     chop = Post.objects.get(filename = filename)
-    vote = Vote.objects(username=session['username'], postuid=chop.uid)
-    for v in vote:
-        print 'Upvoted: ', v.upvoted
-        print 'Downvoted: ', v.downvoted
+
+    if 'username' in session:
+        vote = Vote.objects(username=session['username'], postuid=chop.uid)
+        for v in vote:
+            print 'Upvoted: ', v.upvoted
+            print 'Downvoted: ', v.downvoted
+    else:
+        vote = []
     
     # For registration/login validation
     regForm = RegistrationForm(request.form)

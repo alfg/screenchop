@@ -17,7 +17,11 @@ from screenchop.models import Post, Vote
 
 app = Flask(__name__)
 
+
 def upvote():
+    if 'username' not in session:
+        return 'not logged in'
+
     chop = request.form['chop']
     chopObject = Post.objects.get(filename=chop)
     vote, created = Vote.objects.get_or_create(username=session['username'], postuid=chopObject.uid)
@@ -45,8 +49,10 @@ def upvote():
     print 'Upvoted: ', vote.upvoted
     print 'Downvoted: ', vote.downvoted
 
-    
 def downvote():
+    if 'username' not in session:
+        return 'not logged in'
+        
     chop = request.form['chop']
     chopObject = Post.objects.get(filename=chop)
     vote, created = Vote.objects.get_or_create(username=session['username'], postuid=chopObject.uid)
