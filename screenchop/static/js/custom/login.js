@@ -119,7 +119,7 @@ $('.loginBoxEnter').keypress(function(e){
       if(e.which == 13){
        submitLoginForm();
        }
-    e.preventDefault();
+
       });
 
 function submitRegisterForm() {
@@ -155,7 +155,7 @@ $('.regBoxEnter').keypress(function(e){
       if(e.which == 13){
        submitRegisterForm();
        }
-    e.preventDefault();
+
       });
 
 // End (document).ready()

@@ -7,6 +7,8 @@
     var votes = {{ score }};
 </script>
 
+
+
 <!-- Gallery config variables -->
 
     <body>
@@ -46,9 +48,9 @@
                 <div>
                 
                 <div id="chop-image">
-                    <a href="http://images.screenchop.com/full/{{ chop.filename }}">
-                        <img src="http://images.screenchop.com/medium/{{ chop.filename }}" alt="">
-                    </a>
+                    <!-- <a href="http://images.screenchop.com/full/{{ chop.filename }}"> -->
+                        <img id="toAnnotate" src="http://images.screenchop.com/medium/{{ chop.filename }}" alt="">
+                    <!-- </a> -->
                 </div>
                 
                 {% if chop.caption != None %}
@@ -77,13 +79,13 @@
                 
                 
                     <div class="pull-right">
-                    <input class="share-url" value="{{ shortURL }}{{ chop.filename }}" disabled>
+                    <input class="share-url" value="{{ shortURL }}{{ chop.filename }}">
                     </div>
                 
                     <div class="pull-right">
                     <ul class="share-group">
                     <li class="primary-service">
-                         <a class="share-service-button" href="http://www.facebook.com/sharer.php?u={{ fullURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                         <a class="share-service-button" href="http://www.facebook.com/sharer.php?u={{ fullURL }}c/{{ chop.filename }}" onclick="socialPopup(this.href); return false">
                          <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook">
                          </a>
                     </li><li class="primary-service">
@@ -91,7 +93,7 @@
                          <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter">
                          </a>
                     </li><li class="primary-service">
-                         <a class="share-service-button" href="https://plus.google.com/share?url={{ fullURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                         <a class="share-service-button" href="https://plus.google.com/share?url={{ fullURL }}c/{{ chop.filename }}" onclick="socialPopup(this.href); return false">
                          <img src="../static/img/pixel.gif" alt="Google+" class="share-service-icon share-service-icon-googleplus">
                          </a>
                     </li></ul>
@@ -102,8 +104,7 @@
                 <!-- Load Disqus -->
                 <div id="disqus_thread"></div>
                 <script type="text/javascript">
-                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                    var disqus_shortname = 'screenchop'; // required: replace example with your forum shortname
+                    var disqus_shortname = 'screenchop';
 
                     /* * * DON'T EDIT BELOW THIS LINE * * */
                     (function() {
@@ -123,3 +124,4 @@
     </div> <!-- /container -->
 
 {% include 'layout/footer.html' %}
+

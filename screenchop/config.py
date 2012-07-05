@@ -32,6 +32,7 @@ S3_FULL_URL = config.get('s3', 'S3_FULL_URL')
 # Gallery Configs
 MAX_IMAGES_PER_ROW = int(config.get('gallery', 'MAX_IMAGES_PER_ROW'))
 HOME_MAX_IMAGES = int(config.get('gallery', 'HOME_MAX_IMAGES'))
+TAGGING_ENABLED = config.getboolean('gallery', 'TAGGING_ENABLED')
 
 # Upload Configs
 ALLOWED_FILE_TYPES = config.get('upload', 'ALLOWED_FILE_TYPES').split(',')

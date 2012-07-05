@@ -38,3 +38,14 @@ class Vote(Document):
     postuid = IntField()
     downvoted = BooleanField(default=False)
     upvoted = BooleanField(default=False)
+    
+class Tag(Document):
+    uid = SequenceField()
+    top = IntField()
+    left = IntField()
+    width = IntField()
+    height = IntField()
+    text = StringField()
+    submitter = StringField()
+    postuid = IntField()
+    

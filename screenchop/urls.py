@@ -9,7 +9,7 @@ from screenchop import config
 #import views
 from screenchop.views import home, chops, account
 from screenchop.controllers import uploader, vote
-from screenchop.api.public import images
+from screenchop.api.public import images, tags
 from screenchop.sessions import login, logout, register
 
 
@@ -30,9 +30,12 @@ app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])
 app.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
 app.add_url_rule('/upvote', view_func=vote.upvote, methods=['POST', 'GET'])
 app.add_url_rule('/downvote', view_func=vote.downvote, methods=['POST', 'GET'])
+app.add_url_rule('/tags/save', view_func=tags.saveTag, methods=['POST', 'GET'])
+app.add_url_rule('/tags/delete', view_func=tags.deleteTag, methods=['POST', 'GET'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])
+app.add_url_rule('/api/public/tags.json', view_func=tags.getTags_json, methods=['GET'])
 
 # Error Pages
 @app.errorhandler(500)

@@ -12,6 +12,7 @@ from screenchop.forms import RegistrationForm, LoginForm
 from screenchop.sessions import *
 
 app = Flask(__name__)
+tagging = config.TAGGING_ENABLED
 
 def chop(filename):
     '''
@@ -39,8 +40,8 @@ def chop(filename):
     print 'upvotes: ', chop.upvotes
     print 'downvotes: ', chop.downvotes
     print 'score: ', score
-        
+    
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,
-                            shortURL=shortURL, score=score, vote=vote)
+                            shortURL=shortURL, score=score, vote=vote, tagging=tagging)
 
