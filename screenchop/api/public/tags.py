@@ -5,11 +5,18 @@ from flask import render_template
 
 from screenchop.models import *
 from screenchop import config
-import json
+import json, uuid
 
 def getTags_json():
     
-    tags = Tag.objects()
+    postUID = request.args.get('postuid', '')
+    postFilename = request.args.get('filename', '')
+    
+    if postFilename == '':
+        return 'Error: No postuid parameters given'
+    
+    tags = Tag.objects(postfilename=postFilename)
+
     
     #Query list of dictionaries for a JSON object
     jsonTagsQuery = [
@@ -19,7 +26,9 @@ def getTags_json():
 					       "height": x.height,
 					       "text": x.text,
 					       "id": x.uid,
-					       "editable": True
+					       "editable": True,
+					       "postuid": x.postuid,
+					       "filename": x.postfilename
                          } for x in tags]
     
     return jsonify(tags=jsonTagsQuery)
@@ -31,16 +40,22 @@ def saveTag():
     getTop = request.args.get('top')
     getLeft = request.args.get('left')
     getUID = request.args.get('id')
+    getPostUID = request.args.get('postuid')
+    getPostFilename = request.args.get('filename')
     
+    tagUUID = str(uuid.uuid4())
         
     if getUID == 'new':
         # Create Tag in Mongo
         tag = Tag(
+                uid=tagUUID,
                 top=getTop,
                 left=getLeft,
                 width=getWidth,
                 height=getHeight,
                 text=getText,
+                postuid=getPostUID,
+                postfilename=getPostFilename
                 )
         tag.save()
     else:
@@ -56,5 +71,9 @@ def saveTag():
     return jsonify(tags='saved tag')
     
 def deleteTag():
-    return jsonify(tags='delete tag')
+    getTagID = request.args.get('id')
+    
+    Tag.objects(uid=getTagID).delete()
+
+    return jsonify(tags='deleted tag')
 

@@ -40,7 +40,7 @@ class Vote(Document):
     upvoted = BooleanField(default=False)
     
 class Tag(Document):
-    uid = SequenceField()
+    uid = StringField()
     top = IntField()
     left = IntField()
     width = IntField()
@@ -48,4 +48,5 @@ class Tag(Document):
     text = StringField()
     submitter = StringField()
     postuid = IntField()
+    postfilename = StringField()
     

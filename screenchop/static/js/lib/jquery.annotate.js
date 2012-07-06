@@ -98,7 +98,7 @@
         ///		Loads the annotations from the "getUrl" property passed in on the
         ///     options object.
         ///	</summary>
-        $.getJSON(image.getUrl + '?ticks=' + $.fn.annotateImage.getTicks(), function(data) {
+        $.getJSON(image.getUrl + '&ticks=' + $.fn.annotateImage.getTicks(), function(data) {
             image.notes = data.tags;
             $.fn.annotateImage.load(image);
         });
@@ -142,7 +142,7 @@
         ///	<summary>
         ///		Creates a Save button on the editable note.
         ///	</summary>
-        var ok = $('<a class="image-annotate-edit-ok">OK</a>');
+        var ok = $('<a class="btn btn-mini btn-success btn-spacer">Confirm</a>');
 
         ok.click(function() {
             var form = $('#image-annotate-edit-form form');
@@ -184,7 +184,7 @@
         ///	<summary>
         ///		Creates a Cancel button on the editable note.
         ///	</summary>
-        var cancel = $('<a class="image-annotate-edit-close">Cancel</a>');
+        var cancel = $('<a class="btn btn-mini btn-spacer">Cancel</a>');
         cancel.click(function() {
             editable.destroy();
             image.mode = 'view';
@@ -241,7 +241,7 @@
         image.canvas.children('.image-annotate-edit').show();
 
         // Add the note (which we'll load with the form afterwards)
-        var form = $('<div id="image-annotate-edit-form"><form><textarea id="image-annotate-text" name="text" rows="3" cols="30">' + this.note.text + '</textarea></form></div>');
+        var form = $('<div id="image-annotate-edit-form"><form><textarea id="image-annotate-text" class="input-xlarge" name="text" rows="3" cols="32">' + this.note.text + '</textarea></form></div>');
         this.form = form;
 
         $('body').append(this.form);
@@ -381,7 +381,7 @@
             $.fn.annotateImage.createSaveButton(editable, this.image, annotation);
 
             // Add the delete button
-            var del = $('<a class="image-annotate-edit-delete">Delete</a>');
+            var del = $('<a class="btn btn-mini btn-danger btn-spacer">Delete</a>');
             del.click(function() {
                 var form = $('#image-annotate-edit-form form');
 
@@ -413,6 +413,8 @@
                            '<input type="hidden" value="' + editable.area.width() + '" name="width"/>' +
                            '<input type="hidden" value="' + editable.area.position().top + '" name="top"/>' +
                            '<input type="hidden" value="' + editable.area.position().left + '" name="left"/>' +
+                           '<input type="hidden" value="' + postUID + '" name="postuid"/>' +
+                           '<input type="hidden" value="' + postfilename + '" name="filename"/>' +
                            '<input type="hidden" value="' + editable.note.id + '" name="id"/>');
         form.append(areaFields);
     }

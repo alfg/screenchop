@@ -20,12 +20,12 @@ $(window).load(function() {
 	});
 });
 */
-var id = 'asdf'
+
 $(window).load(function() {
 				$("#toAnnotate").annotateImage({
-					getUrl: "/api/public/tags.json",
+					getUrl: "/api/public/tags.json?filename=" + postfilename,
 					saveUrl: "/tags/save",
-					deleteUrl: "delete.html",
+					deleteUrl: "/tags/delete",
 					editable: true
 				});
 			});

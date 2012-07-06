@@ -37,9 +37,6 @@ def chop(filename):
     shortURL = config.SHORT_DOMAIN_URL
     
     score = int(chop.upvotes) - int(chop.downvotes)
-    print 'upvotes: ', chop.upvotes
-    print 'downvotes: ', chop.downvotes
-    print 'score: ', score
     
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,
