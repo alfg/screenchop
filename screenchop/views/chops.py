@@ -12,6 +12,7 @@ from screenchop.forms import RegistrationForm, LoginForm
 from screenchop.sessions import *
 
 app = Flask(__name__)
+# Enable/disable tagging. For debugging.
 tagging = config.TAGGING_ENABLED
 
 def chop(filename):
@@ -20,25 +21,35 @@ def chop(filename):
     
     '''
     chop = Post.objects.get(filename = filename)
-
-    if 'username' in session:
-        vote = Vote.objects(username=session['username'], postuid=chop.uid)
-        for v in vote:
-            print 'Upvoted: ', v.upvoted
-            print 'Downvoted: ', v.downvoted
-    else:
-        vote = []
     
-    # For registration/login validation
+    # Checking if username in session to check 2 things
+    if 'username' in session:
+        # Loading user vote data to object
+        vote = Vote.objects(username=session['username'], postuid=chop.uid)
+        
+        # Also checking to see session is owner of the post. If so, then allow
+        # tagging. String booleans since that's how the js lib is checking.
+        if session['username'] == chop.submitter:
+            tagable = 'true'
+        else:
+            tagable = 'false'
+    else:
+        # No votes and not taggable if user is not logged in
+        vote = []
+        tagable = 'false'
+    
+    # For registration/login wtf validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
     
+    # For image linking, short url sharing.
     fullURL = config.DOMAIN_URL
     shortURL = config.SHORT_DOMAIN_URL
     
+    # Calculate total score of post
     score = int(chop.upvotes) - int(chop.downvotes)
     
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,
-                            shortURL=shortURL, score=score, vote=vote, tagging=tagging)
+                            shortURL=shortURL, score=score, vote=vote, tagging=tagging, tagable=tagable)
 

@@ -392,3 +392,9 @@ div#register-message {
     
 }
 
+/* Account > Uploads page */
+li.account-uploads {
+    width: 240px;
+    height: 200px;
+}
+

@@ -1,22 +1,6 @@
 .image-annotate-add {
     margin-top: 10px;
     margin-right: 5px;
-    /*
-    background: #fff url(../img/annotate/asterisk_yellow.png) no-repeat 3px 3px;
-    border: solid 1px #ccc !important;
-    color: #000 !important;
-    cursor: pointer;
-    display: block;
-    float: left;
-    font-family: Verdana, Sans-Serif;
-    font-size: 12px;    
-    height: 18px;
-    line-height: 18px;    
-    padding: 2px 0 2px 24px;
-    margin: 5px 0;
-    width: 64px;
-    text-decoration: none;
-    */
 }
 .image-annotate-add:hover {
     /* background-color: #eee; */
@@ -91,6 +75,7 @@
     width: 260px;
     border-bottom-color: 
     #B3B3B3;
+    margin-top: 5px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -129,30 +114,8 @@
 #image-annotate-edit-form .form-button, #image-annotate-edit-form .form-submit {
     margin: 0;
 }
-/*
-#image-annotate-edit-form a {
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-position: 3px 3px;
-    border: solid 1px #ccc;
-    color: #333;
-    cursor: pointer;
-    display: block;
-    float: left;    
-    font-family: Verdana, Sans-Serif;
-    font-size: 12px;        
-    height: 18px;
-    line-height: 18px;
-    padding: 2px 0 2px 24px;
-    margin: 3px 6px 3px 0;
-    width: 48px;
-}
-#image-annotate-edit-form a:hover {
-    background-color: #eee;
-}
-*/
 .image-annotate-edit-area {
-    border: 1px solid black;
+    border: 2px dashed #F8E505;
     cursor: move;
     display: block;
     height: 60px;
@@ -166,17 +129,6 @@
 .image-annotate-edit-area .ui-resizable-handle {
     opacity: 0.8;
 }
-/*
-.image-annotate-edit-ok {
-    background-image: url(../img/annotate/accept.png);
-}
-.image-annotate-edit-delete {
-    background-image: url(../img/annotate/delete.png);
-}
-.image-annotate-edit-close {
-    background-image: url(../img/annotate/cross.png);
-}
-*/
 
 .ui-resizable {
     position: relative;
