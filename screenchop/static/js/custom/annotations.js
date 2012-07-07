@@ -15,4 +15,5 @@ $(window).load(function() {
 					deleteUrl: "/tags/delete",
 					editable: tagable
 				});
+				$('#image-annotate-add').appendTo('#add-tag-button');
 			});

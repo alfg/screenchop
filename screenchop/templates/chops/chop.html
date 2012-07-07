@@ -56,19 +56,17 @@
                     <!-- </a> -->
                 </div>
                 
-                {% if chop.caption != None %}
+
                 <div class="well">                
                     <blockquote>
+                        {% if chop.caption != None %}
                         <p>{{ chop.caption }}</p>
-                        <small>Submitted by {{ chop.submitter }}</small>
+                        {% endif %}
+                        <small>Submitted by <span class="label label-info">{{ chop.submitter }}</label></small>
                     </blockquote>
+                    <div id="add-tag-button"></div>
                 </div>
-                {% else %}
-                <span class="badge badge-info">
-                Submitted by {{ chop.submitter }}
-                </span><br /><br />
-                {% endif %}
-                
+
                 <div id="social-area">
                     <div class="pull-left vote-icons">
                         <span class="votes">{{ score }}</span>
