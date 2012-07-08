@@ -15,3 +15,4 @@
  
 // Add Custom Categories Tooltip
 $('#add-category').tooltip({placement: 'right'})
+

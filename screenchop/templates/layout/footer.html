@@ -5,6 +5,7 @@
     <script src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script src="../static/js/lib/bootstrap.js"></script>
     <script src="../static/js/lib/jglance-min.js"></script>
+    <script src="../static/js/lib/jquery.fancybox.pack.js"></script>
     {% if tagging == True %}
     <script src="../static/js/lib/jquery-ui-1.8.17.js"></script>
     <script src="../static/js/lib/jquery.annotate.js"></script>
@@ -21,7 +22,15 @@
     <script src="../static/js/custom/gallery.js"></script>
     {% endif %}
     <script src="../static/js/custom/votes.js"></script>
-    <!-- <script src="../static/js/gallery.js"></script> -->
+
+    <!-- Scripts that don't need a js file -->
+    
+    <!-- Load fancybox -->
+    <script>
+        $(document).ready(function() {
+            $('.fancybox').fancybox();
+        });
+    </script>
 
 {% if requires_loginForms == True %}
 <!-- Login Modal -->
@@ -32,27 +41,6 @@
         <h3>Register or Sign in</h3>
     </div>
     <div class="modal-body">
-            <!--
-            <div class="pull-left login-form">
-            <p><h4>Login</h4></p>
-            <p><input id="user" class="loginBoxInput" type="text" name="username" value="username" autocomplete="off"></p>
-            <p><input id="pass" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
-            <p><input id="pass-clear" class="loginBoxInput" type="text" name="password" value="password" autocomplete="off"></p>
-            <p><div id="login-message"></div></p>
-            <p><button type="submit" id="submit" class="btn btn-primary">Sign in</button></p>
-            </div>
-
-            <div class="pull-right register-form">
-            <p><h4>Register</h4></p>
-            <p><input id="user-register" class="loginBoxInput" type="text" name="username" value="username" autocomplete="off"></p>
-            <p><input id="pass-register" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
-            <p><input id="pass-register-clear" class="loginBoxInput" type="text" name="placeholder-password" value="password" autocomplete="off"></p>
-            <p><input id="pass-verify" class="loginBoxInput" type="password" name="password" autocomplete="off"></p>
-            <p><input id="pass-verify-clear" class="loginBoxInput" type="text" name="placeholder-password-verify" value="verify password" autocomplete="off"></p>
-            <p><button type="submit" id="submit2" class="btn btn-success">Register</button></p>
-            <p><div id="register-message"></div></p>
-            </div>
-            -->
 
             <div class="pull-left login-form">
             {% include 'auth/login.html' %}
@@ -69,7 +57,6 @@
 
 </div>
 {% endif %}
-
 
 
 <!-- End of Document -->

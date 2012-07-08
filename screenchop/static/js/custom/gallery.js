@@ -15,21 +15,59 @@ var photos = (function () {
     return photos;
 })(); 
 
+// Lightbox gallery. Currently disabled for Fancybox
 var inLightBox = function(photo) {
     if ( !photo.caption ) { return; }
     return $('<div />').addClass( 'lightbox-caption' ).html( photo.caption );
 };
 
+// HTML overlay when images are hovered
 var hovered = function(photo) {
+    if ( !photo.caption ) {
     return $('<div />')
                 .addClass( 'hovered' )
-                .html( 'Score: ' + photo.score );
+                .html( 
+                
+                '<span class="pull-left"></span>' + 
+                '<span class="pull-right" style="margin-right: 5px;">' + photo.score + '</span>' +
+                '<div style="font-size: 20px; "> \
+                    <i class="icon-circle-arrow-up pull-right" style="margin-right: 5px;"></i> \
+                    <i class="icon-circle-arrow-down pull-right" style="margin-right: 5px;"></i> \
+                </div>' +
+                '<div style="font-size: 20px; "> \
+                    <a href="' + photo.large + '" class="fancybox" rel="gallery" data-fancybox-type="image"> \
+                        <i class="icon-fullscreen pull-right" style="color: white; margin-right: 10px;" title="View Preview"></i> \
+                    </a> \
+                </div>' 
+                
+                ); }
+                
+    return $('<div />')
+                .addClass( 'hovered' )
+                .html( 
+                
+                '<i class="icon-comment pull-left" style="margin-right: 8px; margin-left: 4px;"></i> \
+                <span class="pull-left">' + photo.caption + '</span>' + 
+                '<span class="pull-right" style="margin-right: 5px;">' + photo.score + '</span>' +
+                '<div style="font-size: 20px; "> \
+                    <i class="icon-circle-arrow-up pull-right" style="margin-right: 5px;"></i> \
+                    <i class="icon-circle-arrow-down pull-right" style="margin-right: 5px;"></i> \
+                </div>' +
+                '<div style="font-size: 20px; "> \
+                    <a href="' + photo.large + '" class="fancybox" rel="gallery" data-fancybox-type="image"> \
+                        <i class="icon-fullscreen pull-right" style="color: white; margin-right: 10px;" title="View Preview"></i> \
+                    </a> \
+                </div>' 
+                
+                );
 };
 
+// Actions when image is clicked. Currently goes to single photo page
 var click = function(photo) {
     return window.location.href = "/c/" + photo.filename;
 };
 
+// Initialize JGlance with settings
 var jg = new JGlance({
         container: $('#results'),
         maxPerRow: maxPerRow,

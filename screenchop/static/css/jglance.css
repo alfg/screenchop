@@ -258,9 +258,9 @@ Modify the background property if you wish to use the light box
 .hovered {
     margin: 0 10px;
     padding: 5px;
-    color: #000;
-    background-color: #c1c1c1;
-    background-color: rgba(231,234,234,0.9);
+    color: #eee;
+    font-weight: bold;
+    background-color:rgba(255, 255, 255, 0.10);
     -moz-white-space: nowrap;
     -webkit-white-space: nowrap;
     -o-white-space: nowrap;
