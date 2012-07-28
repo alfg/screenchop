@@ -8,6 +8,8 @@
 <script type="text/javascript"> 
     var maxPerRow = {{ maxPerRow }};
     var sortType = 'hot';
+    var page = {{ pageIncr }};
+    var pageInc = {{ pageIncr }};
 </script>
 
     <body>
@@ -34,8 +36,12 @@
                     <div id="results"></div>
 
                 </div>
-                
+                <div id="loadmore">
+                    <span>Load More Chops!</span>
+                </div>
             </div>
         </div> <!-- /container -->
 
+
 {% include 'layout/footer.html' %}
+

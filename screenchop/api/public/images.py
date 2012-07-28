@@ -7,23 +7,28 @@ from flask import render_template
 
 from screenchop.models import *
 from screenchop import config
+
 import json
+from time import strftime
 
 #app = Flask(__name__)
 
 def getMainImages():
     sortType = request.args.get('sort')
+    page = request.args.get('page', 0)
     
     s3ThumbsURL = config.S3_THUMBS_URL
     s3FullURL = config.S3_FULL_URL
     s3MediumURL = config.S3_MEDIUM_URL
     
+    dateToday = strftime("%Y-%m-%d")
+    
     if sortType == 'new':
-        post = Post.objects.order_by('-date').limit(config.HOME_MAX_IMAGES)
+        post = Post.objects(date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
     elif sortType == 'top':
         post = Post.objects.order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
     else:
-        post = Post.objects.order_by('-date').limit(config.HOME_MAX_IMAGES)
+        post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
 
     
     #Query list of dictionaries for a JSON object

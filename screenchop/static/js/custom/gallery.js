@@ -83,3 +83,38 @@ var jg = new JGlance({
 // we pass the photos via 'push' method
 jg.push( photos );
 
+
+/* Pagination stuff */
+
+// Auto load imagePaginate when scrolling to bottom of page
+$(window).scroll(function(){
+    if ($(window).scrollTop() == $(document).height() - $(window).height()){
+        imagePaginate();
+        };
+});
+
+// Run imagePaginate when loadmore bar is clicked
+$('#loadmore').click(function(){
+imagePaginate();
+});
+
+//Loads paginated images. Amount defined in template.
+function imagePaginate(){
+    var photos = (function () {
+            var photos = null;
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': 'api/public/images.json?sort=' + sortType + '&page=' + page,
+                'dataType': "json",
+                'success': function (data) {
+                    photos = data.images;
+                }
+            });
+            page = page + pageInc;
+            return photos;
+        })(); 
+        jg.push( photos );
+        };
+
+

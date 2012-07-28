@@ -144,6 +144,17 @@ div#register-message {
     color: red;
 }
 
+div#loadmore {
+    background: #a7a7a7;
+    text-align: center;
+    font-size: 10px;
+}
+
+div#loadmore:hover {
+    background: #ccc;
+    cursor: pointer;
+}
+
 /* Dropscript Styles */
 
 /*-------------------------
