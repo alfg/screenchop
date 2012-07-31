@@ -88,7 +88,7 @@ jg.push( photos );
 
 // Auto load imagePaginate when scrolling to bottom of page
 $(window).scroll(function(){
-    if ($(window).scrollTop() == $(document).height() - $(window).height()){
+    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10){
         imagePaginate();
         };
 });
