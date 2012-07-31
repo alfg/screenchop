@@ -7,7 +7,7 @@ from flask import render_template
 from screenchop import config
 
 #import views
-from screenchop.views import home, chops, account
+from screenchop.views import home, chops, account, user
 from screenchop.controllers import uploader, vote
 from screenchop.api.public import images, tags
 from screenchop.sessions import login, logout, register
@@ -24,6 +24,7 @@ app.add_url_rule('/upload', view_func=home.upload)
 app.add_url_rule('/account', view_func=account.account, methods=['POST', 'GET'])
 app.add_url_rule('/account/uploads', view_func=account.account_uploads, methods=['POST', 'GET'])
 app.add_url_rule('/c/<filename>', view_func=chops.chop, methods=['GET'])
+app.add_url_rule('/u/<username>', view_func=user.user, methods=['GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])

@@ -155,6 +155,115 @@ div#loadmore:hover {
     cursor: pointer;
 }
 
+/* User Page */
+div#user-profile {
+    height: 80px;
+    margin: 5px 0 15px 0;
+    padding: 10px;
+    background-image: -ms-linear-gradient(top, #06C 0%, #006391 100%);
+    background-image: -moz-linear-gradient(top, #06C 0%, #006391 100%);
+    background-image: -o-linear-gradient(top, #06C 0%, #006391 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #06C), color-stop(1, #006391));
+    background-image: -webkit-linear-gradient(top, #06C 0%, #0089C9 100%);
+    background-image: linear-gradient(top, #06C 0%, #006391 100%);
+}
+
+div.user-avatar {
+    height: 75px;
+    width: 75px;
+    background-image: url('/static/img/avatar.jpg');
+    background-size: 75px 75px;
+    background-color: #a7a7a7;
+    display: inline-block;
+    float: left;
+}
+div.user-info-group {
+    float: left;
+    display: inline-block;
+    margin-left: 10px;
+}
+div.user-name {
+    max-width: 300px;
+    vertical-align: top;
+    color: #DDD;
+}
+
+div.user-title {
+    max-width: 300px;
+    color: #DDD;
+}
+
+div.user-followers {
+    width: 75px;
+    display: inline-block;
+    float: right;
+    padding: 8px 15px;
+    margin: 0 0 0 10px;
+    background-image: -moz-linear-gradient(top, #08C, #05C);
+    background-image: -ms-linear-gradient(top, #08C, #05C);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08C), to(#05C));
+    background-image: -webkit-linear-gradient(top, #08C, #05C);
+    background-image: -o-linear-gradient(top, #08C, #05C);
+    background-image: linear-gradient(top, #08C, #05C);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+    border-color: #05C #05C #003580;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 
+    rgba(255, 255, 255, .2), 0 1px 2px 
+    rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 
+    rgba(255, 255, 255, .2), 0 1px 2px 
+    rgba(0, 0, 0, .05);
+}
+
+div.user-views {
+    width: 75px;
+    display: inline-block;
+    float: right;
+    padding: 8px 15px;
+    background-image: -moz-linear-gradient(top, #08C, #05C);
+    background-image: -ms-linear-gradient(top, #08C, #05C);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08C), to(#05C));
+    background-image: -webkit-linear-gradient(top, #08C, #05C);
+    background-image: -o-linear-gradient(top, #08C, #05C);
+    background-image: linear-gradient(top, #08C, #05C);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+    border-color: #05C #05C #003580;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 
+    rgba(255, 255, 255, .2), 0 1px 2px 
+    rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 
+    rgba(255, 255, 255, .2), 0 1px 2px 
+    rgba(0, 0, 0, .05);
+}
+
+span.user-stat-number {
+    font-size: 18px;
+    text-align: center;
+    color: #DDD;
+    display: block;
+}
+
+span.user-stat-name {
+    font-size: 10px;
+    text-align: center;
+    color: #DDD;
+    display: block;
+}
+
 /* Dropscript Styles */
 
 /*-------------------------

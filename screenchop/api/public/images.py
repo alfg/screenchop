@@ -14,6 +14,7 @@ from time import strftime
 #app = Flask(__name__)
 
 def getMainImages():
+    user = request.args.get('user', None)
     sortType = request.args.get('sort')
     page = request.args.get('page', 0)
     
@@ -23,12 +24,22 @@ def getMainImages():
     
     dateToday = strftime("%Y-%m-%d")
     
-    if sortType == 'new':
-        post = Post.objects(date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
-    elif sortType == 'top':
-        post = Post.objects.order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+    if user == 'all':
+    
+        if sortType == 'new':
+            post = Post.objects(date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
+        elif sortType == 'top':
+            post = Post.objects.order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+        else:
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
+            
     else:
-        post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
+        if sortType == 'new':
+            post = Post.objects(submitter=user).order_by('-date').limit(config.HOME_MAX_IMAGES)
+        elif sortType == 'top':
+            post = Post.objects(submitter=user).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+        else:
+            post = Post.objects(submitter=user)[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
 
     
     #Query list of dictionaries for a JSON object

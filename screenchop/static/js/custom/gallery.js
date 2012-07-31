@@ -6,7 +6,7 @@ var photos = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': 'api/public/images.json?sort=' + sortType,
+        'url': '/api/public/images.json?sort=' + sortType + '&user=' + user,
         'dataType': "json",
         'success': function (data) {
             photos = data.images;
@@ -105,7 +105,7 @@ function imagePaginate(){
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': 'api/public/images.json?sort=' + sortType + '&page=' + page,
+                'url': '/api/public/images.json?sort=' + sortType + '&page=' + page + '&user=' + user,
                 'dataType': "json",
                 'success': function (data) {
                     photos = data.images;

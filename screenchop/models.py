@@ -31,6 +31,7 @@ class User(Document):
     username = StringField(unique=True)
     password = StringField()
     email = EmailField()
+    description = StringField()
 
 class Vote(Document):
     userid = StringField()

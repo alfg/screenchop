@@ -10,7 +10,7 @@
     var sortType = 'hot';
     var page = {{ pageIncr }};
     var pageInc = {{ pageIncr }};
-    var user = 'all';
+    var user = '{{ user.username }}';
 </script>
 
     <body>
@@ -30,6 +30,24 @@
             <div class="row-fluid">
                 
                 <div id="contents">
+                
+                    <div id="user-profile">
+                        <div class="user-avatar"></div>
+                        <div class="user-info-group">
+                            <div class="user-name"><h2>{{ user.username }}</h2></div>
+                            <div class="user-title">
+                                <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
+                            </div>
+                        </div>
+                        <div class="user-followers">
+                            <span class="user-stat-number"><h2>0</h2></span>
+                            <span class="user-stat-name">Followers</span>
+                        </div>
+                        <div class="user-views">
+                            <span class="user-stat-number"><h2>{{ score }}</h2></span>
+                            <span class="user-stat-name">Chop Score</span>
+                        </div>
+                    </div>
                 
                     {% include 'layout/subs.html' %}
 
