@@ -23,30 +23,37 @@
                     
 
                         <ul class="nav nav-pills">
-                          <li class="active"><a href="#">Profile</a></li>
+                          <li class="active"><a href="/account">Profile</a></li>
                           <li><a href="account/uploads">Uploads</a></li>
                           {# <li><a href="#">Comments</a></li> #}
                           <li><a href="#">Friends</a></li>
+                          <li><a href="/account/password">Password</a></li>
                         </ul>
 
+                    <div id="user-profile">
+                        <div class="user-avatar"></div>
+                        <div class="user-info-group">
+                            <div class="user-name"><h2>{{ user.username }}</h2></div>
+                            <div class="user-title">
+                                <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
+                            </div>
+                        </div>
+                        <div class="user-followers">
+                            <span class="user-stat-number"><h2>0</h2></span>
+                            <span class="user-stat-name">Followers</span>
+                        </div>
+                        <div class="user-views">
+                            <span class="user-stat-number"><h2>{{ score }}</h2></span>
+                            <span class="user-stat-name">Chop Score</span>
+                        </div>
+                    </div>
                     
                     {% from "auth/_formhelpers.html" import render_field %}
                     <form class="well" method="post" action="/account">
-                                            
-                        {# Username and Email are disabled fields #}
-                        <dl>
-                            <dt><label>Username</label></dt>
-                            <dd><input type="text" placeholder="{{ user.username }}" disabled></dd>
-                            <dt><label>Email</label></dt>
-                            <dd><input type="text" placeholder="{{ user.email }}" disabled></dl></dd>
-                        <dl>
-                        {{ render_field(form.newpass) }}
-                        {{ render_field(form.confirm) }}
-                        {{ render_field(form.currentpass) }}
+                        {{ render_field(form.description) }}
                         </dl>
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
-
 
                 </div>
             </div>

@@ -7,6 +7,8 @@
 <!-- Gallery config variables -->
 <script type="text/javascript"> 
     var maxPerRow = {{ maxPerRow }};
+    var page = {{ pageIncr }};
+    var pageInc = {{ pageIncr }};
     var sortType = 'top';
     var user = 'all';
 </script>
@@ -33,7 +35,10 @@
 
                     <!-- Gallery -->
                     <div id="results"></div>
-
+                    
+                    <div id="loadmore">
+                        <span>Load More Chops!</span>
+                    </div>
                 </div>
                 
             </div>

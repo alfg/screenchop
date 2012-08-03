@@ -1,4 +1,4 @@
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
+from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, validators
 
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=4, max=25)])
@@ -22,4 +22,6 @@ class AccountForm(Form):
     currentpass = PasswordField('Current Password', [
         validators.Required(message='Current password required')
     ])
-    
+
+class ProfileForm(Form):
+    description = TextAreaField('Profile Description')

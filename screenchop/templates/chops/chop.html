@@ -62,7 +62,7 @@
                         {% if chop.caption != None %}
                         <p>{{ chop.caption }}</p>
                         {% endif %}
-                        <small>Submitted by <span class="label label-info">{{ chop.submitter }}</label></small>
+                        <small>Submitted by <a class="no-underline" href="/u/{{ chop.submitter }}"><span class="label label-info">{{ chop.submitter }}</span></a></small>
                     </blockquote>
                     <div id="add-tag-button"></div>
                 </div>

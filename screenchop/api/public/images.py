@@ -27,9 +27,9 @@ def getMainImages():
     if user == 'all':
     
         if sortType == 'new':
-            post = Post.objects(date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
         elif sortType == 'top':
-            post = Post.objects.order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
         else:
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
             

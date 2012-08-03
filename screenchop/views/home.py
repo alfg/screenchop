@@ -36,13 +36,15 @@ def home_top():
 
     # Configure max images to show on front page
     maxPerRow = config.MAX_IMAGES_PER_ROW
+    pageIncr = config.HOME_MAX_IMAGES # Amount of images to increment/paginate
 
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
 
     return render_template('main/home_top.html', s3ThumbsURL=s3ThumbsURL,
-                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm)
+                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
+                        pageIncr=pageIncr)
                         
 def home_new():
     # Configure S3 Thumbs directory
@@ -50,13 +52,15 @@ def home_new():
 
     # Configure max images to show on front page
     maxPerRow = config.MAX_IMAGES_PER_ROW
+    pageIncr = config.HOME_MAX_IMAGES # Amount of images to increment/paginate
 
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
 
     return render_template('main/home_new.html', s3ThumbsURL=s3ThumbsURL,
-                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm)
+                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
+                        pageIncr=pageIncr)
 @requires_auth
 def upload():
     '''

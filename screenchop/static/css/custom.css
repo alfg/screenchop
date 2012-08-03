@@ -2,6 +2,10 @@ body {
     background-color: #eee;
 }
 
+.no-underline {
+    text-decoration: none !important;
+}
+
 .navbar-inner {
     /* IE10 */ 
     background-image: -ms-linear-gradient(top, #0066CC 0%, #006391 100%);
