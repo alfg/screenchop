@@ -28,6 +28,7 @@ AWS_SECRET_ACCESS_KEY = config.get('s3', 'AWS_SECRET_ACCESS_KEY')
 S3_THUMBS_URL = config.get('s3', 'S3_THUMBS_URL')
 S3_MEDIUM_URL = config.get('s3', 'S3_MEDIUM_URL')
 S3_FULL_URL = config.get('s3', 'S3_FULL_URL')
+S3_AVATAR_URL = config.get('s3', 'S3_AVATAR_URL')
 
 # Gallery Configs
 MAX_IMAGES_PER_ROW = int(config.get('gallery', 'MAX_IMAGES_PER_ROW'))

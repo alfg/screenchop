@@ -3,12 +3,22 @@
 from flask import Flask
 from flask import request, session, redirect, url_for
 from flask import render_template, flash
+from werkzeug import secure_filename
 
 from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm, AccountForm, ProfileForm
+from screenchop.util.allowed_images import *
 
 from screenchop.sessions import *
+
+import boto
+from boto.s3.key import Key
+
+from PIL import Image, ImageOps
+
+import os
+import uuid
 
 app = Flask(__name__)
 
@@ -23,6 +33,8 @@ def account():
     chops = Post.objects(submitter=session['username'])
     form = ProfileForm(request.form, description=user.description)
     
+    avatarURL = config.S3_AVATAR_URL
+    
     # Calculate total score by adding all upvotes subtracted by all downvotes
     upvotes = 0
     downvotes = 0
@@ -36,11 +48,13 @@ def account():
     if request.method == 'POST' and form.validate():
         user.description = form.description.data
         user.save()
+        
         flash('Account updated')
         return redirect(url_for('account'))
     else:
     
-        return render_template('main/account.html', user=user, score=score, form=form)
+        return render_template('main/account.html', user=user, score=score,
+                                                    form=form, avatarURL = avatarURL)
 
 @requires_auth
 def account_password():
@@ -73,4 +87,69 @@ def account_uploads():
 
     return render_template('main/account_uploads.html',
                             s3ThumbsURL=s3ThumbsURL, chops=chops)
+        
+
+                               
+@requires_auth
+def account_avatar_uploader():
+    '''
+    Upload controller for avatar uploads.
+    
+    '''
+    
+    image = request.files['avatar']
+    
+    # Generate UUID.hex to use as filename
+    uid = uuid.uuid4()
+    generate_unique = uid.hex
+    
+    if image and allowed_file(image.filename):
+    
+        # Create temp file
+        image.save(config.TEMP_FILE_DIR + secure_filename(image.filename))
+        
+        # Set filename and file location securely
+        filename = secure_filename(image.filename)
+        
+        # Build file locations for original and proxy images
+        fileloc = config.TEMP_FILE_DIR + secure_filename(image.filename)
+        
+        # Using PIL, create thumbnail for avatar and size it to fit 75x75
+        size = (75, 75)
+        image = Image.open(fileloc)
+        thumb = ImageOps.fit(image, size, Image.ANTIALIAS)
+        thumb.save(fileloc, "JPEG")
+         
+        # Connect to S3 and set Key object.
+        conn = boto.connect_s3(config.AWS_ACCESS_KEY_ID,
+                                 config.AWS_SECRET_ACCESS_KEY)
+                                 
+        b = conn.get_bucket(config.BUCKET_NAME)
+        k = Key(b)
+        
+        
+        # Set original file in bucket/full
+        k.key = 'avatar/' + generate_unique
+        
+        # Upload file to S3 and make public URL
+        k.set_contents_from_filename(fileloc)
+        k.make_public
+        k.set_acl('public-read')
+        
+        
+        # Clean temp files
+        os.remove(fileloc)
+        
+        # Atomically update Account document to Store avatar key
+        User.objects(username=session['username']).update_one(set__avatar=generate_unique)
+        
+    else:
+        flash('Only JPG, JPEG, and PNG images allowed')
+        return redirect(url_for('account'))
+    
+    flash('Avatar Updated')
+    return redirect(url_for('account'))
+    
+    
+
 

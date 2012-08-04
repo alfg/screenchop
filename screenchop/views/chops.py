@@ -17,9 +17,13 @@ tagging = config.TAGGING_ENABLED
 
 def chop(filename):
     '''
-    The Chop View
+    The Screenshot "chop" View
     
     '''
+    s3ThumbsURL = config.S3_THUMBS_URL
+    s3FullURL = config.S3_FULL_URL
+    s3MediumURL = config.S3_MEDIUM_URL
+    
     chop = Post.objects.get(filename = filename)
     
     # Checking if username in session to check 2 things
@@ -51,5 +55,7 @@ def chop(filename):
     
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,
-                            shortURL=shortURL, score=score, vote=vote, tagging=tagging, tagable=tagable)
+                            shortURL=shortURL, score=score, vote=vote, 
+                            tagging=tagging, tagable=tagable,
+                            s3MediumURL=s3MediumURL)
 

@@ -75,6 +75,7 @@ def register():
 
 
 """
+@requires_auth
 Checks if session exists. If not, then denies access to requested page.
 Must use @requires_auth before each view function to restrict access.
 

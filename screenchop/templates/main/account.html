@@ -31,7 +31,11 @@
                         </ul>
 
                     <div id="user-profile">
-                        <div class="user-avatar"></div>
+                        <div class="user-avatar">
+                            {% if user.avatar %}
+                            <img src="{{ avatarURL }}{{ user.avatar }}"></img>
+                            {% endif %}
+                        </div>
                         <div class="user-info-group">
                             <div class="user-name"><h2>{{ user.username }}</h2></div>
                             <div class="user-title">
@@ -48,12 +52,21 @@
                         </div>
                     </div>
                     
-                    {% from "auth/_formhelpers.html" import render_field %}
-                    <form class="well" method="post" action="/account">
-                        {{ render_field(form.description) }}
+                    <div class="well">
+                    <form method="post" action="/account/avatar" enctype="multipart/form-data">
+                        <dl>
+                        <dt><label>Avatar</label></dt>
+                        <dd><input class="account-avatar-input" type="file" name="avatar" /></dd>
+                        <button type="submit" class="btn btn-success">Upload</button>
                         </dl>
+                    </form>
+                    
+                    {% from "auth/_formhelpers.html" import render_field %}
+                    <form method="post" action="/account">
+                        {{ render_field(form.description) }}
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
+                    </div>
 
                 </div>
             </div>

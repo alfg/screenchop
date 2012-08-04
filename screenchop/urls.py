@@ -34,6 +34,7 @@ app.add_url_rule('/upvote', view_func=vote.upvote, methods=['POST', 'GET'])
 app.add_url_rule('/downvote', view_func=vote.downvote, methods=['POST', 'GET'])
 app.add_url_rule('/tags/save', view_func=tags.saveTag, methods=['POST', 'GET'])
 app.add_url_rule('/tags/delete', view_func=tags.deleteTag, methods=['POST', 'GET'])
+app.add_url_rule('/account/avatar', view_func=account.account_avatar_uploader, methods=['POST'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])

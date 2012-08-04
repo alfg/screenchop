@@ -32,6 +32,7 @@ class User(Document):
     password = StringField()
     email = EmailField()
     description = StringField()
+    avatar = StringField()
 
 class Vote(Document):
     userid = StringField()

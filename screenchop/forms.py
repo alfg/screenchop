@@ -1,7 +1,8 @@
-from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, validators
+from wtforms import Form, BooleanField, TextField, PasswordField
+from wtforms import TextAreaField, FileField, validators
 
 class RegistrationForm(Form):
-    username = TextField('Username', [validators.Length(min=4, max=25)])
+    username = TextField('Username', [validators.Length(min=3, max=25)])
     password = PasswordField('New Password', [
         validators.Required(message='Password required'),
         validators.EqualTo('confirm', message='Passwords must match')
