@@ -15,4 +15,6 @@
  
 // Add Custom Categories Tooltip
 $('#add-category').tooltip({placement: 'right'})
-
+$('#directFullLink').tooltip({placement: 'top'})
+$('#directMedLink').tooltip({placement: 'top'})
+$('#directThumbLink').tooltip({placement: 'top'})

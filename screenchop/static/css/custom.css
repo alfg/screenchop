@@ -409,6 +409,9 @@ span.user-stat-name {
     rgba(0, 0, 0, 0.075);
 }
 
+span#add-tag-button > a { /* Override hack to align Tag Image button */
+    margin-top: 0;
+}
 /* Social Buttons on Chops page */
 
 #social-area {
@@ -480,6 +483,10 @@ span.user-stat-name {
 .share-panel-services {
     line-height: 0;
 }
+ul.share-group {
+    float: right;
+}
+
 .share-group li {
     display: inline;
 }
@@ -518,6 +525,31 @@ span.user-stat-name {
     position: relative;
     bottom: 2px;
     
+}
+
+#social-area ul.img-links {
+    float: left;
+    margin-top: 5px;
+}
+
+#social-area .img-links li {
+    display: inline;
+}
+
+#social-area .img-links #directFullLink {
+    font-size: 36px;
+}
+
+#social-area .img-links #directMedLink {
+    font-size: 30px;
+}
+
+#social-area .img-links #directThumbLink {
+    font-size: 26px;
+}
+
+#social-area ul.img-links i {
+    vertical-align: middle;
 }
 
 /* Account > Uploads page */

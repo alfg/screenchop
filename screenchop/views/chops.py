@@ -56,6 +56,6 @@ def chop(filename):
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, fullURL=fullURL,
                             shortURL=shortURL, score=score, vote=vote, 
-                            tagging=tagging, tagable=tagable,
-                            s3MediumURL=s3MediumURL)
+                            tagging=tagging, tagable=tagable, s3FullURL=s3FullURL,
+                            s3MediumURL=s3MediumURL, s3ThumbsURL=s3ThumbsURL)
 
