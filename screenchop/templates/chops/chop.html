@@ -91,7 +91,7 @@
                     
                     <ul class="img-links">
                         <li><a class="no-underline" href="{{ s3FullURL }}{{ chop.filename }}" id="directFullLink" rel="tooltip" title="Direct Link - Full"><i class="icon-external-link"></i></a></li>
-                        <li><a class="no-underline" href="{{ s3MedURL }}{{ chop.filename }}" id="directMedLink" rel="tooltip" title="Direct Link - Medium"><i class="icon-external-link"></i></a></li>
+                        <li><a class="no-underline" href="{{ s3MediumURL }}{{ chop.filename }}" id="directMedLink" rel="tooltip" title="Direct Link - Medium"><i class="icon-external-link"></i></a></li>
                         <li><a class="no-underline" href="{{ s3ThumbsURL }}{{ chop.filename }}" id="directThumbLink" rel="tooltip" title="Direct Link - Thumb"><i class="icon-external-link"></i></a></li>
                     </ul>
                     
@@ -146,7 +146,7 @@
         
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn btn-danger" data-dismiss="modal">Delete</a>
+        <a href="/c/{{ chop.filename }}/delete" class="btn btn-danger">Delete</a>
         <a href="#" class="btn" data-dismiss="modal">Close</a>
     </div>
 

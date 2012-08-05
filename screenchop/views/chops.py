@@ -11,6 +11,9 @@ from screenchop.forms import RegistrationForm, LoginForm
 
 from screenchop.sessions import *
 
+import boto
+from boto.s3.key import Key
+
 app = Flask(__name__)
 # Enable/disable tagging. For debugging.
 tagging = config.TAGGING_ENABLED
@@ -58,4 +61,38 @@ def chop(filename):
                             shortURL=shortURL, score=score, vote=vote, 
                             tagging=tagging, tagable=tagable, s3FullURL=s3FullURL,
                             s3MediumURL=s3MediumURL, s3ThumbsURL=s3ThumbsURL)
+                            
+@requires_auth        
+def delete_chop(filename):
+    ''' Controller to delete a chop post '''
+    
+    # Query post
+    chop = Post.objects.get(filename = filename)
+    
+    # User session is the submitter, then delete the post
+    # otherwise, redirect with a flash message
+    if session['username'] == chop.submitter:
+        # Delete MongoDB post
+        chop.delete()
+        
+        # Connect to S3 and delete all key objects
+        conn = boto.connect_s3(config.AWS_ACCESS_KEY_ID,
+                                 config.AWS_SECRET_ACCESS_KEY)
+                                 
+        b = conn.get_bucket(config.BUCKET_NAME)
+        k = Key(b)
+        
+        k.key = 'full/' + filename
+        b.delete_key(k)
+        k.key = 'medium/' + filename
+        b.delete_key(k)
+        k.key = 'thumbs/' + filename
+        b.delete_key(k)
+            
+    else:
+        flash('You are not the submitter')
+        return redirect('/c/%s' % filename)
+    
+    flash('Screenchop deleted')
+    return redirect(url_for('home'))
 
