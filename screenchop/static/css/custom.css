@@ -2,6 +2,19 @@ body {
     background-color: #eee;
 }
 
+.s-logo {
+    width: 26px;
+    height: 30px;
+    margin: 5px 10px 0 20px;
+    background-image: url('../img/logo_transparent.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.navbar .brand {
+    padding: 0 !important;
+}
+
 .no-underline {
     text-decoration: none !important;
 }
