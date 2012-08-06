@@ -52,3 +52,10 @@ class Tag(Document):
     postuid = IntField()
     postfilename = StringField()
     
+class Invite_code(Document):
+    code = StringField()
+    date_used = StringField()
+    used_by = StringField()
+    valid = BooleanField()
+    quantity = IntField()
+    

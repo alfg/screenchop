@@ -12,12 +12,11 @@ from screenchop.forms import RegistrationForm, LoginForm, AccountForm
 
 from screenchop.sessions import *
 
-app = Flask(__name__)
 
 def home():
     # Configure S3 Thumbs directory
     s3ThumbsURL = config.S3_THUMBS_URL
-
+    
     # Configure max images to show on front page
     maxPerRow = config.MAX_IMAGES_PER_ROW
     pageIncr = config.HOME_MAX_IMAGES # Amount of images to increment/paginate

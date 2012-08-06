@@ -27,7 +27,11 @@ def chop(filename):
     s3FullURL = config.S3_FULL_URL
     s3MediumURL = config.S3_MEDIUM_URL
     
-    chop = Post.objects.get(filename = filename)
+    try:
+        # Query post
+        chop = Post.objects.get(filename = filename)
+    except:
+        return render_template('error_pages/404.html'), 404
     
     # Checking if username in session to check 2 things
     if 'username' in session:

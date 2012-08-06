@@ -30,6 +30,9 @@ S3_MEDIUM_URL = config.get('s3', 'S3_MEDIUM_URL')
 S3_FULL_URL = config.get('s3', 'S3_FULL_URL')
 S3_AVATAR_URL = config.get('s3', 'S3_AVATAR_URL')
 
+# Registration
+REGISTRATION_LEVEL = config.get('registration', 'REGISTRATION_LEVEL')
+
 # Gallery Configs
 MAX_IMAGES_PER_ROW = int(config.get('gallery', 'MAX_IMAGES_PER_ROW'))
 HOME_MAX_IMAGES = int(config.get('gallery', 'HOME_MAX_IMAGES'))

@@ -1,5 +1,6 @@
 import sys, traceback
 from functools import wraps
+from time import strftime
 
 from flask import Flask
 from flask import request, redirect, url_for, session, flash
@@ -48,7 +49,17 @@ def register():
 
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
-
+    
+        # Code to support if invite registration mode is enabled.
+        if config.REGISTRATION_LEVEL == 'invite':
+        
+            # Check if invite code is valid
+            if checkInviteCode(form.invite_code.data, form.username.data) != 'success':
+                error = {"code": ["Invitation code invalid"]}
+                return jsonify(errors=error)
+        else:
+            pass
+            
         # Check or create if user does not exist
         user, created = User.objects.get_or_create(username=form.username.data)
         
@@ -72,6 +83,31 @@ def register():
     # Return POST errors in json
     return jsonify(errors=form.errors)
 
+def checkInviteCode(code, user):
+    ''' If REGISTRATION_LEVEL is set to 'invite', then this code will be run to
+    check if invite code exists and/or is valid. If code is valid, then
+    invalidate code after being used. '''
+    
+    try:
+        # Query code
+        checkCode = Invite_code.objects.get(code=code)
+
+        # Check if code has been used. Fail if so.
+        if checkCode.valid == False:
+            return 'fail'
+        
+        # Invalidate code in DB with a timestamp and user recorded
+        checkCode.valid = False
+        checkCode.date_used = strftime("%Y-%m-%d_%H-%M-%S")
+        checkCode.used_by = user
+                  
+        checkCode.save()
+        
+        return 'success'
+    except:
+        
+        # Fail if does not exist exception
+        return 'fail'
 
 
 """

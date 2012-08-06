@@ -15,81 +15,6 @@
 
 // Dynamically clears username and password boxes when focus.
 $(document).ready(function loginForm() {
- /*
-	$('#pass-clear').show();
-	$('#pass').hide();
- 
-	$('#pass-clear').focus(function() {
-		$('#pass-clear').hide();
-		$('#pass').show();
-		$('#pass').focus();
-	});
-	$('#pass').blur(function() {
-		if($('#pass').val() == '') {
-			$('#pass-clear').show();
-			$('#pass').hide();
-		}
-	});
-
-	$('#user').each(function() {
-		var default_value = this.value;
-		$(this).focus(function() {
-			if(this.value == default_value) {
-				this.value = '';
-			}
-		});
-		$(this).blur(function() {
-			if(this.value == '') {
-				this.value = default_value;
-			}
-		});
-	});
-	
-	$('#pass-register-clear').show();
-	$('#pass-register').hide();
- 
-	$('#pass-register-clear').focus(function() {
-		$('#pass-register-clear').hide();
-		$('#pass-register').show();
-		$('#pass-register').focus();
-	});
-	$('#pass-register').blur(function() {
-		if($('#pass-register').val() == '') {
-			$('#pass-register-clear').show();
-			$('#pass-register').hide();
-		}
-	});
-	
-    $('#pass-verify-clear').show();
-	$('#pass-verify').hide();
- 
-	$('#pass-verify-clear').focus(function() {
-		$('#pass-verify-clear').hide();
-		$('#pass-verify').show();
-		$('#pass-verify').focus();
-	});
-	$('#pass-verify').blur(function() {
-		if($('#pass-verify').val() == '') {
-			$('#pass-verify-clear').show();
-			$('#pass-verify').hide();
-		}
-	});
-	
-
-	$('#user-register').each(function() {
-		var default_value = this.value;
-		$(this).focus(function() {
-			if(this.value == default_value) {
-				this.value = '';
-			}
-		});
-		$(this).blur(function() {
-			if(this.value == '') {
-				this.value = default_value;
-			}
-		});
-	});
-*/
 
 // Checks if Username and/or Password are valid. If valid, redirect back to front page.
 function submitLoginForm() {
@@ -128,12 +53,13 @@ var user = $("#userregister").val();
 var pass = $("#passregister").val();
 var passVerify = $("#passverify").val();
 var tos = $("#tos").attr('checked');
+var invitecode = $("#invitecode").val();
 
 
 $.ajax({
            type: "POST",
            url: "/register",
-           data: { username : user, password : pass, confirm : passVerify, accept_tos : tos }
+           data: { username : user, password : pass, confirm : passVerify, accept_tos : tos, invite_code : invitecode }
             }).done(function( msg ) {
             
             if (msg == 'Success')

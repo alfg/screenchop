@@ -140,6 +140,7 @@ body {
     font-weight: bold;
 }
 
+/* Login/Registration Modal */
 .loginBoxInput {
     color: #666;
     text-align: left;
@@ -161,6 +162,11 @@ div#register-message {
     color: red;
 }
 
+div#login-form .modal-body {
+    max-height: 500px !important;
+}
+
+/* Load more images from front page button */
 div#loadmore {
     background: #a7a7a7;
     text-align: center;

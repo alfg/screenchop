@@ -54,3 +54,8 @@ def not_found(e):
 # Sessions
 app.add_url_rule('/login', view_func=login, methods=['POST', 'GET'])
 app.add_url_rule('/logout', view_func=logout, methods=['POST', 'GET'])
+
+# Global Variables
+@app.context_processor
+def registration_level():
+    return dict(registration_level=config.REGISTRATION_LEVEL)
