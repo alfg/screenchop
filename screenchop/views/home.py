@@ -60,6 +60,16 @@ def home_new():
     return render_template('main/home_new.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
                         pageIncr=pageIncr)
+                        
+def tags():
+
+    # For registration/login validation
+    regForm = RegistrationForm(request.form)
+    loginForm = LoginForm(request.form)
+    
+    return render_template('main/tags.html', regForm=regForm, loginForm=loginForm)
+
+
 @requires_auth
 def upload():
     '''

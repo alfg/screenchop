@@ -31,7 +31,7 @@
                         </ul>
 
                         <div class="well">
-                        
+                            {% if chops %}
                             <ul class="thumbnails">
                                 {% for i in chops %}
                                 <li class="account-uploads">
@@ -43,6 +43,15 @@
                                     </div>
                                 </li>
                                 {% endfor %}
+                                
+                                {% else %}
+                                <center>
+                                    <h3>
+                                        <i class="icon-asterisk"></i>
+                                        You have not uploaded any screenchops yet! <a href="/upload">Get started!
+                                    </h3>
+                                </center>
+                                {% endif %}
                             </ul>
                         
                         </div>

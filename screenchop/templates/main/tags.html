@@ -1,0 +1,68 @@
+{% set active_page = "tags" %}
+{% set active_sub = "hot" %}
+{% set requires_loginForms = True %}
+
+{% include 'layout/header.html' %}
+
+<!-- Gallery config variables -->
+<script type="text/javascript"> 
+    var maxPerRow = {{ maxPerRow }};
+    var sortType = 'hot';
+    var page = {{ pageIncr }};
+    var pageInc = {{ pageIncr }};
+    var user = 'all';
+</script>
+
+    <body>
+    {% include 'layout/nav.html' %}
+        <div class="container">
+
+            <!-- Display flash message if any errors -->
+            {% with message = get_flashed_messages() %}
+            {% if message %}
+            <div class="alert">
+            <button class="close" data-dismiss="alert">×</button>
+                    {{ message[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+            
+            <div class="row-fluid">
+                
+                <div id="contents">
+                
+                <!-- Tag Search Form -->
+                <div class="pull-left">
+                    <div class="controls">
+                        <div class="input-append">
+                            <form action="/tags/asdf">
+                            <input id="appendedInputButton" size="16" type="text"><button class="btn" type="submit">Go!</button>
+                            </form>
+                        </div>
+                        <p class="help-block">Search a tag. (<a href="#">#Tera</a>, <a href="#">#DayZ</a>, <a href="#">#bf3</a>)</p>
+                    </div>
+                </div>
+                
+                
+                <!-- Tag Cloud Area -->
+                <div id="tagCloud"></div>
+                
+  
+                
+              
+                
+                    {% include 'layout/subs.html' %}
+
+                    <!-- Gallery -->
+                    <div id="results"></div>
+
+                </div>
+                <div id="loadmore">
+                    <span>Load More Chops!</span>
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+
+{% include 'layout/footer.html' %}
+

@@ -9,9 +9,9 @@
           <a class="brand" href="/"><div class="s-logo"></div></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="/">Screens</a></li>
-              <li><a href="tags">Tags</a></li>
-              <li><a href="friends">Friends</a></li>
+              <li {% if active_page == 'home' %}class="active"{% endif %}><a href="/">Screens</a></li>
+              <li {% if active_page == 'tags' %}class="active"{% endif %}><a href="tags">Tags</a></li>
+              <li {% if active_page == 'friends' %}class="active"{% endif %}><a href="friends">Friends</a></li>
             </ul>
             <ul class="nav pull-right navbarupload">
                 
