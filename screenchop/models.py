@@ -56,6 +56,6 @@ class Invite_code(Document):
     code = StringField()
     date_used = StringField()
     used_by = StringField()
-    valid = BooleanField()
+    valid = BooleanField(default=True)
     quantity = IntField()
     
