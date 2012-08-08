@@ -16,7 +16,7 @@ class Post(Document):
     title = StringField()
     submitter = StringField()
     caption = StringField()
-    tags = ListField()
+    tags = ListField(StringField())
     thumbnail = StringField()
     filename = StringField()
     medium = StringField()
@@ -59,3 +59,6 @@ class Invite_code(Document):
     valid = BooleanField(default=True)
     quantity = IntField()
     
+class Tag_freq(Document):
+    tag = StringField()
+    freq = IntField()
