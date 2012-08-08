@@ -55,7 +55,7 @@ def uploader():
         if request.form['tags']:
             tags = request.form['tags']
         else:
-            tags = None
+            tags = ''
             
     # Otherwise, just set them to None as there's no data.
     else:
@@ -98,7 +98,6 @@ def uploader():
                 submitter=session['username'],
                 caption=caption,
                 tags= [tags], 
-                date=strftime("%Y-%m-%d_%H-%M-%S"), 
                 width=width, 
                 height=height)
 

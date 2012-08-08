@@ -6,6 +6,7 @@ MongoDB Models
 
 from mongoengine import *
 from screenchop import config
+import datetime
 
 connect(config.MONGO_DATABASE, host=config.MONGO_HOST,
         port=config.MONGO_PORT, username=config.MONGO_USER,
@@ -20,7 +21,7 @@ class Post(Document):
     thumbnail = StringField()
     filename = StringField()
     medium = StringField()
-    date = StringField()
+    date = DateTimeField(default=datetime.datetime.now)
     upvotes = IntField(default=0)
     downvotes = IntField(default=0)
     width = IntField()

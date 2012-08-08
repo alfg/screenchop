@@ -52,7 +52,8 @@ def getMainImages():
                          'caption' : x.caption,
                          'upvotes' : x.upvotes,
                          'downvotes' : x.downvotes,
-                         'score' : x.upvotes - x.downvotes
+                         'score' : x.upvotes - x.downvotes,
+                         'submitted' : str(x.date)
                          } for x in post]
     
     return jsonify(images=jsonImageQuery)
