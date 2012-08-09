@@ -6,7 +6,7 @@ var photos = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': '/api/public/images.json?sort=' + sortType + '&user=' + user,
+        'url': '/api/public/images.json?sort=' + sortType + '&user=' + user + '&tag=' + tag,
         'dataType': "json",
         'success': function (data) {
             photos = data.images;

@@ -62,12 +62,46 @@ def home_new():
                         pageIncr=pageIncr)
                         
 def tags():
+    ''' /tags view '''
+    
+    # Display all tags
+    tag = 'all'
+    
+    # Configure S3 Thumbs directory
+    s3ThumbsURL = config.S3_THUMBS_URL
 
+    # Configure max images to show on front page
+    maxPerRow = config.MAX_IMAGES_PER_ROW
+    pageIncr = config.HOME_MAX_IMAGES # Amount of images to increment/paginate
+    
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
     
-    return render_template('main/tags.html', regForm=regForm, loginForm=loginForm)
+    return render_template('main/tags.html', tag=tag, s3ThumbsURL=s3ThumbsURL,
+                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
+                        pageIncr=pageIncr)
+    
+def tags_single(tag):
+    ''' /tags/<tag> view '''
+    
+    # Check if any tags queried exist
+    tagCount = Tag_freq.objects(tag=tag).count()
+    
+    # Configure S3 Thumbs directory
+    s3ThumbsURL = config.S3_THUMBS_URL
+
+    # Configure max images to show on front page
+    maxPerRow = config.MAX_IMAGES_PER_ROW
+    pageIncr = config.HOME_MAX_IMAGES # Amount of images to increment/paginate
+    
+    # For registration/login validation
+    regForm = RegistrationForm(request.form)
+    loginForm = LoginForm(request.form)
+    
+    return render_template('main/tags.html', tag=tag, tagCount=tagCount, s3ThumbsURL=s3ThumbsURL,
+                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
+                        pageIncr=pageIncr)
 
 
 @requires_auth

@@ -20,7 +20,8 @@ app.secret_key = config.SESSION_KEY
 app.add_url_rule('/', view_func=home.home)
 app.add_url_rule('/top', view_func=home.home_top)
 app.add_url_rule('/new', view_func=home.home_new)
-app.add_url_rule('/tags', view_func=home.tags)
+app.add_url_rule('/tags/', view_func=home.tags)
+app.add_url_rule('/tags/<tag>', view_func=home.tags_single)
 app.add_url_rule('/upload', view_func=home.upload)
 app.add_url_rule('/account', view_func=account.account, methods=['POST', 'GET'])
 app.add_url_rule('/account/password', view_func=account.account_password, methods=['POST', 'GET'])
@@ -42,6 +43,7 @@ app.add_url_rule('/c/<filename>/delete', view_func=chops.delete_chop, methods=['
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])
 app.add_url_rule('/api/public/tags.json', view_func=tags.getTags_json, methods=['GET'])
 app.add_url_rule('/api/public/tagcloud.json', view_func=tagcloud.tagcloud_json, methods=['GET'])
+app.add_url_rule('/api/public/searchTags.json', view_func=tagcloud.searchTags_json, methods=['GET'])
 
 # Error Pages
 @app.errorhandler(500)

@@ -59,7 +59,7 @@ def uploader():
             
     # Otherwise, just set them to None as there's no data.
     else:
-        title, caption, tags = None, None, None
+        title, caption, tags = None, None, ''
     
     if image and allowed_file(image.filename):
     

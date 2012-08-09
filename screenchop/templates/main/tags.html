@@ -11,6 +11,7 @@
     var page = {{ pageIncr }};
     var pageInc = {{ pageIncr }};
     var user = 'all';
+    var tag = '{{ tag }}';
 </script>
 
     <body>
@@ -30,39 +31,77 @@
             <div class="row-fluid">
                 
                 <div id="contents">
-                
-                <!-- Tag Search Form -->
-                <div class="pull-left">
-                    <div class="controls">
-                        <div class="input-append">
-                            <form action="/tags/asdf">
-                            <input id="appendedInputButton" size="16" type="text"><button class="btn" type="submit">Go!</button>
-                            </form>
+                    
+                    <div id="tag-toparea">
+                        <!-- Tag Search Form -->
+                        <div class="pull-left">
+                            <div class="controls">
+                                <h5 class="help-block">Search a tag</h5>
+                                <div class="input-append">
+                                    <form>
+                                    <input id="tagInput" size="16" type="text" data-provide="typeahead">
+                                    <button id="submit" class="btn" type="submit">Go!</button>
+                                    </form>
+                                </div>
+
+                                <h2>Viewing #{{ tag }}</h2><br />
+                            </div>
                         </div>
-                        <p class="help-block">Search a tag. (<a href="#">#Tera</a>, <a href="#">#DayZ</a>, <a href="#">#bf3</a>)</p>
+                        
+                        
+                        <!-- Tag Cloud Area -->
+                        <div id="tagCloud-area" class="pull-right">
+                        <h5 class="help-block">Trending</h5>
+                        <div id="tagCloud"></div>
+                        </div>
+
                     </div>
-                </div>
-                
-                
-                <!-- Tag Cloud Area -->
-                <div id="tagCloud"></div>
-                
-  
-                
-              
-                
+                    
+                    {% if tagCount != 0 %}
+                    
                     {% include 'layout/subs.html' %}
 
                     <!-- Gallery -->
                     <div id="results"></div>
 
+                    
                 </div>
                 <div id="loadmore">
                     <span>Load More Chops!</span>
                 </div>
+                {% else %}
+                <div id="no-results">
+                    <div id="no-results-msg">
+                    <span class="message">
+                        <i class="icon-info-sign"></i> Gasp! No screenchops for this tag! D:<br>
+                        <em>How about submitting some of your own?</em>
+                        {% if 'username' in session %}
+                        <a class="btn btn-success btn-mini" href="/upload" style="line-height: 10px;">Upload</a>
+                        {% else %}
+                        <a class="btn btn-success btn-mini" href="#login-form" data-toggle="modal" style="line-height: 10px;">Register</a>
+                        {% endif %}
+                    </span>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div> <!-- /container -->
 
 
 {% include 'layout/footer.html' %}
+<script>
 
+    /* Controller-less input redirecting */
+    $('#submit').click( function() { 
+        var tagInput = $("#tagInput").val();
+        location.href = '/tags/' + tagInput;
+        return false;
+    } );
+
+    /* Search Tags Typeahead JSON */
+    $.getJSON("/api/public/searchTags.json", function(json) {
+          $('#tagInput').typeahead({
+            source: json.tags
+            });
+     });
+</script>

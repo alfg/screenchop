@@ -17,14 +17,15 @@ def getMainImages():
     user = request.args.get('user', None)
     sortType = request.args.get('sort')
     page = request.args.get('page', 0)
+    tag = request.args.get('tag', None)
     
     s3ThumbsURL = config.S3_THUMBS_URL
     s3FullURL = config.S3_FULL_URL
     s3MediumURL = config.S3_MEDIUM_URL
     
     dateToday = strftime("%Y-%m-%d")
-    
-    if user == 'all':
+    print tag
+    if user == 'all' and tag == 'all':
     
         if sortType == 'new':
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
@@ -32,6 +33,15 @@ def getMainImages():
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
         else:
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
+            
+    elif user == 'all' and tag != 'all':
+    
+        if sortType == 'new':
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag, date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
+        elif sortType == 'top':
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+        else:
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-date')
             
     else:
         if sortType == 'new':

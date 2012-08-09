@@ -9,7 +9,7 @@ from scripts.tag_freq import tag_frequencies
 manager = Manager(urls.app)
 
 @manager.command
-def invite_code(help='Generates an invitation code'):
+def invite_code():
     "Generates an invitation code"
     generate_invite()
 
