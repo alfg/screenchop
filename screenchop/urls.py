@@ -31,6 +31,7 @@ app.add_url_rule('/u/<username>', view_func=user.user, methods=['GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])
+app.add_url_rule('/urluploader', view_func=uploader.url_uploader, methods=['POST'])
 app.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
 app.add_url_rule('/upvote', view_func=vote.upvote, methods=['POST', 'GET'])
 app.add_url_rule('/downvote', view_func=vote.downvote, methods=['POST', 'GET'])

@@ -20,20 +20,29 @@
                     </div>
                     {% endif %}
                     {% endwith %}
+                    
+                    <p><h2>Add from URL...</h2></p>
+                    <p><h6>*5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
+                    <form class="well form-inline" action="urluploader" method="POST">
+                      
+                      <input type="text" class="input-medium" placeholder="Image URL" name="imageurl">
+                      <input type="text" class="input-medium" placeholder="Caption" name="caption">
+                      <input type="text" class="input-medium" placeholder="Tags" name="tags">
+
+                      <button type="submit" class="btn btn-success pull-right">Upload</button>
+                      
+                    </form>
+                    
                     <p><h2> Upload a Single File...</h2></p>
                     <p><h6>*5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
                     <form class="well form-inline" action="uploader" method="POST" enctype="multipart/form-data">
-                      <!--
-                      <input type="text" class="span3" placeholder="Type something…">
-                      <span class="help-block">Example block-level help text here.</span>
-                      -->
-                      <input type="text" class="input-medium" placeholder="Title" name="title">
+
                       <input type="text" class="input-medium" placeholder="Caption" name="caption">
-                      <input type="text" class="input-large" placeholder="Tags - (separated by commas)" name="tags">
+                      <input type="text" class="input-medium" placeholder="Tags" name="tags">
                       <input class="input-file" id="fileInput" type="file" name="imageupload" />
 
                       <input type="hidden" name="uploadType" value="single-upload" />
-                      <button type="submit" class="btn btn-success pull-right">Submit</button>
+                      <button type="submit" class="btn btn-success pull-right">Upload</button>
                       
                     </form>
                     
@@ -42,7 +51,7 @@
 
                     <div id="dropbox">
                     <span class="message">Drop images here to upload.<br />
-                    <em>You can add titles, captions and tags during upload or later!</em></span>
+                    <em>You can add captions and tags during upload or later!</em></span>
                     </div>
 
 

@@ -14,7 +14,6 @@ connect(config.MONGO_DATABASE, host=config.MONGO_HOST,
 
 class Post(Document):
     uid = SequenceField()
-    title = StringField()
     submitter = StringField()
     caption = StringField()
     tags = ListField(StringField())
