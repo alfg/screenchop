@@ -85,9 +85,7 @@ body {
     width: 880px;
     background-color: #ddd;
     padding: 10px;
-    margin-top: 30px;
     clear: left;
-    /*min-height: 600px;*/
 }
 
 
@@ -143,7 +141,8 @@ body {
 
 #mininav {
     float: left;
-    width: 100%;
+    margin-left: 15px;
+    margin-right: 5px;
     border-bottom: 0px solid #000;
     overflow: hidden;
     position: relative;
@@ -233,6 +232,7 @@ div#loadmore:hover {
 
 #tagCloud-area {
     width:600px;
+    min-height:130px;
     overflow:auto; 
 }
 

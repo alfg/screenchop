@@ -40,10 +40,12 @@ def home_top():
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
+    
+    timerange = request.args.get('t', '7d')
 
     return render_template('main/home_top.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr)
+                        pageIncr=pageIncr, timerange=timerange)
                         
 def home_new():
     # Configure S3 Thumbs directory

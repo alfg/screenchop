@@ -9,37 +9,54 @@ from screenchop.models import *
 from screenchop import config
 
 import json
-from time import strftime
+import datetime
 
-#app = Flask(__name__)
 
 def getMainImages():
+    """ JSON API to request image data in a JSON request. Used mainly for the
+    galleries on front and tags pages. """
+    
     user = request.args.get('user', None)
     sortType = request.args.get('sort')
     page = request.args.get('page', 0)
     tag = request.args.get('tag', None)
+    time = request.args.get('t', None)
     
     s3ThumbsURL = config.S3_THUMBS_URL
     s3FullURL = config.S3_FULL_URL
     s3MediumURL = config.S3_MEDIUM_URL
     
-    dateToday = strftime("%Y-%m-%d")
-    print tag
+    # Set time range to query
+    if time == 'hour':
+        timerange = datetime.datetime.today() - datetime.timedelta(hours=1)
+    elif time == '24h':
+        timerange = datetime.datetime.today() - datetime.timedelta(hours=24)
+    elif time == '7d':
+        timerange = datetime.datetime.today() - datetime.timedelta(days=7)
+    elif time == '30d':
+        timerange = datetime.datetime.today() - datetime.timedelta(days=30)
+    elif time == 'all':
+        timerange = datetime.datetime.today() - datetime.timedelta(days=99999)
+    else:
+        timerange = datetime.datetime.today() - datetime.timedelta(days=99999)
+        
+    # Front page
     if user == 'all' and tag == 'all':
     
         if sortType == 'new':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date').limit(config.HOME_MAX_IMAGES)
         elif sortType == 'top':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
         else:
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
             
+    # /tags/<tag> page
     elif user == 'all' and tag != 'all':
     
         if sortType == 'new':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag, date__contains=dateToday).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-date').limit(config.HOME_MAX_IMAGES)
         elif sortType == 'top':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag, date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
         else:
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-date')
             
@@ -63,6 +80,8 @@ def getMainImages():
                          'upvotes' : x.upvotes,
                          'downvotes' : x.downvotes,
                          'score' : x.upvotes - x.downvotes,
+                         'tags' : x.tags,
+                         'submitter' : x.submitter,
                          'submitted' : str(x.date)
                          } for x in post]
     

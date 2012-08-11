@@ -17,6 +17,9 @@ app = Flask(__name__)
 def user(username):
     # Configure S3 Thumbs directory
     s3ThumbsURL = config.S3_THUMBS_URL
+    
+    # Avatar location
+    avatarURL = config.S3_AVATAR_URL
 
     # Configure max images to show on front page
     maxPerRow = config.MAX_IMAGES_PER_ROW
@@ -43,7 +46,8 @@ def user(username):
     score = upvotes - downvotes
     
     return render_template('main/user.html', s3ThumbsURL=s3ThumbsURL,
-                        maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr, user=user, score=score)
+                        avatarURL=avatarURL, maxPerRow=maxPerRow, regForm=regForm,
+                        loginForm=loginForm, pageIncr=pageIncr, user=user, 
+                        score=score)
 
 

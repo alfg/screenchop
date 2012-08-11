@@ -167,7 +167,7 @@ def uploader():
 
 
 
-
+@requires_auth
 def url_uploader():
     """
     This is the upload controller used when uploading by URL.

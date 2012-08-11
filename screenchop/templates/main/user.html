@@ -12,6 +12,7 @@
     var pageInc = {{ pageIncr }};
     var user = '{{ user.username }}';
     var tag = 'all';
+    var time = 'all';
 </script>
 
     <body>
@@ -33,7 +34,11 @@
                 <div id="contents">
                 
                     <div id="user-profile">
-                        <div class="user-avatar"></div>
+                        <div class="user-avatar">
+                            {% if user.avatar %}
+                            <img src="{{ avatarURL }}{{ user.avatar }}"></img>
+                            {% endif %}
+                        </div>
                         <div class="user-info-group">
                             <div class="user-name"><h2>{{ user.username }}</h2></div>
                             <div class="user-title">

@@ -6,3 +6,29 @@
         <li><a id="add-category" href="#" rel="tooltip" title="Add custom categories!">+</a></li>
     </ul>
 </div>
+{% if active_sub == 'top' %}
+<div class="btn-group pull-left">
+    <a class="btn dropdown-toggle btn-mini btn-primary" style="line-height:11px; top:2px;" data-toggle="dropdown" href="#">
+        {% if timerange == 'hour' %}
+        Last Hour
+        {% elif timerange == '24h' %}
+        Last 24 Hours
+        {% elif timerange == '7d' %}
+        7 Days
+        {% elif timerange == '30d' %}
+        30 Days
+        {% elif timerange == 'all' %}
+        All Time
+        {% endif %}
+        {{ time }}
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" style="min-width: 50px;">
+        <li><a href="?t=hour">Last Hour</a></li>
+        <li><a href="?t=24h">Last 24 Hours</a></li>
+        <li><a href="?t=7d">7 Days</a></li>
+        <li><a href="?t=30d">30 Days</a></li>
+        <li><a href="?t=all">All Time</a></li>
+    </ul>
+</div>
+{% endif %}

@@ -6,7 +6,7 @@ var photos = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': '/api/public/images.json?sort=' + sortType + '&user=' + user + '&tag=' + tag,
+        'url': '/api/public/images.json?sort=' + sortType + '&user=' + user + '&tag=' + tag + '&t=' + time,
         'dataType': "json",
         'success': function (data) {
             photos = data.images;
@@ -32,13 +32,17 @@ var hovered = function(photo) {
                 '<span class="pull-right" style="margin-right: 5px;">' + photo.score + '</span>' +
                 '<div style="font-size: 20px; "> \
                     <i class="icon-circle-arrow-up pull-right" style="margin-right: 5px;"></i> \
-                    <i class="icon-circle-arrow-down pull-right" style="margin-right: 5px;"></i> \
                 </div>' +
                 '<div style="font-size: 20px; "> \
                     <a href="' + photo.large + '" class="fancybox" rel="gallery" data-fancybox-type="image"> \
                         <i class="icon-fullscreen pull-right" style="color: white; margin-right: 10px;" title="View Preview"></i> \
                     </a> \
-                </div>' 
+                </div>' +
+                '<span class="pull-left" style="clear: left; font-size: 10px;"> \
+                <i class="icon-user" style="color: white; margin-right: 5px;"></i> \
+                Submitted By: <a class="no-underline" href="/u/' + photo.submitter + '"><span class="label label-info">' + photo.submitter + '</span></a> \
+                </span>' +
+                '<a class="no-underline" href="/tags/' + photo.tags + '"><span class="pull-right label label-success" style="margin-right:10px;">' + photo.tags + '</span></a>' 
                 
                 ); }
                 
@@ -47,18 +51,21 @@ var hovered = function(photo) {
                 .html( 
                 
                 '<i class="icon-comment pull-left" style="margin-right: 8px; margin-left: 4px;"></i> \
-                <span class="pull-left">' + photo.caption + '</span>' + 
+                <span class="pull-left"><h4>' + photo.caption + '</h4></span>' + 
                 '<span class="pull-right" style="margin-right: 5px;">' + photo.score + '</span>' +
                 '<div style="font-size: 20px; "> \
                     <i class="icon-circle-arrow-up pull-right" style="margin-right: 5px;"></i> \
-                    <i class="icon-circle-arrow-down pull-right" style="margin-right: 5px;"></i> \
                 </div>' +
                 '<div style="font-size: 20px; "> \
                     <a href="' + photo.large + '" class="fancybox" rel="gallery" data-fancybox-type="image"> \
                         <i class="icon-fullscreen pull-right" style="color: white; margin-right: 10px;" title="View Preview"></i> \
                     </a> \
-                </div>' 
-                
+                </div>' +
+                '<span class="pull-left" style="clear: left; font-size: 10px;"> \
+                <i class="icon-user" style="color: white; margin-right: 5px;"></i> \
+                Submitted By: <a class="no-underline" href="/u/' + photo.submitter + '"><span class="label label-info">' + photo.submitter + '</span></a> \
+                </span>' +
+                '<a class="no-underline" href="/tags/' + photo.tags + '"><span class="pull-right label label-success">' + photo.tags + '</span></a>' 
                 );
 };
 
@@ -105,7 +112,7 @@ function imagePaginate(){
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': '/api/public/images.json?sort=' + sortType + '&page=' + page + '&user=' + user,
+                'url': '/api/public/images.json?sort=' + sortType + '&page=' + page + '&user=' + user  + '&tag=' + tag  + '&t=' + time,
                 'dataType': "json",
                 'success': function (data) {
                     photos = data.images;

@@ -10,10 +10,6 @@
     var tagable = {{ tagable }};
 </script>
 
-
-
-<!-- Gallery config variables -->
-
     <body>
     
     <!-- onClick popup windows for facebook share -->
@@ -66,19 +62,19 @@
                             <span class="label label-info">{{ chop.submitter }}</span>
                             </a>
                         </small>
-                        
-                        {% if chop.tags %}
-                        <span class="pull-right">
-                            {% for c in chop.tags %}
-                            <a href="/tags/{{ c }}" class="no-underline">
-                            <span class="label label-success">
-                                {{ c }}
-                            </span>
-                            </a>
-                            {% endfor %}
-                        </span>
-                        {% endif %}
                     </blockquote>
+                    
+                    {% if chop.tags %}
+                    <span class="pull-right">
+                        {% for c in chop.tags %}
+                        <a href="/tags/{{ c }}" class="no-underline">
+                        <span class="label label-success">
+                            {{ c }}
+                        </span>
+                        </a>
+                        {% endfor %}
+                    </span>
+                    {% endif %}
 
                     <span id="add-tag-button"></span>
                     {% if session['username'] == chop.submitter %}
@@ -118,7 +114,7 @@
                          <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook">
                          </a>
                     </li><li class="primary-service">
-                         <a class="share-service-button" href="https://twitter.com/share?text={{ shortURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                         <a class="share-service-button" href="https://twitter.com/share?{% if chop.caption != None %}text={{ chop.caption }} &mdash;&{% endif %}url={{ shortURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
                          <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter">
                          </a>
                     </li><li class="primary-service">
