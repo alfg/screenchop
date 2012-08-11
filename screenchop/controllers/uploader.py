@@ -8,9 +8,7 @@ store info in MongoDB. Needs much refactoring and optimizing.
 import os, sys
 from time import strftime
 import uuid
-import urllib
-import urllib2
-from urllib2 import urlparse
+import requests
 
 from flask import Flask
 from flask import request, session
@@ -182,10 +180,10 @@ def url_uploader():
     imageurl = request.form['imageurl']
     
     try:
-        image = urllib2.urlopen(imageurl).read()
-        imageparse = urlparse.urlsplit(imageurl)
-        imagefilename = imageparse.path.split('/')[-1]
-        print imagefilename
+        r = requests.get(imageurl)
+        image = r.content
+        imagefilename = (r.url).split('/')[-1]
+        
     except:
         flash("Invalid File - Please upload an image file. (png, jpg, jpeg)")
         return redirect(url_for('upload'))
@@ -205,8 +203,8 @@ def url_uploader():
     if image and allowed_file(imagefilename):
         try:
             # Create temp file
-            urllib.urlretrieve(imageurl, (config.TEMP_FILE_DIR + secure_filename(imagefilename)))
-            
+            with open(config.TEMP_FILE_DIR + secure_filename(imagefilename), "wb") as tmp:
+                tmp.write(r.content)
             
             # Set filename and file location securely
             filename = secure_filename(imagefilename)
