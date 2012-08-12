@@ -238,9 +238,11 @@ body {
     font-weight: bold;
 }
 
+
 .btn-subscribe {
     line-height: 12px;
     margin: 7px 0 0 5px;
+    float: left;
 }
 
 /* Login/Registration Modal */
@@ -284,12 +286,16 @@ div#loadmore:hover {
 /* Tags Page */
 
 #tag-toparea {
-    height: 140px;
+    height: 150px;
+}
+
+#tag-bottomarea {
+    float: left;
 }
 
 #tagCloud-area {
     width:600px;
-    min-height:130px;
+    min-height:100px;
     overflow:auto; 
 }
 
@@ -323,6 +329,27 @@ div#loadmore:hover {
 
 #tagList li a:hover {
     text-decoration:underline;
+}
+
+/* Following Page */
+
+ul.follow-avatars-list {
+    min-height: 100px;
+}
+
+.follow-avatars-list li {
+    list-style: none;
+}
+
+div.follow-avatar {
+    height: 50px;
+    width: 50px;
+    background-image: url('/static/img/avatar.jpg');
+    background-size: 50px 50px;
+    background-color: #A7A7A7;
+    display: inline-block;
+    float: left;
+    margin: 0 3px 0 3px;\
 }
 
 /* User Page */

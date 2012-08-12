@@ -9,7 +9,7 @@ from screenchop import config
 #import views
 from screenchop.views import home, chops, account, user
 from screenchop.controllers import uploader, vote, subscriptions
-from screenchop.api.public import images, tags, tagcloud
+from screenchop.api.public import images, tags, tagcloud, getuser
 from screenchop.sessions import login, logout, register
 
 
@@ -28,6 +28,7 @@ app.add_url_rule('/account/password', view_func=account.account_password, method
 app.add_url_rule('/account/uploads', view_func=account.account_uploads, methods=['POST', 'GET'])
 app.add_url_rule('/c/<filename>', view_func=chops.chop, methods=['GET'])
 app.add_url_rule('/u/<username>', view_func=user.user, methods=['GET'])
+app.add_url_rule('/following', view_func=home.following, methods=['GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])
@@ -47,6 +48,7 @@ app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, meth
 app.add_url_rule('/api/public/tags.json', view_func=tags.getTags_json, methods=['GET'])
 app.add_url_rule('/api/public/tagcloud.json', view_func=tagcloud.tagcloud_json, methods=['GET'])
 app.add_url_rule('/api/public/searchTags.json', view_func=tagcloud.searchTags_json, methods=['GET'])
+app.add_url_rule('/api/public/following.json', view_func=getuser.userFollowing_json, methods=['GET'])
 
 # Error Pages
 @app.errorhandler(500)
