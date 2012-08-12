@@ -190,6 +190,59 @@ body {
     font-weight: bold;
 }
 
+#mininav-subscriptions {
+    float: right;
+    margin-right: 0px;
+    border-bottom: 0px solid #000;
+    overflow: hidden;
+    position: relative;
+}
+
+#mininav-subscriptions ul {
+    clear: left; 
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#mininav-subscriptions ul li {
+    display: block;
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#mininav-subscriptions ul li a {
+    display: block;
+    margin: 0 0 0 1px;
+    padding: 3px 10px;
+    background: #ddd;
+    color: #000;
+    text-decoration: none;
+    line-height: 1.3em;
+}
+
+#mininav-subscriptions ul li a:hover {
+    background: #51A351;
+    color: #fff;
+}
+
+#mininav-subscriptions ul li a.active,
+#mininav-subscriptions ul li a.active:hover {
+    color: #DDD;
+    background: #51A351;
+    font-weight: bold;
+}
+
+.btn-subscribe {
+    line-height: 12px;
+    margin: 7px 0 0 5px;
+}
+
 /* Login/Registration Modal */
 .loginBoxInput {
     color: #666;
@@ -229,6 +282,10 @@ div#loadmore:hover {
 }
 
 /* Tags Page */
+
+#tag-toparea {
+    height: 140px;
+}
 
 #tagCloud-area {
     width:600px;

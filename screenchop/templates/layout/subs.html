@@ -3,7 +3,7 @@
         <li><a href="/" {% if active_sub == 'hot' %} class="active"{% endif %}>Hot</a></li>
         <li><a href="/top" {% if active_sub == 'top' %} class="active"{% endif %}>Top</a></li>
         <li><a href="/new" {% if active_sub == 'new' %} class="active"{% endif %}>New</a></li>
-        <li><a id="add-category" href="#" rel="tooltip" title="Add custom categories!">+</a></li>
+        {# <li><a id="add-category" href="#" rel="tooltip" title="Add custom categories!">+</a></li> #}
     </ul>
 </div>
 {% if active_sub == 'top' %}
@@ -29,6 +29,17 @@
         <li><a href="?t=7d">7 Days</a></li>
         <li><a href="?t=30d">30 Days</a></li>
         <li><a href="?t=all">All Time</a></li>
+    </ul>
+</div>
+{% endif %}
+
+{# if user has subscriptions, then show them #}
+{% if user.subscriptions %}
+<div id="mininav-subscriptions">
+    <ul>
+        {% for t in user.subscriptions %}
+        <li><a href="/tags/{{ t }}" {% if t == tag %}class="active"{% endif %}>{{ t }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 {% endif %}

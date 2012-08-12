@@ -24,10 +24,13 @@ def home():
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
+    
+    # Query user object. Used to check if tag subscriptions exist
+    user = User.objects.get(username=session['username'])
 
     return render_template('main/home.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr)
+                        pageIncr=pageIncr, user=user)
                         
 def home_top():
     # Configure S3 Thumbs directory
@@ -41,11 +44,14 @@ def home_top():
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
     
+    # Query user object. Used to check if tag subscriptions exist
+    user = User.objects.get(username=session['username'])
+    
     timerange = request.args.get('t', '7d')
 
     return render_template('main/home_top.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr, timerange=timerange)
+                        pageIncr=pageIncr, timerange=timerange, user=user)
                         
 def home_new():
     # Configure S3 Thumbs directory
@@ -59,9 +65,12 @@ def home_new():
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
 
+    # Query user object. Used to check if tag subscriptions exist
+    user = User.objects.get(username=session['username'])
+    
     return render_template('main/home_new.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr)
+                        pageIncr=pageIncr, user=user)
                         
 def tags():
     ''' /tags view '''
@@ -80,9 +89,12 @@ def tags():
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
     
+    # Query user object. Used to check if tag subscriptions exist
+    user = User.objects.get(username=session['username'])
+    
     return render_template('main/tags.html', tag=tag, s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr)
+                        pageIncr=pageIncr, user=user)
     
 def tags_single(tag):
     ''' /tags/<tag> view '''
@@ -101,9 +113,12 @@ def tags_single(tag):
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
     
+    # Query user object. Used to check if tag subscriptions exist
+    user = User.objects.get(username=session['username'])
+    
     return render_template('main/tags.html', tag=tag, tagCount=tagCount, s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
-                        pageIncr=pageIncr)
+                        pageIncr=pageIncr, user=user)
 
 
 @requires_auth

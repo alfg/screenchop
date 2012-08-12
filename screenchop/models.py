@@ -1,15 +1,17 @@
 #!/usr/bin/env python
-'''
+"""
 MongoDB Models
 
-'''
+"""
 
 from mongoengine import *
 from screenchop import config
 import datetime
 
-connect(config.MONGO_DATABASE, host=config.MONGO_HOST,
-        port=config.MONGO_PORT, username=config.MONGO_USER,
+connect(config.MONGO_DATABASE, 
+        host=config.MONGO_HOST,
+        port=config.MONGO_PORT, 
+        username=config.MONGO_USER,
         password=config.MONGO_PASS)
 
 class Post(Document):
@@ -33,6 +35,8 @@ class User(Document):
     email = EmailField()
     description = StringField()
     avatar = StringField()
+    subscriptions = ListField(StringField())
+    following = ListField(StringField())
 
 class Vote(Document):
     userid = StringField()
