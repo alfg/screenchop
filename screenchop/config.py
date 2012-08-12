@@ -44,3 +44,6 @@ THUMB_MAX_WIDTH = int(config.get('upload', 'THUMB_MAX_WIDTH'))
 THUMB_MAX_HEIGHT = int(config.get('upload', 'THUMB_MAX_HEIGHT'))
 MEDIUM_MAX_WIDTH = int(config.get('upload', 'MEDIUM_MAX_WIDTH'))
 MEDIUM_MAX_HEIGHT = int(config.get('upload', 'MEDIUM_MAX_HEIGHT'))
+
+# Marketing Configs
+GOOGLE_ANALYTICS_ACCOUNT = config.get('marketing', 'GOOGLE_ANALYTICS_ACCOUNT')

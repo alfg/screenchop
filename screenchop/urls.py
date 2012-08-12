@@ -64,3 +64,7 @@ app.add_url_rule('/logout', view_func=logout, methods=['POST', 'GET'])
 @app.context_processor
 def registration_level():
     return dict(registration_level=config.REGISTRATION_LEVEL)
+    
+@app.context_processor
+def google_analytics_account():
+    return dict(google_analytics_account=config.GOOGLE_ANALYTICS_ACCOUNT)
