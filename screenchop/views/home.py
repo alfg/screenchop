@@ -26,7 +26,10 @@ def home():
     loginForm = LoginForm(request.form)
     
     # Query user object. Used to check if tag subscriptions exist
-    user = User.objects.get(username=session['username'])
+    if 'username' in session:
+        user = User.objects.get(username=session['username'])
+    else:
+        user = None
 
     return render_template('main/home.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
@@ -45,7 +48,10 @@ def home_top():
     loginForm = LoginForm(request.form)
     
     # Query user object. Used to check if tag subscriptions exist
-    user = User.objects.get(username=session['username'])
+    if 'username' in session:
+        user = User.objects.get(username=session['username'])
+    else:
+        user = None
     
     timerange = request.args.get('t', '7d')
 
@@ -66,7 +72,10 @@ def home_new():
     loginForm = LoginForm(request.form)
 
     # Query user object. Used to check if tag subscriptions exist
-    user = User.objects.get(username=session['username'])
+    if 'username' in session:
+        user = User.objects.get(username=session['username'])
+    else:
+        user = None
     
     return render_template('main/home_new.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
@@ -90,7 +99,10 @@ def tags():
     loginForm = LoginForm(request.form)
     
     # Query user object. Used to check if tag subscriptions exist
-    user = User.objects.get(username=session['username'])
+    if 'username' in session:
+        user = User.objects.get(username=session['username'])
+    else:
+        user = None
     
     return render_template('main/tags.html', tag=tag, s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,
@@ -114,7 +126,10 @@ def tags_single(tag):
     loginForm = LoginForm(request.form)
     
     # Query user object. Used to check if tag subscriptions exist
-    user = User.objects.get(username=session['username'])
+    if 'username' in session:
+        user = User.objects.get(username=session['username'])
+    else:
+        user = None
     
     return render_template('main/tags.html', tag=tag, tagCount=tagCount, s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, regForm=regForm, loginForm=loginForm,

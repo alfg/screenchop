@@ -13,23 +13,21 @@ from screenchop import config
 from screenchop.sessions import requires_auth
 from screenchop.models import User
 
-
+@requires_auth
 def subscribe(tag):
+    """ Controller for subscribing to tags """
     try:
-        if 'username' not in session:
-            return 'not logged in'
-            
         User.objects(username=session['username']).update_one(push__subscriptions=tag)
         return redirect('/tags/%s' % tag)
         
     except:
         return 'fail'
-        
+
+@requires_auth
 def unsubscribe(tag):
+    """ Controller for unsubscribing to tags """
     try:
-        if 'username' not in session:
-            return 'not logged in'
-            
+
         User.objects(username=session['username']).update_one(pull__subscriptions=tag)
         return redirect('/tags/%s' % tag)
         
