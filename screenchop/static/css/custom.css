@@ -495,6 +495,21 @@ span.user-stat-name {
     margin-bottom: 9px;
 }
 
+/* Following Page */
+div#following-box {
+    color: #DDD;
+    min-height: 100px;
+    margin: 5px 0 15px 0;
+    padding: 10px;
+    background-image: -ms-linear-gradient(top, #06C 0%, #006391 100%);
+    background-image: -moz-linear-gradient(top, #06C 0%, #006391 100%);
+    background-image: -o-linear-gradient(top, #06C 0%, #006391 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #06C), color-stop(1, #006391));
+    background-image: -webkit-linear-gradient(top, #06C 0%, #0089C9 100%);
+    background-image: linear-gradient(top, #06C 0%, #006391 100%);
+}
+
+
 /* Dropscript Styles */
 
 /*-------------------------

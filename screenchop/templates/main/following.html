@@ -35,18 +35,23 @@
                 <div id="contents">
                 
                 {% if followlist %}
-                <p><h3>Viewing submissions from following</h3></p>
+                <div id="following-box">
+                <p><h3>Your Followed Users...</h3></p>
                 
                 <ul class="follow-avatars-list">
                     {% for u in followlist %}
                     <li>
+                        <a href="/u/{{ u.username }}" title="{{ u.username }}">
                         <div class="follow-avatar">
-                            <a href="/u/{{ u.username }}" title="{{ u.username }}">
-                            <img src="{{ avatarURL }}{{ u.avatar }}"></img></a>
+                            {% if u.avatar %}
+                            <img src="{{ avatarURL }}{{ u.avatar }}"></img>
+                            {% endif %}
                         </div>
+                        </a>
                     </li>
                     {% endfor %}
                 </ul>
+                </div>
                 
                 
                 

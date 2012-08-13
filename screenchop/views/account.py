@@ -43,6 +43,10 @@ def account():
         upvotes = upvotes + n.upvotes
         downvotes = downvotes + n.downvotes
     score = upvotes - downvotes
+
+    # Count number of followers and following
+    followerCount = len(User.objects(following__in=[user.username]))
+    followingCount = len(user.following)
     
     
     if request.method == 'POST' and form.validate():
@@ -54,7 +58,9 @@ def account():
     else:
     
         return render_template('main/account.html', user=user, score=score,
-                                                    form=form, avatarURL = avatarURL)
+                                                    form=form, avatarURL = avatarURL,
+                                                    followerCount=followerCount,
+                                                    followingCount=followingCount)
 
 @requires_auth
 def account_password():
