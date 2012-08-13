@@ -10,9 +10,10 @@
     var sortType = 'new';
     var page = {{ pageIncr }};
     var pageInc = {{ pageIncr }};
-    var user = 'all';
+    var user = '{{ session['username'] }}';
     var tag = 'all';
     var time = 'all';
+    var showFollowing = 'true';
 </script>
 
     <body>
@@ -33,6 +34,7 @@
                 
                 <div id="contents">
                 
+                {% if followlist %}
                 <p><h3>Viewing submissions from following</h3></p>
                 
                 <ul class="follow-avatars-list">
@@ -61,6 +63,10 @@
                 <div id="loadmore">
                     <span>Load More Chops!</span>
                 </div>
+                {% else %}
+                You are not following any users
+                {% endif %}
+
             </div>
         </div> <!-- /container -->
 

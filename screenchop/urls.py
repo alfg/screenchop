@@ -8,7 +8,7 @@ from screenchop import config
 
 #import views
 from screenchop.views import home, chops, account, user
-from screenchop.controllers import uploader, vote, subscriptions
+from screenchop.controllers import uploader, vote, subscriptions, follow
 from screenchop.api.public import images, tags, tagcloud, getuser
 from screenchop.sessions import login, logout, register
 
@@ -42,6 +42,8 @@ app.add_url_rule('/account/avatar', view_func=account.account_avatar_uploader, m
 app.add_url_rule('/c/<filename>/delete', view_func=chops.delete_chop, methods=['POST', 'GET'])
 app.add_url_rule('/tags/<tag>/subscribe', view_func=subscriptions.subscribe, methods=['POST', 'GET'])
 app.add_url_rule('/tags/<tag>/unsubscribe', view_func=subscriptions.unsubscribe, methods=['POST', 'GET'])
+app.add_url_rule('/u/<user>/follow', view_func=follow.follow, methods=['POST', 'GET'])
+app.add_url_rule('/u/<user>/unfollow', view_func=follow.unfollow, methods=['POST', 'GET'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])

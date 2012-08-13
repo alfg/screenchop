@@ -28,7 +28,13 @@ def user(username):
     # For registration/login validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
-    
+
+    # Sessioned user
+    if 'username' in session:
+        sessionUser = User.objects.get(username=session['username'])
+    else:
+        sessionUser = None
+    # Get queried user for page info
     try:
         user = User.objects.get(username=username)
     except:
@@ -47,7 +53,7 @@ def user(username):
     
     return render_template('main/user.html', s3ThumbsURL=s3ThumbsURL,
                         avatarURL=avatarURL, maxPerRow=maxPerRow, regForm=regForm,
-                        loginForm=loginForm, pageIncr=pageIncr, user=user, 
-                        score=score)
+                        loginForm=loginForm, pageIncr=pageIncr, sessionUser=sessionUser,
+                        user=user, score=score)
 
 

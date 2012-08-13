@@ -17,7 +17,7 @@ from screenchop.models import User
 def subscribe(tag):
     """ Controller for subscribing to tags """
     try:
-        User.objects(username=session['username']).update_one(push__subscriptions=tag)
+        User.objects(username=session['username']).update_one(add_to_set__subscriptions=tag)
         return redirect('/tags/%s' % tag)
         
     except:

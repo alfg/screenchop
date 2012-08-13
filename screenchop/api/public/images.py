@@ -21,6 +21,7 @@ def getMainImages():
     page = request.args.get('page', 0)
     tag = request.args.get('tag', None)
     time = request.args.get('t', None)
+    showFollowing = request.args.get('showFollowing', None)
     
     s3ThumbsURL = config.S3_THUMBS_URL
     s3FullURL = config.S3_FULL_URL
@@ -60,6 +61,19 @@ def getMainImages():
         else:
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-date')
             
+    # /following page
+    elif user and showFollowing == 'true':
+
+        queryUser = User.objects.get(username=user)
+        followingList = queryUser.following
+    
+        if sortType == 'new':
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](submitter__in=followingList).order_by('-date').limit(config.HOME_MAX_IMAGES)
+        elif sortType == 'top':
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](submitter__in=followingList, date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+        else:
+            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](submitter__in=followingList).order_by('-date')
+
     else:
         if sortType == 'new':
             post = Post.objects(submitter=user).order_by('-date').limit(config.HOME_MAX_IMAGES)

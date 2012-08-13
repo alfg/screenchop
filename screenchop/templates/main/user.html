@@ -13,6 +13,7 @@
     var user = '{{ user.username }}';
     var tag = 'all';
     var time = 'all';
+    var showFollowing = 'false';
 </script>
 
     <body>
@@ -40,7 +41,17 @@
                             {% endif %}
                         </div>
                         <div class="user-info-group">
-                            <div class="user-name"><h2>{{ user.username }}</h2></div>
+                            <div class="user-name">
+                                {% if 'username' in session %}
+                                {% if user.username in sessionUser.following %}
+                                <h2>{{ user.username }} <a class="btn btn-mini btn-danger" href="/u/{{ user.username }}/unfollow" style="margin-bottom:3px;">Unfollow</a></h2>
+                                {% else %}
+                                <h2>{{ user.username }} <a class="btn btn-mini btn-success" href="/u/{{ user.username }}/follow" style="margin-bottom:3px;">Follow</a></h2>
+                                {% endif %}
+                                {% else %}
+                                <h2>{{ user.username }}</h2>
+                                {% endif %}
+                            </div>
                             <div class="user-title">
                                 <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
                             </div>
@@ -48,6 +59,10 @@
                         <div class="user-followers">
                             <span class="user-stat-number"><h2>0</h2></span>
                             <span class="user-stat-name">Followers</span>
+                        </div>
+                        <div class="user-following">
+                            <span class="user-stat-number"><h2>0</h2></span>
+                            <span class="user-stat-name">Following</span>
                         </div>
                         <div class="user-views">
                             <span class="user-stat-number"><h2>{{ score }}</h2></span>
