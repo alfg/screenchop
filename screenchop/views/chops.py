@@ -7,7 +7,7 @@ from flask import render_template, flash
 
 from screenchop.models import *
 from screenchop import config
-from screenchop.forms import RegistrationForm, LoginForm
+from screenchop.forms import RegistrationForm, LoginForm, EditPost
 from screenchop.sessions import *
 from screenchop.cache import cache
 
@@ -20,10 +20,8 @@ tagging = config.TAGGING_ENABLED
 
 @cache.cached(timeout=config.CACHE_TIMEOUT)
 def chop(filename):
-    '''
-    The Screenshot "chop" View
+    """ The Screenshot "chop" View """
     
-    '''
     s3ThumbsURL = config.S3_THUMBS_URL
     s3FullURL = config.S3_FULL_URL
     s3MediumURL = config.S3_MEDIUM_URL
@@ -53,6 +51,8 @@ def chop(filename):
     # For registration/login wtf validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
+    editPostForm = EditPost(request.form)
+
     
     # For image linking, short url sharing.
     fullURL = config.DOMAIN_URL
@@ -62,14 +62,15 @@ def chop(filename):
     score = int(chop.upvotes) - int(chop.downvotes)
     
     return render_template('chops/chop.html', chop=chop, regForm=regForm,
-                            loginForm=loginForm, fullURL=fullURL,
-                            shortURL=shortURL, score=score, vote=vote, 
-                            tagging=tagging, tagable=tagable, s3FullURL=s3FullURL,
-                            s3MediumURL=s3MediumURL, s3ThumbsURL=s3ThumbsURL)
+                            loginForm=loginForm, editPostForm=editPostForm,
+                            fullURL=fullURL, shortURL=shortURL, score=score,
+                            vote=vote, tagging=tagging, tagable=tagable,
+                            s3FullURL=s3FullURL, s3MediumURL=s3MediumURL,
+                            s3ThumbsURL=s3ThumbsURL)
                             
 @requires_auth        
 def delete_chop(filename):
-    ''' Controller to delete a chop post '''
+    """ Controller to delete a chop post """ 
     
     # Query post
     chop = Post.objects.get(filename = filename)
@@ -100,4 +101,34 @@ def delete_chop(filename):
     
     flash('Screenchop deleted')
     return redirect(url_for('home'))
+
+@requires_auth
+def update_chop(filename):
+    """ Controller to update a chop post """
+
+    # Initiate form for validation
+    form = EditPost(request.form)
+
+    # Query post
+    chop = Post.objects.get(filename = filename)
+
+    if request.method == 'POST' and form.validate():
+
+
+        # User session is the submitter, then edit post
+        # otherwise, redirect with flash message
+        if session['username'] == chop.submitter:
+            # Update post
+            print form.caption.data, form.tags.data
+            chop.caption = form.caption.data
+            chop.tags = [form.tags.data]
+            chop.save()
+
+        else:
+           flash('You are not the submitter of this post')
+           return redirect('/c/%s' % filename)
+
+        flash('Screenchop updated')
+        return redirect('/c/%s' % filename)
+    return jsonify(errors=form.errors)
 

@@ -78,7 +78,7 @@
 
                     <span id="add-tag-button"></span>
                     {% if session['username'] == chop.submitter %}
-                    <button class="btn btn-mini btn-info">Edit</button>
+                    <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal">Edit</button>
                     <button class="btn btn-mini btn-danger" href="#delete-chop" data-toggle="modal">Delete</button>
                     {% endif %}
                     
@@ -148,8 +148,28 @@
         </div>
     </div> <!-- /container -->
     
-<div class="modal hide" id="delete-chop">
+<div class="modal hide" id="edit-chop">
 
+    <div class="modal-header">
+        <h3>Editing Post</h3>
+    </div>
+    <div class="modal-body">
+
+        {% from "chops/_formhelpers.html" import render_field %}          
+        <form method="post" action="/c/{{ chop.filename }}/update">                           
+            {{ render_field(editPostForm.caption) }}                         
+            {{ render_field(editPostForm.tags) }}
+        
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-info">Update</button>
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </form>
+    </div>
+
+</div>
+
+<div class="modal hide" id="delete-chop"> 
     <div class="modal-header">
         <h3>Delete Post?</h3>
     </div>

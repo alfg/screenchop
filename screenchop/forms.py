@@ -34,3 +34,7 @@ class AccountForm(Form):
 
 class ProfileForm(Form):
     description = TextAreaField('Profile Description')
+
+class EditPost(Form):
+    caption = TextAreaField('Caption')
+    tags = TextField('Tags')
