@@ -14,6 +14,11 @@ SESSION_KEY = config.get('app', 'SESSION_KEY')
 DOMAIN_URL = config.get('app', 'DOMAIN_URL')
 SHORT_DOMAIN_URL = config.get('app', 'SHORT_DOMAIN_URL')
 
+# Caching Configs
+CACHE_TYPE = config.get('caching', 'CACHE_TYPE')
+CACHE_SERVER_ADDRESS = config.get('caching', 'CACHE_SERVER_ADDRESS').split()
+CACHE_TIMEOUT = config.getint('caching', 'CACHE_TIMEOUT')
+
 # Mongo Configs
 MONGO_DATABASE = config.get('mongodb', 'DATABASE')
 MONGO_HOST = config.get('mongodb', 'HOST')

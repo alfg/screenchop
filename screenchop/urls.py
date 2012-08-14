@@ -3,6 +3,7 @@
 from flask import Flask
 from flask import request, redirect, url_for, escape
 from flask import render_template
+from flaskext.cache import Cache
 
 from screenchop import config
 
@@ -15,6 +16,7 @@ from screenchop.sessions import login, logout, register
 
 app = Flask(__name__)
 app.secret_key = config.SESSION_KEY
+
 
 # All views below
 app.add_url_rule('/', view_func=home.home)

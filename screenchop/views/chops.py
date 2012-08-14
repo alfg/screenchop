@@ -8,8 +8,8 @@ from flask import render_template, flash
 from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm
-
 from screenchop.sessions import *
+from screenchop.cache import cache
 
 import boto
 from boto.s3.key import Key
@@ -18,6 +18,7 @@ app = Flask(__name__)
 # Enable/disable tagging. For debugging.
 tagging = config.TAGGING_ENABLED
 
+@cache.cached(timeout=config.CACHE_TIMEOUT)
 def chop(filename):
     '''
     The Screenshot "chop" View
