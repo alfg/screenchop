@@ -80,6 +80,8 @@
                     {% if session['username'] == chop.submitter %}
                     <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal">Edit</button>
                     <button class="btn btn-mini btn-danger" href="#delete-chop" data-toggle="modal">Delete</button>
+                    {% else %}
+                    <span>&nbsp;</span>
                     {% endif %}
                     
                 </div>
@@ -158,7 +160,7 @@
         {% from "chops/_formhelpers.html" import render_field %}          
         <form method="post" action="/c/{{ chop.filename }}/update">                           
             {{ render_field(editPostForm.caption) }}                         
-            {{ render_field(editPostForm.tags) }}
+            {{ render_field(editPostForm.tags, autocomplete="off") }}
         
     </div>
     <div class="modal-footer">
@@ -187,5 +189,16 @@
 
 {% include 'layout/footer.html' %}
 
+<Script>
+    /* Add attribute to tags form hack */
+    $('#tags').attr('data-provide', "typeahead")
+
+    /* Search Tags Typeahead JSON */
+    $.getJSON("/api/public/searchTags.json", function(json) {
+          $('#tags').typeahead({
+            source: json.tags
+            });
+     });
+</script>
 
 

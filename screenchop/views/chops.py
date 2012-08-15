@@ -51,7 +51,9 @@ def chop(filename):
     # For registration/login wtf validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
-    editPostForm = EditPost(request.form)
+    editPostForm = EditPost(request.form,
+                            caption=chop.caption,
+                            tags=chop.tags[0])
 
     
     # For image linking, short url sharing.
