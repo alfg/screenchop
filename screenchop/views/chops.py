@@ -15,10 +15,10 @@ import boto
 from boto.s3.key import Key
 
 app = Flask(__name__)
+
 # Enable/disable tagging. For debugging.
 tagging = config.TAGGING_ENABLED
 
-@cache.cached(timeout=config.CACHE_TIMEOUT)
 def chop(filename):
     """ The Screenshot "chop" View """
     

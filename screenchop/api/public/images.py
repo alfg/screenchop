@@ -12,7 +12,6 @@ from screenchop.cache import cache
 import json
 import datetime
 
-@cache.cached(timeout=config.CACHE_TIMEOUT)
 def getMainImages():
     """ JSON API to request image data in a JSON request. Used mainly for the
     galleries on front and tags pages. """

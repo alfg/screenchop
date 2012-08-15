@@ -7,4 +7,5 @@ from screenchop import config
 app = Flask(__name__)
 app.config['CACHE_TYPE'] = config.CACHE_TYPE
 app.config['CACHE_MEMCACHED_SERVERS'] = config.CACHE_SERVER_ADDRESS
+app.config['CACHE_DEFAULT_TIMEOUT'] = config.CACHE_DEFAULT_TIMEOUT
 cache = Cache(app)

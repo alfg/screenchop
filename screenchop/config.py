@@ -17,7 +17,7 @@ SHORT_DOMAIN_URL = config.get('app', 'SHORT_DOMAIN_URL')
 # Caching Configs
 CACHE_TYPE = config.get('caching', 'CACHE_TYPE')
 CACHE_SERVER_ADDRESS = config.get('caching', 'CACHE_SERVER_ADDRESS').split()
-CACHE_TIMEOUT = config.getint('caching', 'CACHE_TIMEOUT')
+CACHE_DEFAULT_TIMEOUT = config.getint('caching', 'CACHE_DEFAULT_TIMEOUT')
 
 # Mongo Configs
 MONGO_DATABASE = config.get('mongodb', 'DATABASE')
