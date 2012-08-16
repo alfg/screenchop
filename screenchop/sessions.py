@@ -1,6 +1,5 @@
 import sys, traceback
 from functools import wraps
-from time import strftime
 
 from flask import Flask
 from flask import request, redirect, url_for, session, flash
@@ -11,6 +10,7 @@ from flaskext.bcrypt import check_password_hash, generate_password_hash
 from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm
+from screenchop.util.invite_codes import InviteCode
 
 
 
@@ -22,12 +22,12 @@ def login():
         
         # Check if user exists, then check if password hash matches.
         try:
-            user = User.objects.get(username=form.username.data)
+            user = User.objects.get(username__iexact=form.username.data)
         except:
             return 'You shall not pass.'
         
         if check_password_hash(user.password, form.password.data) == True:
-            session['username'] = form.username.data
+            session['username'] = user.username
         else:
             return 'You shall not pass.'
         
@@ -53,22 +53,41 @@ def register():
         # Code to support if invite registration mode is enabled.
         if config.REGISTRATION_LEVEL == 'invite':
         
+            c = InviteCode()
+
             # Check if invite code is valid
-            if checkInviteCode(form.invite_code.data, form.username.data) != 'success':
+            if c.is_valid(form.invite_code.data) == False: 
                 error = {"code": ["Invitation code invalid"]}
                 return jsonify(errors=error)
         else:
             pass
             
         # Check or create if user does not exist
-        user, created = User.objects.get_or_create(username=form.username.data)
+        #user, created = User.objects.get_or_create(username__exact=form.username.data)
+        try:
+            user = User.objects.get(username__iexact=form.username.data)
+            created = False 
+        except:
+            user = User(username=form.username.data)
+            created = True
         
         # if created == True, then create a password, save and login session
         if created:
+            # Set password and save
             user.password = generate_password_hash(form.password.data)
             user.save()
+
+            # If invite-mode on, use invite code
+            if config.REGISTRATION_LEVEL == 'invite':
+                c = InviteCode()
+
+                # Use code
+                c.use_code(form.invite_code.data, form.username.data)
+
+            # Log in user and flash message
             session['username'] = form.username.data
             flash('Thanks for registering!')
+
             return 'Success'
         else:
             error = {"duplicate": ["Please choose another username"]}
@@ -83,31 +102,6 @@ def register():
     # Return POST errors in json
     return jsonify(errors=form.errors)
 
-def checkInviteCode(code, user):
-    ''' If REGISTRATION_LEVEL is set to 'invite', then this code will be run to
-    check if invite code exists and/or is valid. If code is valid, then
-    invalidate code after being used. '''
-    
-    try:
-        # Query code
-        checkCode = Invite_code.objects.get(code=code)
-
-        # Check if code has been used. Fail if so.
-        if checkCode.valid == False:
-            return 'fail'
-        
-        # Invalidate code in DB with a timestamp and user recorded
-        checkCode.valid = False
-        checkCode.date_used = strftime("%Y-%m-%d_%H-%M-%S")
-        checkCode.used_by = user
-                  
-        checkCode.save()
-        
-        return 'success'
-    except:
-        
-        # Fail if does not exist exception
-        return 'fail'
 
 
 """

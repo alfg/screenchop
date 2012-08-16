@@ -64,7 +64,7 @@ def getMainImages():
     # /following page
     elif user and showFollowing == 'true':
 
-        queryUser = User.objects.get(username=user)
+        queryUser = User.objects.get(username__iexact=user)
         followingList = queryUser.following
     
         if sortType == 'new':
@@ -76,11 +76,11 @@ def getMainImages():
 
     else:
         if sortType == 'new':
-            post = Post.objects(submitter=user).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects(submitter__iexact=user).order_by('-date').limit(config.HOME_MAX_IMAGES)
         elif sortType == 'top':
-            post = Post.objects(submitter=user).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects(submitter__iexact=user).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
         else:
-            post = Post.objects(submitter=user)[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
+            post = Post.objects(submitter__iexact=user)[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
 
     
     #Query list of dictionaries for a JSON object

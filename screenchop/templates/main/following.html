@@ -36,13 +36,13 @@
                 
                 {% if followlist %}
                 <div id="following-box">
-                <p><h3>Your Followed Users...</h3></p>
                 
                 <ul class="follow-avatars-list">
                     {% for u in followlist %}
                     <li>
-                        <a href="/u/{{ u.username }}" title="{{ u.username }}">
-                        <div class="follow-avatar">
+                        <a href="/u/{{ u.username }}">
+                        <div class="follow-avatar follow-user-popover" data-original-title="{{ u.username }}" rel="popover"
+                         data-content="{% if u.description %}{{ u.description }} {% else %} This user does not have a profile description. {% endif %}">
                             {% if u.avatar %}
                             <img src="{{ avatarURL }}{{ u.avatar }}"></img>
                             {% endif %}

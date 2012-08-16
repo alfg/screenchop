@@ -19,7 +19,7 @@ def userFollowing_json():
     
     avatarURL = config.S3_AVATAR_URL
     
-    user = User.objects.get(username=username)
+    user = User.objects.get(username__iexact=username)
     print user
 
     #Query list of dictionaries for a JSON object

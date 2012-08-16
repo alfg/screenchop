@@ -17,3 +17,4 @@
 $('#directFullLink').tooltip({placement: 'top'})
 $('#directMedLink').tooltip({placement: 'top'})
 $('#directThumbLink').tooltip({placement: 'top'})
+$('.follow-user-popover').popover({placement: 'bottom'})

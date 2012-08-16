@@ -37,13 +37,13 @@ def user(username):
 
     # Get queried user for page info
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.get(username__iexact=username)
         followingCount = len(user.following)
         followerCount = len(User.objects(following__in=[username]))
     except:
         return render_template('error_pages/404.html'), 404
         
-    chops = Post.objects(submitter=username)
+    chops = Post.objects(submitter__iexact=username)
     
     # Calculate total score by adding all upvotes subtracted by all downvotes
     upvotes = 0

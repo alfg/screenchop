@@ -68,7 +68,7 @@ def account_password():
     The Account Password View
     
     '''
-    user = User.objects.get(username = session['username'])
+    user = User.objects.get(username=session['username'])
     form = AccountForm(request.form)
     if request.method == 'POST' and form.validate():
         if check_password_hash(user.password, form.currentpass.data):
