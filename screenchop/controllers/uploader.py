@@ -159,7 +159,7 @@ def uploader():
             flash("Screenshot uploaded - View here. %sc/%s" % (config.DOMAIN_URL, url), 'uploaded')
             return redirect(url_for('upload'))
         else:
-            return jsonify(result='success')
+            return jsonify(result='success', url=('%sc/%s' % (config.DOMAIN_URL, url)))
             
     else:
         flash("Invalid File - Please upload an image file. (png, jpg, jpeg)")

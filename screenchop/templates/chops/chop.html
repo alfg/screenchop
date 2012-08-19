@@ -11,6 +11,12 @@
 </script>
 
     <body>
+
+    <!-- Social Sharing Open Graph Meta -->
+    <meta property="og:title" content="Screenchop"/>
+    <meta property="og:image" content="{{ s3MediumURL }}{{ chop.filename }}"/>
+    <meta property="og:description" content="{% if chop.caption %} {{ chop.caption}} {% endif %}"/>
+
     
     <!-- onClick popup windows for facebook share -->
     <script>
@@ -20,6 +26,7 @@
             popup.focus();
             }
     </script>
+
 
 
     {% include 'layout/nav.html' %}
@@ -78,7 +85,7 @@
 
                     <span id="add-tag-button"></span>
                     {% if session['username'] == chop.submitter %}
-                    <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal">Edit</button>
+                    <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal">Caption & Tags</button>
                     <button class="btn btn-mini btn-danger" href="#delete-chop" data-toggle="modal">Delete</button>
                     {% else %}
                     <span>&nbsp;</span>

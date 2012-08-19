@@ -2,6 +2,7 @@ $(function(){
 	
 	var dropbox = $('#dropbox'),
 		message = $('.message', dropbox);
+
 	
 	dropbox.filedrop({
 		// The name of the $_FILES entry:
@@ -14,8 +15,11 @@ $(function(){
 		    uploadType: 'multi-upload'
 		    },
 		uploadFinished:function(i,file,response){
+            var imgControlsTemplate = '<a href="' + response.url + '" onclick="window.open(this.href); return false">' + response.url + '</a>';
+
 			$.data(file).addClass('done');
-			// response is the JSON object that post_file.php returns
+            $.data(file).find('.imageurl').html(imgControlsTemplate);
+			// response is the JSON object that upload controller returns
 		},
 		
     	error: function(err, file) {
@@ -63,6 +67,7 @@ $(function(){
 						'<div class="progress">'+
 							'<div class="bar"></div>'+
 						'</div>'+
+                        '<span class="imageurl"></span>' +
 					'</div>'; 
 	
 	

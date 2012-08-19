@@ -27,7 +27,7 @@
                       
                       <input type="text" class="input-large" placeholder="Image URL" name="imageurl">
                       <input type="text" class="input-large" placeholder="Caption" name="caption">
-                      <input id="tagInput" type="text" class="input-medium" placeholder="Tags" name="tags" autocomplete="off" data-provide="typeahead">
+                      <input id="tagInput" type="text" class="input-medium tagInput" placeholder="Tags" name="tags" autocomplete="off" data-provide="typeahead">
 
                       <button type="submit" class="btn btn-success pull-right">Upload</button>
                       
@@ -38,7 +38,7 @@
                     <form class="well form-inline" action="uploader" method="POST" enctype="multipart/form-data">
 
                       <input type="text" class="input-large" placeholder="Caption" name="caption">
-                      <input id="tagInput2" type="text" class="input-medium" placeholder="Tags" name="tags" autocomplete="off" data-provide="typeahead">
+                      <input id="tagInput2" type="text" class="input-medium tagInput" placeholder="Tags" name="tags" autocomplete="off" data-provide="typeahead">
                       <input class="input-file" id="fileInput" type="file" name="imageupload" />
 
                       <input type="hidden" name="uploadType" value="single-upload" />
@@ -47,11 +47,11 @@
                     </form>
                     
                     <p><h2>...Or Drag Multiple Images From Your Desktop Here!</h2></p>
-                    <p><h6>*Max 50 images per upload. 5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
+                    <p><h6>*Max 25 images per upload. 5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
 
                     <div id="dropbox">
                     <span class="message">Drop images here to upload.<br />
-                    <em>You can add captions and tags during upload or later!</em></span>
+                    {# <em>You can add captions and tags during upload or later!</em> #}</span>
                     </div>
 
 
@@ -67,13 +67,13 @@
     
     <script>
 
+    function enableTags() {
     /* Search Tags Typeahead JSON */
     $.getJSON("/api/public/searchTags.json", function(json) {
-          $('#tagInput').typeahead({
+          $('.tagInput').typeahead({
             source: json.tags
             });
-          $('#tagInput2').typeahead({
-            source: json.tags
-            });
-     });
+        });
+    }
+    enableTags();
     </script>
