@@ -18,7 +18,7 @@ class Post(Document):
     uid = SequenceField()
     submitter = StringField()
     caption = StringField()
-    tags = ListField(StringField())
+    tags = ListField()
     thumbnail = StringField()
     filename = StringField()
     medium = StringField()

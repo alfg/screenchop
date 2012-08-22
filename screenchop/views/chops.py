@@ -53,7 +53,7 @@ def chop(filename):
     loginForm = LoginForm(request.form)
     editPostForm = EditPost(request.form,
                             caption=chop.caption,
-                            tags=chop.tags[0])
+                            tags=chop.tags)
 
     
     # For image linking, short url sharing.
@@ -123,7 +123,7 @@ def update_chop(filename):
             # Update post
             print form.caption.data, form.tags.data
             chop.caption = form.caption.data
-            chop.tags = [form.tags.data]
+            chop.tags = form.tags.data
             chop.save()
 
         else:

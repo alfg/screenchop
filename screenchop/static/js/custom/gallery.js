@@ -42,7 +42,7 @@ var hovered = function(photo) {
                 <i class="icon-user" style="color: white; margin-right: 5px;"></i> \
                 Submitted by <a class="no-underline" href="/u/' + photo.submitter + '"><span class="label label-info">' + photo.submitter + '</span></a> \
                 </span>' +
-                '<a class="no-underline" href="/tags/' + photo.tags + '"><span class="pull-right label label-success" style="margin-right:10px;">' + photo.tags + '</span></a>' 
+                '<a class="no-underline" href="/tags/' + photo.tags[0] + '"><span class="pull-right label label-success" style="margin-right:10px;">' + photo.tags[0] + '</span></a>' 
                 
                 ); }
                 
@@ -65,7 +65,7 @@ var hovered = function(photo) {
                 <i class="icon-user" style="color: white; margin-right: 5px;"></i> \
                 Submitted by <a class="no-underline" href="/u/' + photo.submitter + '"><span class="label label-info">' + photo.submitter + '</span></a> \
                 </span>' +
-                '<a class="no-underline" href="/tags/' + photo.tags + '"><span class="pull-right label label-success">' + photo.tags + '</span></a>' 
+                '<a class="no-underline" href="/tags/' + photo.tags[0] + '"><span class="pull-right label label-success">' + photo.tags[0] + '</span></a>' 
                 );
 };
 

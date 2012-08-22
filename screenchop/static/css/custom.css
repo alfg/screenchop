@@ -711,6 +711,9 @@ span#add-tag-button > a { /* Override hack to align Tag Image button */
     height: 32px;
     vertical-align: middle;
 }
+a.share-service-button {
+    text-decoration: none;
+}
 .share-service-icon-facebook {
     background-position: 0 -881px;
 }

@@ -1,6 +1,7 @@
 from wtforms import Form, BooleanField, TextField, PasswordField
 from wtforms import TextAreaField, FileField, validators
 
+from screenchop.util.custom_fields import TagListField 
 from screenchop import config
 
 class RegistrationForm(Form):
@@ -37,4 +38,6 @@ class ProfileForm(Form):
 
 class EditPost(Form):
     caption = TextAreaField('Caption')
-    tags = TextField('Tags')
+    tags = TagListField('Tags')
+
+
