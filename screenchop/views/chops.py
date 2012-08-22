@@ -121,7 +121,6 @@ def update_chop(filename):
         # otherwise, redirect with flash message
         if session['username'] == chop.submitter:
             # Update post
-            print form.caption.data, form.tags.data
             chop.caption = form.caption.data
             chop.tags = form.tags.data
             chop.save()
