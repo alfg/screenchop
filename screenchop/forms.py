@@ -1,5 +1,6 @@
 from wtforms import Form, BooleanField, TextField, PasswordField
 from wtforms import TextAreaField, FileField, validators
+from flask.ext.wtf import url
 
 from screenchop.util.custom_fields import TagListField 
 from screenchop import config
@@ -40,4 +41,11 @@ class EditPost(Form):
     caption = TextAreaField('Caption')
     tags = TagListField('Tags')
 
+class AddFromURLForm(Form):
+    caption = TextField()
+    tags = TagListField()
+    url = TextField(validators=[url()])
 
+class SingleFileForm(Form):
+    caption = TextField()
+    tags = TagListField()

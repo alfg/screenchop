@@ -25,6 +25,7 @@ from screenchop import config
 from screenchop.sessions import requires_auth
 from screenchop.models import Post
 from screenchop.util import short_url
+from screenchop.forms import AddFromURLForm, SingleFileForm 
 
 ALLOWED_EXTENSIONS = set(config.ALLOWED_FILE_TYPES)
 
@@ -41,6 +42,9 @@ def uploader():
     TODO: Optimize and create class with methods for each process.
     
     """
+
+    # Accept Form for caption and tags
+    singleFileForm = SingleFileForm(request.form)
     
     # Accept upload into object
     image = request.files['imageupload']
@@ -50,18 +54,12 @@ def uploader():
     if uploadType == 'single-upload':
 
         # Store optional fields into variables if they exist
-        if request.form['caption']:
-            caption = request.form['caption']
-        else:
-            caption = None
-        if request.form['tags']:
-            tags = request.form['tags']
-        else:
-            tags = ''
-            
+        caption = singleFileForm.caption.data 
+        tags = singleFileForm.tags.data
+
     # Otherwise, just set them to None as there's no data.
     else:
-        caption, tags = None, ''
+        caption, tags = None, None 
     
     if image and allowed_file(image.filename):
     
@@ -98,7 +96,7 @@ def uploader():
         # Create Post in MongoDB
         post = Post(submitter=session['username'],
                 caption=caption,
-                tags= [tags], 
+                tags=tags, 
                 width=width, 
                 height=height)
 
@@ -176,8 +174,9 @@ def url_uploader():
     uploader() code.
     
     """
+    urlForm = AddFromURLForm(request.form)
     
-    imageurl = request.form['imageurl']
+    imageurl = urlForm.url.data 
     
     try:
         r = requests.get(imageurl)
@@ -190,15 +189,8 @@ def url_uploader():
 
 
     # Store optional fields into variables if they exist
-    if request.form['caption']:
-        caption = request.form['caption']
-    else:
-        caption = None
-    if request.form['tags']:
-        tags = request.form['tags']
-    else:
-        tags = ''
-
+    tags = urlForm.tags.data
+    caption = urlForm.caption.data
     
     if image and allowed_file(imagefilename):
         try:
@@ -235,7 +227,7 @@ def url_uploader():
             # Create Post in MongoDB
             post = Post(submitter=session['username'],
                     caption=caption,
-                    tags= [tags], 
+                    tags=tags, 
                     width=width, 
                     height=height)
 

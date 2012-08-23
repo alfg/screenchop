@@ -24,10 +24,10 @@
                     <p><h2>Add from URL...</h2></p>
                     <p><h6>*5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
                     <form class="well form-inline" action="urluploader" method="POST">
-                      
-                      <input type="text" class="input-large" placeholder="Image URL" name="imageurl">
-                      <input type="text" class="input-large" placeholder="Caption" name="caption">
-                      <input id="tagInput" type="text" class="input-medium tagInput" placeholder="Tags" name="tags" autocomplete="off" data-provide="typeahead">
+
+                      {{ urlForm.url(class="input-large", placeholder="Image URL") }}
+                      {{ urlForm.caption(class="input-large", placeholder="Caption") }}
+                      {{ urlForm.tags(class="input-medium tagInput", placeholder="Tags", autocomplete="off") }}
 
                       <button type="submit" class="btn btn-success pull-right">Upload</button>
                       
@@ -37,8 +37,8 @@
                     <p><h6>*5MB max filesize. PNG, JPG, JPEG Files only.</h6></p>
                     <form class="well form-inline" action="uploader" method="POST" enctype="multipart/form-data">
 
-                      <input type="text" class="input-large" placeholder="Caption" name="caption">
-                      <input id="tagInput2" type="text" class="input-medium tagInput" placeholder="Tags" name="tags" autocomplete="off" data-provide="typeahead">
+                      {{ singleFileForm.caption(class="input-large", placeholder="Caption") }}
+                      {{ singleFileForm.tags(class="input-medium tagInput", placeholder="Tags", autocomplete="off") }}
                       <input class="input-file" id="fileInput" type="file" name="imageupload" />
 
                       <input type="hidden" name="uploadType" value="single-upload" />

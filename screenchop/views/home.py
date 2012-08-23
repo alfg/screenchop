@@ -9,6 +9,7 @@ from flaskext.bcrypt import check_password_hash, generate_password_hash
 from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm, AccountForm
+from screenchop.forms import AddFromURLForm, SingleFileForm
 
 from screenchop.sessions import *
 from screenchop.cache import cache
@@ -145,7 +146,10 @@ def upload():
     The Upload View
     
     '''
-    return render_template('main/upload.html')
+    urlForm = AddFromURLForm(request.form)
+    singleFileForm = SingleFileForm(request.form)
+
+    return render_template('main/upload.html', urlForm=urlForm, singleFileForm=singleFileForm)
 
 @requires_auth
 def following():
