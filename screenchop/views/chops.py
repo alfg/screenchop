@@ -131,5 +131,7 @@ def update_chop(filename):
 
         flash('Screenchop updated')
         return redirect('/c/%s' % filename)
-    return jsonify(errors=form.errors)
+    errors = form.errors
+    flash(errors)
+    return redirect('/c/%s' % filename) 
 

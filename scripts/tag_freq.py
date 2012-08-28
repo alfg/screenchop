@@ -13,7 +13,7 @@ def tag_frequencies():
     ''' Finds frequently used tags in Posts and sorts them into tuples. '''
     
     tag_freqs = Post.objects.item_frequencies('tags', normalize=False)
-    top_tags = sorted(tag_freqs.items(), key=itemgetter(1), reverse=True)[:10]
+    top_tags = sorted(tag_freqs.items(), key=itemgetter(1), reverse=True)[:30]
     
     # Print output and save results into Tag_freq collection
     for tag, freq in top_tags:

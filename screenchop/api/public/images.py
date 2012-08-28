@@ -45,22 +45,36 @@ def getMainImages():
     if user == 'all' and tag == 'all':
     
         if sortType == 'new':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) +
+                    config.HOME_MAX_IMAGES].order_by('-date').limit(config.HOME_MAX_IMAGES)
+
         elif sortType == 'top':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page)
+                    + config.HOME_MAX_IMAGES](date__gt=timerange) \
+                            .order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+
         else:
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
+            post = Post.objects[int(page):int(page)
+                    + config.HOME_MAX_IMAGES].order_by('-date')
             
+
     # /tags/<tag> page
     elif user == 'all' and tag != 'all':
     
         if sortType == 'new':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) +
+                    config.HOME_MAX_IMAGES](tags=tag).order_by('-date') \
+                            .limit(config.HOME_MAX_IMAGES)
+
         elif sortType == 'top':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag, date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) +
+                    config.HOME_MAX_IMAGES](tags=tag,
+                                    date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+
         else:
             post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](tags=tag).order_by('-date')
             
+
     # /following page
     elif user and showFollowing == 'true':
 
@@ -68,19 +82,33 @@ def getMainImages():
         followingList = queryUser.following
     
         if sortType == 'new':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](submitter__in=followingList).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) +
+                    config.HOME_MAX_IMAGES](submitter__in=followingList) \
+                            .order_by('-date').limit(config.HOME_MAX_IMAGES)
+
         elif sortType == 'top':
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](submitter__in=followingList, date__gt=timerange).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects[int(page):int(page) +
+                    config.HOME_MAX_IMAGES](submitter__in=followingList,
+                                            date__gt=timerange) \
+                        .order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+
         else:
-            post = Post.objects[int(page):int(page) + config.HOME_MAX_IMAGES](submitter__in=followingList).order_by('-date')
+            post = Post.objects[int(page):int(page) +
+                    config.HOME_MAX_IMAGES](submitter__in=followingList).order_by('-date')
+
 
     else:
         if sortType == 'new':
-            post = Post.objects(submitter__iexact=user).order_by('-date').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects(submitter__iexact=user) \
+                    .order_by('-date').limit(config.HOME_MAX_IMAGES)
+
         elif sortType == 'top':
-            post = Post.objects(submitter__iexact=user).order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+            post = Post.objects(submitter__iexact=user) \
+                    .order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+
         else:
-            post = Post.objects(submitter__iexact=user)[int(page):int(page) + config.HOME_MAX_IMAGES].order_by('-date')
+            post = Post.objects(submitter__iexact=user)[int(page):int(page) +
+                    config.HOME_MAX_IMAGES].order_by('-date')
 
     
     #Query list of dictionaries for a JSON object

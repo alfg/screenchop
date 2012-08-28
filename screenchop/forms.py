@@ -35,10 +35,14 @@ class AccountForm(Form):
     ])
 
 class ProfileForm(Form):
-    description = TextAreaField('Profile Description')
+    description = TextAreaField('Profile Description', [
+        validators.Length(max=300, message='Max 300 characters'),
+        ])
 
 class EditPost(Form):
-    caption = TextAreaField('Caption')
+    caption = TextAreaField('Caption', [
+        validators.Length(max=100, message='Max 100 characters')
+            ])
     tags = TagListField('Tags')
 
 class AddFromURLForm(Form):

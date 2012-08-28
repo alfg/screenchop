@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-"""
-MongoDB Models
-
-"""
+""" MongoDB Models """
 
 from mongoengine import *
 from screenchop import config
@@ -16,53 +13,73 @@ connect(config.MONGO_DATABASE,
 
 class Post(Document):
     uid = SequenceField()
-    submitter = StringField()
-    caption = StringField()
-    tags = ListField()
-    thumbnail = StringField()
-    filename = StringField()
-    medium = StringField()
+    submitter = StringField(required=True)
+    caption = StringField(max_length=200)
+    tags = ListField(StringField(max_length=15))
+    filename = StringField(max_length=30)
     date = DateTimeField(default=datetime.datetime.now)
     upvotes = IntField(default=0)
     downvotes = IntField(default=0)
-    width = IntField()
-    height = IntField()
+    width = IntField(required=True)
+    height = IntField(required=True)
+
+    meta = {
+        'indexes': ['uid', 'filename']
+        }
     
 class User(Document):
     userid = SequenceField()
-    username = StringField(unique=True)
-    password = StringField()
-    email = EmailField()
-    description = StringField()
-    avatar = StringField()
-    subscriptions = ListField(StringField())
-    following = ListField(StringField())
+    username = StringField(required=True, unique=True, max_length=30)
+    password = StringField(required=True, max_length=60)
+    email = EmailField(max_length=60)
+    description = StringField(max_length=200)
+    avatar = StringField(max_length=100)
+    subscriptions = ListField(StringField(max_length=50))
+    following = ListField(StringField(max_length=60))
+
+    meta = {
+        'indexes': ['userid', 'username', 'email']
+        }
 
 class Vote(Document):
-    userid = StringField()
-    username = StringField()
-    postuid = IntField()
+    username = StringField(required=True, max_length=60)
+    postuid = IntField(required=True)
     downvoted = BooleanField(default=False)
     upvoted = BooleanField(default=False)
+
+    meta = {
+        'indexes': ['username', 'postuid']
+        }
     
 class Tag(Document):
-    uid = StringField()
-    top = IntField()
-    left = IntField()
-    width = IntField()
-    height = IntField()
-    text = StringField()
-    submitter = StringField()
-    postuid = IntField()
-    postfilename = StringField()
+    uid = StringField(required=True)
+    top = IntField(required=True)
+    left = IntField(required=True)
+    width = IntField(required=True)
+    height = IntField(required=True)
+    text = StringField(max_length=60)
+    submitter = StringField(max_length=60)
+    postuid = IntField(required=True)
+    postfilename = StringField(required=True)
+
+    meta = {
+        'indexes': ['uid', 'postuid', 'postfilename']
+        }
     
 class Invite_code(Document):
-    code = StringField()
+    code = StringField(required=True)
     date_used = StringField()
     used_by = StringField()
     valid = BooleanField(default=True)
-    quantity = IntField()
+
+    meta = {
+        'indexes': ['code', 'used_by']
+        }
     
 class Tag_freq(Document):
-    tag = StringField()
-    freq = IntField()
+    tag = StringField(required=True)
+    freq = IntField(required=True)
+
+    meta = {
+        'indexes': ['tag']
+        }
