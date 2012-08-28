@@ -78,7 +78,7 @@ class Invite_code(Document):
     
 class Tag_freq(Document):
     tag = StringField(required=True)
-    freq = IntField(required=True)
+    freq = IntField()
 
     meta = {
         'indexes': ['tag']
