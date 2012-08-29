@@ -18,7 +18,7 @@ class RegistrationForm(Form):
     else:
         pass
     confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I agree to the Terms of Service', [validators.Required(message='You must agree to the Terms of Service')])
+    accept_tos = BooleanField('Terms of Service', [validators.Required(message='You must agree to the Terms of Service')])
 
 class LoginForm(Form):
     username = TextField('Username')

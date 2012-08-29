@@ -15,6 +15,7 @@
               <li {% if active_page == 'following' %}class="active"{% endif %}><a href="/following">Following</a></li>
             </ul>
             <ul class="nav pull-right navbarupload">
+                <li {% if active_page == 'help' %}class="active"{% endif %}><a href="/help">Help</a></li>
                 
                 {% if 'username' in session %}                
                 <li>

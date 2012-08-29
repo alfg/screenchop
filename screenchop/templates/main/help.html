@@ -1,0 +1,56 @@
+{% set active_page = "help" %}
+{% set requires_loginForms = True %}
+
+{% include 'layout/header.html' %}
+
+    <body>
+    {% include 'layout/nav.html' %}
+        <div class="container">
+
+            <!-- Display flash message if any errors -->
+            {% with message = get_flashed_messages() %}
+            {% if message %}
+            <div class="alert">
+            <button class="close" data-dismiss="alert">×</button>
+                    {{ message[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+            
+            <div class="row-fluid">
+                <div id="contents">
+                    <div class="well span8">
+                        <h2>FAQs</h2>
+                        <dl>
+                            <dt><i class="icon-question-sign icon-large"></i> What is Screenchop?</dt>
+                            <dd>It is a thing.</dd>
+                        </dl>
+
+                        <h2>Screenchop Etiquette</h2>
+                        <ul>
+                            <li>Do stuff right</li>
+                        </ul>
+
+                        <h2>Terms of Service</h2>
+                        <p>We own your soul.</p>
+
+                        <h2>About</h2>
+                        <p>Stuff</p>
+
+                        <h2>Contribute</h2>
+                        <p>Submit code and stuff</p>
+                    </div>
+
+                    <div id="help-sample-images" class="span4">
+                        <img class="img-polaroid" src="http://i.screenchop.com/thumbs/nh799"></img> 
+                        <img class="img-polaroid" src="http://i.screenchop.com/thumbs/nh799"></img> 
+                        <img class="img-polaroid" src="http://i.screenchop.com/thumbs/nh799"></img> 
+                    </div>
+
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+
+{% include 'layout/footer.html' %}
+

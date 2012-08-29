@@ -174,3 +174,12 @@ def following():
     return render_template('main/following.html', s3ThumbsURL=s3ThumbsURL,
                         maxPerRow=maxPerRow, pageIncr=pageIncr, user=user, 
                         avatarURL=avatarURL, followlist=followlist)
+
+def help():
+    """ Help Page """
+
+    # For registration/login validation
+    regForm = RegistrationForm(request.form)
+    loginForm = LoginForm(request.form)
+
+    return render_template('main/help.html', regForm=regForm, loginForm=loginForm)

@@ -19,6 +19,21 @@ body {
     text-decoration: none !important;
 }
 
+.img-rounded {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.img-polaroid {
+    padding: 4px;
+    background-color: white;
+    border: 1px solid #CCC;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-inner {
     /* IE10 */ 
     background-image: -ms-linear-gradient(top, #0066CC 0%, #006391 100%);
@@ -334,7 +349,7 @@ div#loadmore:hover {
 /* Following Page */
 
 ul.follow-avatars-list {
-    min-height: 100px;
+    min-height: 40px;
 }
 
 .follow-avatars-list li {
@@ -498,7 +513,6 @@ span.user-stat-name {
 /* Following Page */
 div#following-box {
     color: #DDD;
-    min-height: 100px;
     margin: 5px 0 15px 0;
     padding: 10px;
     background-image: -ms-linear-gradient(top, #06C 0%, #006391 100%);
@@ -509,6 +523,14 @@ div#following-box {
     background-image: linear-gradient(top, #06C 0%, #006391 100%);
 }
 
+/* Help Page */
+#help-sample-images {
+    width: 275px;
+}
+
+#help-sample-images > img {
+    margin-bottom: 10px;
+}
 
 /* Dropscript Styles */
 
