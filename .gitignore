@@ -17,6 +17,7 @@ dev_scripts
 *.swp
 *.swo
 *.backup
+*.ini
 
 # Installer logs
 pip-log.txt

@@ -3,6 +3,7 @@
 
 from mongoengine import *
 from screenchop import config
+from screenchop.util import ranking
 import datetime
 
 connect(config.MONGO_DATABASE, 
@@ -22,11 +23,12 @@ class Post(Document):
     downvotes = IntField(default=0)
     width = IntField(required=True)
     height = IntField(required=True)
+    rank = FloatField(default=0)
 
     meta = {
-        'indexes': ['uid', 'filename']
+        'indexes': ['uid', 'filename', 'rank'],
         }
-    
+
 class User(Document):
     userid = SequenceField()
     username = StringField(required=True, unique=True, max_length=30)

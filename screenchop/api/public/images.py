@@ -6,6 +6,7 @@ from flask import abort, redirect, url_for, jsonify
 from flask import render_template
 
 from screenchop.models import *
+from screenchop.util import ranking
 from screenchop import config
 from screenchop.cache import cache
 
@@ -52,6 +53,11 @@ def getMainImages():
             post = Post.objects[int(page):int(page)
                     + config.HOME_MAX_IMAGES](date__gt=timerange) \
                             .order_by('-upvotes').limit(config.HOME_MAX_IMAGES)
+
+        elif sortType == 'hot':
+            post = Post.objects[int(page):int(page)
+                    + config.HOME_MAX_IMAGES](date__gt=timerange) \
+                            .order_by('-rank').limit(config.HOME_MAX_IMAGES)
 
         else:
             post = Post.objects[int(page):int(page)
@@ -124,7 +130,8 @@ def getMainImages():
                          'score' : x.upvotes - x.downvotes,
                          'tags' : x.tags,
                          'submitter' : x.submitter,
-                         'submitted' : str(x.date)
+                         'submitted' : str(x.date),
+                         'rank' : x.rank
                          } for x in post]
     
     return jsonify(images=jsonImageQuery)

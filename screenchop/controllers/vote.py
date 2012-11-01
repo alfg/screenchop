@@ -14,6 +14,7 @@ from flask import request, session
 from screenchop import config
 from screenchop.sessions import requires_auth
 from screenchop.models import Post, Vote
+from screenchop.util import ranking
 
 app = Flask(__name__)
 
@@ -24,10 +25,14 @@ def upvote():
 
     chop = request.form['chop']
     chopObject = Post.objects.get(filename=chop)
+    print chopObject.rank
     vote, created = Vote.objects.get_or_create(username=session['username'], postuid=chopObject.uid)
     
     if created:
         Post.objects(filename=chop).update_one(inc__upvotes=1)
+        chopObject.reload()
+        rank = ranking.hot(chopObject.upvotes, chopObject.downvotes, chopObject.date) 
+        Post.objects(filename=chop).update_one(set__rank=rank)
         Vote.objects(username=session['username'],
                 postuid=chopObject.uid).update_one(set__upvoted=True,
                                                     set__downvoted=False)
@@ -35,6 +40,16 @@ def upvote():
         
     elif vote.upvoted == False and vote.downvoted == True:
         Post.objects(filename=chop).update_one(inc__upvotes=1, dec__downvotes=1)
+
+        #reload post object for updated rank since downvote
+        chopObject.reload()
+
+        # set rank using algorithm
+        rank = ranking.hot(chopObject.upvotes, chopObject.downvotes, chopObject.date) 
+
+        # Update rank in database
+        Post.objects(filename=chop).update_one(set__rank=rank)
+
         Vote.objects(username=session['username'],
                 postuid=chopObject.uid).update_one(set__upvoted=True,
                                                     set__downvoted=False)
@@ -59,6 +74,16 @@ def downvote():
     
     if created:
         Post.objects(filename=chop).update_one(inc__downvotes=1)
+
+        #reload post object for updated rank since downvote
+        chopObject.reload()
+
+        # set rank using algorithm
+        rank = ranking.hot(chopObject.upvotes, chopObject.downvotes, chopObject.date) 
+
+        # Update rank in database
+        Post.objects(filename=chop).update_one(set__rank=rank)
+
         Vote.objects(username=session['username'],
                 postuid=chopObject.uid).update_one(set__upvoted=False,
                                                     set__downvoted=True)
@@ -66,6 +91,9 @@ def downvote():
         
     elif vote.downvoted == False and vote.upvoted == True:
         Post.objects(filename=chop).update_one(inc__downvotes=1, dec__upvotes=1)
+        chopObject.reload()
+        rank = ranking.hot(chopObject.upvotes, chopObject.downvotes, chopObject.date) 
+        Post.objects(filename=chop).update_one(set__rank=rank)
         Vote.objects(username=session['username'],
                 postuid=chopObject.uid).update_one(set__upvoted=False,
                                                     set__downvoted=True)
