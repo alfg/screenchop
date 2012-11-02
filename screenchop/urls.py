@@ -32,6 +32,7 @@ app.add_url_rule('/c/<filename>', view_func=chops.chop, methods=['GET'])
 app.add_url_rule('/u/<username>', view_func=user.user, methods=['GET'])
 app.add_url_rule('/following', view_func=home.following, methods=['GET'])
 app.add_url_rule('/help/', view_func=home.help, methods=['GET'])
+app.add_url_rule('/tos/', view_func=home.tos, methods=['GET'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])

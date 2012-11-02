@@ -183,3 +183,12 @@ def help():
     loginForm = LoginForm(request.form)
 
     return render_template('main/help.html', regForm=regForm, loginForm=loginForm)
+
+def tos():
+    """ ToS Page """
+
+    # For registration/login validation
+    regForm = RegistrationForm(request.form)
+    loginForm = LoginForm(request.form)
+
+    return render_template('main/tos.html', regForm=regForm, loginForm=loginForm)
