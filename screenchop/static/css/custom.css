@@ -2,6 +2,16 @@ body {
     background-color: #eee;
 }
 
+.footer-links {
+    margin: 10px auto 10px auto !important;
+}
+
+.footer-links > li {
+    display: inline;
+    list-style: none;
+    margin: auto 2px auto 6px;
+}
+
 .s-logo {
     width: 26px;
     height: 30px;
@@ -17,6 +27,11 @@ body {
 
 .no-underline {
     text-decoration: none !important;
+}
+
+.center {
+    text-align: center;
+    margin: 0;
 }
 
 .img-rounded {
