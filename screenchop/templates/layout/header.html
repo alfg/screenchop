@@ -10,7 +10,7 @@
     <!-- Social Open Graph Meta -->
     <meta property="og:title" content="Screenchop"/>
     <meta property="og:image" content="{{ s3MediumURL }}{{ chop.filename }}"/>
-    <meta property="og:description" content="{% if chop.caption %} {{ chop.caption}} {% endif %}"/>
+    <meta property="og:description" content="{% if chop.caption %} {{ chop.caption}} {% else %} &nbsp; {% endif %}"/>
     {% endif %}
 
     <!-- Le styles -->
