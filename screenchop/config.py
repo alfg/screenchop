@@ -8,7 +8,7 @@ config.read('config.ini')
 # Read config.ini and store into variables
 HOST = config.get('app', 'HOST')
 PORT = int(config.get('app', 'PORT'))
-DEBUG = config.get('app', 'DEBUG')
+DEBUG = config.getboolean('app', 'DEBUG')
 TEMP_FILE_DIR = config.get('app', 'TEMP_FILE_DIR')
 SESSION_KEY = config.get('app', 'SESSION_KEY')
 DOMAIN_URL = config.get('app', 'DOMAIN_URL')
