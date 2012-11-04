@@ -33,6 +33,7 @@ app.add_url_rule('/u/<username>', view_func=user.user, methods=['GET'])
 app.add_url_rule('/following', view_func=home.following, methods=['GET'])
 app.add_url_rule('/help/', view_func=home.help, methods=['GET'])
 app.add_url_rule('/tos/', view_func=home.tos, methods=['GET'])
+app.add_url_rule('/contact/', view_func=home.contact, methods=['GET', 'POST'])
 
 # Controllers
 app.add_url_rule('/uploader', view_func=uploader.uploader, methods=['POST'])

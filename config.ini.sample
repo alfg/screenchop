@@ -7,6 +7,7 @@ TEMP_FILE_DIR = /tmp/ ; Requires trailing slash
 SESSION_KEY = supersecret ; Keep this secret
 DOMAIN_URL = http://localhost:5000/ ; Domain name. Requires trailing slash.
 SHORT_DOMAIN_URL = http://localhost/ ; Shorter domain name. Use same as DOMAIN if none. Requires trailing slash.
+ADMIN_EMAIL = your@email ; Used for contact form
 
 [caching]
 CACHE_TYPE = memcached ; Set to null to disable

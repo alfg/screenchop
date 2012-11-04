@@ -10,6 +10,7 @@ from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm, AccountForm
 from screenchop.forms import AddFromURLForm, SingleFileForm
+from screenchop.util import mailer
 
 from screenchop.sessions import *
 from screenchop.cache import cache
@@ -192,3 +193,26 @@ def tos():
     loginForm = LoginForm(request.form)
 
     return render_template('main/tos.html', regForm=regForm, loginForm=loginForm)
+
+def contact():
+    """ Contact Page """
+
+    # For registration/login validation
+    regForm = RegistrationForm(request.form)
+    loginForm = LoginForm(request.form)
+
+    if request.method == 'POST':
+        try:
+            name = request.form['name']
+            email = request.form['email']
+            comment = request.form['comment']
+
+            mailer.send_contact_email(name, email, comment)
+
+            flash("Form submitted")
+            return redirect(url_for('contact'))
+        except:
+            print "something went wrong!"
+            return redirect(url_for('contact'))
+
+    return render_template('main/contact.html', regForm=regForm, loginForm=loginForm)

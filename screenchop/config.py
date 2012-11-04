@@ -13,6 +13,7 @@ TEMP_FILE_DIR = config.get('app', 'TEMP_FILE_DIR')
 SESSION_KEY = config.get('app', 'SESSION_KEY')
 DOMAIN_URL = config.get('app', 'DOMAIN_URL')
 SHORT_DOMAIN_URL = config.get('app', 'SHORT_DOMAIN_URL')
+ADMIN_EMAIL = config.get('app', 'ADMIN_EMAIL')
 
 # Caching Configs
 CACHE_TYPE = config.get('caching', 'CACHE_TYPE')
