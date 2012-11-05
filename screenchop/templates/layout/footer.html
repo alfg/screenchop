@@ -1,32 +1,32 @@
 
-    <!-- Le javascript
+    <!-- javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../static/js/lib/jquery-1.7.2.min.js"></script>
-    <script src="../static/js/lib/bootstrap.js"></script>
-    <script src="../static/js/lib/jglance-min.js"></script>
-    <script src="../static/js/lib/jquery.fancybox.pack.js"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery-1.7.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jglance-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.17.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery.annotate.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery.filedrop.js') }}"></script>
+
     {% if tagging == True %}
-    <script src="../static/js/lib/jquery-ui-1.8.17.js"></script>
-    <script src="../static/js/lib/jquery.annotate.js"></script>
-    <script src="../static/js/custom/annotations.js"></script>
+    <script src="{{ url_for('static', filename='js/custom/annotations.js') }}"></script>
     {% endif %}
     {% if active_page == "upload" %}
-    <script src="../static/js/lib/jquery.filedrop.js"></script>
-    <script src="../static/js/custom/dropscript.js"></script>
+    <script src="{{ url_for('static', filename='js/custom/dropscript.js') }}"></script>
     {% endif %}
-    <script src="../static/js/custom/login.js"></script>
-    <script src="../static/js/custom/tooltips.js"></script>
+    <script src="{{ url_for('static', filename='js/custom/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom/tooltips.js') }}"></script>
     {% if active_page == "home" or active_page == "tags" or active_page == "following" %}
-    <script src="../static/js/custom/gallery.js"></script>
+    <script src="{{ url_for('static', filename='js/custom/gallery.js') }}"></script>
     {% endif %}
-    <script src="../static/js/custom/votes.js"></script>
+    <script src="{{ url_for('static', filename='js/custom/votes.js') }}"></script>
     {% if active_page == "tags" %}
-    <script src="../static/js/custom/tagcloud.js"></script>
+    <script src="{{ url_for('static', filename='js/custom/tagcloud.js') }}"></script>
     {% endif %}
-    <script src="../static/js/custom/custom.js"></script>
-    <!-- Scripts that don't need a js file -->
-    
+    <script src="{{ url_for('static', filename='js/custom/custom.js') }}"></script>
+
     <!-- Load fancybox -->
     <script>
         $(document).ready(function() {

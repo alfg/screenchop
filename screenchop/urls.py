@@ -4,6 +4,7 @@ from flask import Flask
 from flask import request, redirect, url_for, escape
 from flask import render_template
 from flaskext.cache import Cache
+from flask.ext.assets import Environment, Bundle
 
 from screenchop import config
 
@@ -16,6 +17,23 @@ from screenchop.sessions import login, logout, register
 
 app = Flask(__name__)
 app.secret_key = config.SESSION_KEY
+assets = Environment(app)
+app.config['ASSETS_DEBUG'] = True 
+
+js_libs = Bundle('js/lib/jquery.annotate.js',
+                 'js/lib/jquery.filedrop.js', filters='jsmin', output='gen/js_libs.js')
+
+js_custom = Bundle('js/custom/annotations.js',
+                   'js/custom/dropscript.js',
+                   'js/custom/login.js',
+                   'js/custom/tooltips.js',
+                   'js/custom/gallery.js',
+                   'js/custom/votes.js',
+                   'js/custom/tagcloud.js',
+                   'js/custom/custom.js', filters='jsmin', output='gen/js_custom.js')
+
+assets.register('js_libs', js_libs)
+assets.register('js_custom', js_custom)
 
 
 # All views below

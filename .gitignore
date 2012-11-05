@@ -18,6 +18,8 @@ dev_scripts
 *.swo
 *.backup
 config.ini
+gen
+.webassets-cache
 
 # Installer logs
 pip-log.txt
