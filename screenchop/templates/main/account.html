@@ -53,7 +53,7 @@
                     </div>
                     
                     <div class="well row" style="margin-left: 0px;">
-                        <div class="pull-left span7">
+                        <div class="pull-left span6">
                             <form method="post" action="/account/avatar" enctype="multipart/form-data">
                                 <dl>
                                 <dt><label>Avatar</label></dt>
@@ -69,7 +69,7 @@
                             </form>
                         </div>
                         {% if registration_level == 'invite' %}
-                        <div class="pull-left">
+                        <div class="pull-right">
                             <dl>
                                 <dt>Invite codes</dt>
                                 {% for c in codes %}
