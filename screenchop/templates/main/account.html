@@ -6,10 +6,6 @@
     {% include 'layout/nav.html' %}
 
     <div class="container">
-        <div class="row-fluid">
-
-            <div>
-                <div id="contents">
                     
                     <!-- Display flash message if any errors -->
                     {% with message = get_flashed_messages() %}
@@ -56,27 +52,42 @@
                         </div>
                     </div>
                     
-                    <div class="well">
-                    <form method="post" action="/account/avatar" enctype="multipart/form-data">
-                        <dl>
-                        <dt><label>Avatar</label></dt>
-                        <dd><input class="account-avatar-input" type="file" name="avatar" /></dd>
-                        <button type="submit" class="btn btn-success">Upload</button>
-                        </dl>
-                    </form>
-                    
-                    {% from "auth/_formhelpers.html" import render_field %}
-                    <form method="post" action="/account">
-                        {{ render_field(form.description) }}
-                        <button type="submit" class="btn btn-success">Update</button>
-                    </form>
+                    <div class="well row" style="margin-left: 0px;">
+                        <div class="pull-left span7">
+                            <form method="post" action="/account/avatar" enctype="multipart/form-data">
+                                <dl>
+                                <dt><label>Avatar</label></dt>
+                                <dd><input class="account-avatar-input" type="file" name="avatar" /></dd>
+                                <button type="submit" class="btn btn-success">Upload</button>
+                                </dl>
+                            </form>
+                            
+                            {% from "auth/_formhelpers.html" import render_field %}
+                            <form method="post" action="/account">
+                                {{ render_field(form.description) }}
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </form>
+                        </div>
+                        {% if registration_level == 'invite' %}
+                        <div class="pull-left">
+                            <dl>
+                                <dt>Invite codes</dt>
+                                {% for c in codes %}
+                                <dd><code>
+                                    {% if c.valid == False %}<del>{% endif %}
+                                        {{ c.code }}
+                                    {% if c.valid == False %}</del>{% endif %}
+                                </code></dd><br />
+                                {% endfor %}
+                            </dl>
+                            <form method="post" action="/account/generateInvite">
+                                <button type="submit" class="btn btn-success">Generate Invite Code</button>
+                            </form>
+                        </div>
+                        {% endif %}
                     </div>
 
-                </div>
-            </div>
 
-
-        </div>
     </div> <!-- /container -->
 
     {% include 'layout/footer.html' %}

@@ -9,6 +9,7 @@ from screenchop.models import *
 from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm, AccountForm, ProfileForm
 from screenchop.util.allowed_images import *
+from screenchop.util.generate_invite_code import *
 
 from screenchop.sessions import *
 
@@ -32,6 +33,9 @@ def account():
     user = User.objects.get(username=session['username'])
     chops = Post.objects(submitter=session['username'])
     form = ProfileForm(request.form, description=user.description)
+    codes = Invite_code.objects(created_by=session['username'])
+    for code in codes:
+        print code.code
     
     avatarURL = config.S3_AVATAR_URL
     
@@ -60,7 +64,8 @@ def account():
         return render_template('main/account.html', user=user, score=score,
                                                     form=form, avatarURL = avatarURL,
                                                     followerCount=followerCount,
-                                                    followingCount=followingCount)
+                                                    followingCount=followingCount,
+                                                    codes=codes)
 
 @requires_auth
 def account_password():
@@ -156,6 +161,21 @@ def account_avatar_uploader():
     flash('Avatar Updated')
     return redirect(url_for('account'))
     
+@requires_auth
+def account_generate_code():
+    """ Generate Invite Code Controller """
     
+    
+    user = User.objects.get(username=session['username'])
+    valid_codes = len(Invite_code.objects(created_by=session['username'], valid=True))
 
+    if request.method == 'POST' and valid_codes < 5:
+        generate_invite(user.username)
+        
+        flash('Code generated')
+        return redirect(url_for('account'))
+    else:
+    
+        flash('You may only have up to 5 valid invite codes at a time.')
+        return redirect(url_for('account'))
 

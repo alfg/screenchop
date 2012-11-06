@@ -73,6 +73,7 @@ class Invite_code(Document):
     date_used = StringField()
     used_by = StringField()
     valid = BooleanField(default=True)
+    created_by = StringField()
 
     meta = {
         'indexes': ['code', 'used_by']

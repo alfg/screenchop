@@ -68,6 +68,7 @@ app.add_url_rule('/tags/<tag>/subscribe', view_func=subscriptions.subscribe, met
 app.add_url_rule('/tags/<tag>/unsubscribe', view_func=subscriptions.unsubscribe, methods=['POST', 'GET'])
 app.add_url_rule('/u/<user>/follow', view_func=follow.follow, methods=['POST', 'GET'])
 app.add_url_rule('/u/<user>/unfollow', view_func=follow.unfollow, methods=['POST', 'GET'])
+app.add_url_rule('/account/generateInvite', view_func=account.account_generate_code, methods=['POST', 'GET'])
 
 # APIs
 app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])
