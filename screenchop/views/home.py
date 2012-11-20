@@ -231,7 +231,7 @@ def request_invite():
             mailer.send_request_invite_email(email)
 
             flash("Request submitted. You will receive an invite code within a few days.")
-            return redirect(url_for('contact'))
+            return redirect(url_for('home'))
         except:
             print "something went wrong!"
             return redirect(url_for('request_invite'))
