@@ -1,4 +1,4 @@
-{% from "auth/_formhelpers.html" import render_field, render_tos %}
+{% from "auth/_formhelpers.html" import render_field, render_tos, render_invite %}
 
 {% if registration_level == 'closed' %}
 <h3>Registration is currently closed</h3>
@@ -10,7 +10,7 @@
     {{ render_field(regForm.username, id="userregister", class="loginBoxInput regBoxEnter") }}
     {{ render_field(regForm.password, id="passregister", class="loginBoxInput regBoxEnter") }}
     {{ render_field(regForm.confirm, id="passverify", class="loginBoxInput regBoxEnter") }}
-    {{ render_field(regForm.invite_code, id="invitecode", class="loginBoxInput regBoxEnter") }}
+    {{ render_invite(regForm.invite_code, id="invitecode", class="loginBoxInput regBoxEnter") }}
     {{ render_tos(regForm.accept_tos, id="tos") }}
   </dl>
   <p><button type="submit" id="submit2" class="btn btn-success">Register</button></p>

@@ -20,3 +20,15 @@ def send_contact_email(name, email, comment):
         template,
         [config.ADMIN_EMAIL])
 
+def send_request_invite_email(email):
+    """ Mailer for Request Invite Post form and view. """
+
+    template = """
+                Email: %s \n
+               """ % (email)
+    
+    conn.send_email(
+        config.ADMIN_EMAIL,
+        'Invite Code Request from %s' % email,
+        template,
+        [config.ADMIN_EMAIL])

@@ -1,0 +1,43 @@
+{% set active_page = "help" %}
+{% set requires_loginForms = True %}
+
+{% include 'layout/header.html' %}
+
+    <body>
+    {% include 'layout/nav.html' %}
+        <div class="container">
+
+            <!-- Display flash message if any errors -->
+            {% with message = get_flashed_messages() %}
+            {% if message %}
+            <div class="alert">
+            <button class="close" data-dismiss="alert">×</button>
+                    {{ message[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+            
+            <div class="row-fluid">
+                <div id="contents">
+                    <div class="well span8">
+                        <legend><i class="icon-envelope"></i> Request an invite</legend>
+                        <form action="/request-invite/" method="POST">
+                          <label>Email</label>
+                          <input type="text" name="email">
+                          <br>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+                    <div id="help-sample-images" class="span4">
+                        <img class="img-polaroid" src="/static/img/screenshot_samples/sample_02.png"></img>
+                        <img class="img-polaroid" src="/static/img/screenshot_samples/sample_03.png"></img>
+                    </div>
+
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+
+{% include 'layout/footer.html' %}
+

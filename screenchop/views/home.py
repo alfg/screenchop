@@ -216,3 +216,24 @@ def contact():
             return redirect(url_for('contact'))
 
     return render_template('main/contact.html', regForm=regForm, loginForm=loginForm)
+    
+def request_invite():
+    """ Request Invite Page """
+
+    # For registration/login validation
+    regForm = RegistrationForm(request.form)
+    loginForm = LoginForm(request.form)
+
+    if request.method == 'POST':
+        try:
+            email = request.form['email']
+
+            mailer.send_request_invite_email(email)
+
+            flash("Request submitted. You will receive an invite code within a few days.")
+            return redirect(url_for('contact'))
+        except:
+            print "something went wrong!"
+            return redirect(url_for('request_invite'))
+
+    return render_template('main/invite.html', regForm=regForm, loginForm=loginForm)
