@@ -66,7 +66,7 @@
   <li><a href="/tos/">Terms</a></li>
   <li><a href="https://github.com/alfg/screenchop/">Code</a></li>
   <li><a href="/contact/">Contact</a></li>
-  {% if registration_level == 'invite' %}
+  {% if registration_level == 'invite' and 'username' not in session %}
   <li><a href="/request-invite/" style="color:red;">Request Invite</a></li>
   {% endif %}
 </ul> 
