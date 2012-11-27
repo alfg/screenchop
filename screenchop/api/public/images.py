@@ -119,9 +119,9 @@ def getMainImages():
     
     #Query list of dictionaries for a JSON object
     jsonImageQuery = [
-                        {'filename' : x.filename,
-                         'thumbnail' : s3ThumbsURL + x.filename,
-                         'large' : s3MediumURL + x.filename,
+                        {'filename' : x.filename if x.filename is not None else 'empty',
+                         'thumbnail' : s3ThumbsURL + x.filename if x.filename else 'empty',
+                         'large' : s3MediumURL + x.filename if x.filename else 'empty',
                          'width' : x.width,
                          'height' : x.height,
                          'caption' : x.caption,
