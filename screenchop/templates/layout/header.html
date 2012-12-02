@@ -13,6 +13,9 @@
     <meta property="og:title" content="Screenchop"/>
     <meta property="og:image" content="{{ s3MediumURL }}{{ chop.filename }}"/>
     <meta property="og:description" content="{% if chop.caption %} {{ chop.caption}} {% else %} &nbsp; {% endif %}"/>
+    {% else %}
+    <meta property="og:title" content="Screenchop"/>
+    <meta property="og:description" content="Gaming screenshot ranking and sharing"/>
     {% endif %}
 
     <!-- Le styles -->
