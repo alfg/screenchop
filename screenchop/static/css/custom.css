@@ -68,6 +68,11 @@ body {
 
     /* Proposed W3C Markup */ 
     background-image: linear-gradient(top, #0066CC 0%, #006391 100%);
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0066CC', endColorstr='#006391', GradientType=0)
+
+    -pie-background: linear-gradient(#EEFF99, #66EE33);
+    behavior: url(/static/css/PIE.htc);
 }
 
 .navbar .brand {
@@ -100,6 +105,8 @@ body {
 }
 
 .navbarupload {
+
+    behavior: url('/static/css/PIE.htc');
 
 }
 
@@ -410,7 +417,7 @@ div.user-info-group {
     float: left;
     display: inline-block;
     margin-left: 10px;
-    width: 400px;
+    /* width: 400px; */
 }
 div.user-name {
     max-width: 300px;
@@ -844,6 +851,7 @@ ul.share-group {
 }
 
 /* Account > Uploads page */
+
 li.account-uploads {
     width: 240px;
     height: 200px;

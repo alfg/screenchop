@@ -23,7 +23,7 @@ class Post(Document):
     downvotes = IntField(default=0)
     width = IntField(required=True)
     height = IntField(required=True)
-    rank = FloatField(default=0)
+    rank = FloatField(default=ranking.hot(1, 0, datetime.datetime.now()))
 
     meta = {
         'indexes': ['uid', 'filename', 'rank'],
