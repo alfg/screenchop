@@ -9,6 +9,15 @@
               <li {% if active_page == 'following' %}class="active"{% endif %}><a href="/following">Following</a></li>
             </ul>
             <ul class="nav pull-right navbarupload">
+                <!-- Social buttons -->
+                <li>
+                  <div class="center" style="margin-left: 25px; margin-top: 10px;">
+                      <div class="fb-like" style="top:-2px;"data-href="http://screenchop.com" data-send="false"
+                         data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+                      &nbsp;
+                      <div class="g-plusone" data-size="medium"></div>
+                  </div>
+                </li>
 
                 <li {% if active_page == 'help' %}class="active"{% endif %}><a href="/help">Help</a></li>
                 
