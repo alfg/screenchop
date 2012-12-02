@@ -108,12 +108,12 @@ body {
 }
 
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-    width:900px !important;
+    /* width:900px !important; */
 
 }
 
 #results {
-    width: 880px;
+    /* width: 880px; */
     background-color: #ddd;
     padding: 10px;
     clear: left;
@@ -317,16 +317,17 @@ div#loadmore:hover {
 /* Tags Page */
 
 #tag-toparea {
-    height: 150px;
+    /* height: 150px; */
+    margin-left: 20px;
 }
 
 #tag-bottomarea {
-    float: left;
+    /* float: left; */
 }
 
 #tagCloud-area {
     width:600px;
-    min-height:100px;
+    /* min-height:100px; */
     overflow:auto; 
 }
 

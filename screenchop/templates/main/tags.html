@@ -36,8 +36,8 @@
                     
                     <div id="tag-toparea">
                         <!-- Tag Search Form -->
-                        <div class="pull-left">
-                            <div class="controls">
+                        <div class="row">
+                            <div class="controls span4">
                                 <h5 class="help-block">Search a tag</h5>
                                 <div class="input-append">
                                     <form>
@@ -45,21 +45,18 @@
                                     <button id="submit" class="btn" type="submit">Go!</button>
                                     </form>
                                 </div>
-
-
-                                
                             </div>
-                        </div>
-                        
-                        
                         <!-- Tag Cloud Area -->
-                        <div id="tagCloud-area" class="pull-right">
+                        <div id="tagCloud-area" class="pull-right span5">
                             <h5 class="help-block">Trending</h5>
                             <div id="tagCloud"></div>
                         </div>
+                        </div>
+                        
+                        
 
-                        <div id="tag-bottomarea">
-                        <h2 class="pull-left">Viewing #{{ tag }}</h2>
+                        <div id="tag-bottomarea" class="row">
+                        <h2 class="">Viewing #{{ tag }}</h2>
                         
                         {% if tag != 'all' %}
                         {% if tag in user.subscriptions %}
@@ -70,6 +67,7 @@
                         {% endif %}
                         </div>
                     </div>
+                    <br />
                     
                     {% if tagCount != 0 %}
                     
