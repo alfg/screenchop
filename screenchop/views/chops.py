@@ -10,6 +10,7 @@ from screenchop import config
 from screenchop.forms import RegistrationForm, LoginForm, EditPost
 from screenchop.sessions import *
 from screenchop.cache import cache
+from screenchop.util import mailer
 
 import boto
 from boto.s3.key import Key
@@ -134,4 +135,9 @@ def update_chop(filename):
     errors = form.errors
     flash(errors)
     return redirect('/c/%s' % filename) 
+
+def report_chop(filename):
+    mailer.report_chop(filename)
+    flash('Thank you for reporting this post. A moderator has been notified.')
+    return redirect('/c/%s' % filename)
 

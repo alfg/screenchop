@@ -32,3 +32,16 @@ def send_request_invite_email(email):
         'Invite Code Request from %s' % email,
         template,
         [config.ADMIN_EMAIL])
+
+def report_chop(chop):
+    """ Mailer for reporting a post. """
+
+    template = """
+                Post reported: %sc/%s \n
+               """ % (config.DOMAIN_URL, chop)
+    
+    conn.send_email(
+        config.ADMIN_EMAIL,
+        'Post reported - %sc/%s' % (config.DOMAIN_URL, chop),
+        template,
+        [config.ADMIN_EMAIL])
