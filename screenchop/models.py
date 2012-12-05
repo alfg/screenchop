@@ -52,6 +52,15 @@ class Vote(Document):
     meta = {
         'indexes': ['username', 'postuid']
         }
+
+class Star(Document):
+    username = StringField(required=True, max_length=60)
+    postuid = IntField(required=True)
+    starred = BooleanField(default=False)
+
+    meta = {
+        'indexes': ['username', 'postuid']
+        }
     
 class Tag(Document):
     uid = StringField(required=True)

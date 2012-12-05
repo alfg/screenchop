@@ -93,40 +93,38 @@
                     <input class="share-url" value="{{ shortURL }}{{ chop.filename }}">
                     </div>
                 
-                    <div class="pull-right">
+                    <div class="pull-right share-links">
                     
-                    <!--
-                    <ul class="img-links">
-                        <li><a class="no-underline" href="{{ s3FullURL }}{{ chop.filename }}" id="directFullLink" rel="tooltip" title="Direct Link - Full"><i class="icon-external-link"></i></a></li>
-                        <li><a class="no-underline" href="{{ s3MediumURL }}{{ chop.filename }}" id="directMedLink" rel="tooltip" title="Direct Link - Medium"><i class="icon-external-link"></i></a></li>
-                        <li><a class="no-underline" href="{{ s3ThumbsURL }}{{ chop.filename }}" id="directThumbLink" rel="tooltip" title="Direct Link - Thumb"><i class="icon-external-link"></i></a></li>
-                    </ul>
-                    -->
+                    <div>
+                    <a href="#" class="no-underline star-button" value="{{ chop.filename }}" >
+                        <i class="icon-star star-favorite {% for s in star %}{% if s.starred %}star-starred{% endif %}{% endfor %}" rel="tooltip" data-original-title="Star a favorite!" data-placement="left"></i>
+                    </a>
+                    </div>
 
-<div class="btn-group pull-left" style="top:2px;">
-  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-    Share Direct Link
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-    <li><a href="{{ s3FullURL }}{{ chop.filename }}">Full Resolution</a></li>
-    <li><a href="{{ s3MediumURL }}{{ chop.filename }}">Medium</a></li>
-    <li><a href="{{ s3ThumbsURL }}{{ chop.filename }}">Small</a></li>
-  </ul>
-</div>
+                    <div class="btn-group pull-left" style="top:2px;">
+                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        Share Direct Link
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{{ s3FullURL }}{{ chop.filename }}">Full Resolution</a></li>
+                        <li><a href="{{ s3MediumURL }}{{ chop.filename }}">Medium</a></li>
+                        <li><a href="{{ s3ThumbsURL }}{{ chop.filename }}">Small</a></li>
+                      </ul>
+                    </div>
                     
                     <ul class="share-group">
                     <li class="primary-service">
                          <a class="share-service-button" href="http://www.facebook.com/sharer.php?u={{ fullURL }}c/{{ chop.filename }}" onclick="socialPopup(this.href); return false">
-                         <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook">
+                         <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook" rel="tooltip" data-original-title="Share on Facebook!" data-placement="top">
                          </a>
                     </li><li class="primary-service">
                          <a class="share-service-button" href="https://twitter.com/share?{% if chop.caption != None %}text={{ chop.caption }} &mdash;&{% endif %}url={{ shortURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
-                         <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter">
+                         <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter" rel="tooltip" data-original-title="Share on Twitter!" data-placement="top">
                          </a>
                     </li><li class="primary-service">
                          <a class="share-service-button" href="https://plus.google.com/share?url={{ fullURL }}c/{{ chop.filename }}" onclick="socialPopup(this.href); return false">
-                         <img src="../static/img/pixel.gif" alt="Google+" class="share-service-icon share-service-icon-googleplus">
+                         <img src="../static/img/pixel.gif" alt="Google+" class="share-service-icon share-service-icon-googleplus" rel="tooltip" data-original-title="Share on Google Plus!" data-placement="top">
                          </a>
                     </li></ul>
                     </div>

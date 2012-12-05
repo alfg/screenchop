@@ -35,8 +35,9 @@ def chop(filename):
     
     # Checking if username in session to check 2 things
     if 'username' in session:
-        # Loading user vote data to object
+        # Loading user vote and star data to object
         vote = Vote.objects(username=session['username'], postuid=chop.uid)
+        star = Star.objects(username=session['username'], postuid=chop.uid)
         
         # Also checking to see session is owner of the post. If so, then allow
         # tagging. String booleans since that's how the js lib is checking.
@@ -47,6 +48,7 @@ def chop(filename):
     else:
         # No votes and not taggable if user is not logged in
         vote = []
+        star = []
         tagable = 'false'
     
     # For registration/login wtf validation
@@ -69,7 +71,7 @@ def chop(filename):
                             fullURL=fullURL, shortURL=shortURL, score=score,
                             vote=vote, tagging=tagging, tagable=tagable,
                             s3FullURL=s3FullURL, s3MediumURL=s3MediumURL,
-                            s3ThumbsURL=s3ThumbsURL)
+                            s3ThumbsURL=s3ThumbsURL, star=star)
                             
 @requires_auth        
 def delete_chop(filename):
