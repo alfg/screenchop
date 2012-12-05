@@ -114,6 +114,11 @@ body {
     margin-left: 5px;
 }
 
+.navbar .social-nav {
+    font-size: 22px;
+}
+.navbar li.social-nav > a { padding: 9px 0 11px; }
+
 .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     /* width:900px !important; */
 
