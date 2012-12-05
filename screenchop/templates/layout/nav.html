@@ -9,7 +9,7 @@
               <li {% if active_page == 'following' %}class="active"{% endif %}><a href="/following">Following</a></li>
             </ul>
             <ul class="nav pull-right navbarupload">
-                {% if active_page == 'home' and debug_enabled == 'true' %}
+                {% if active_page == 'home' and debug_enabled == False %}
                 <!-- Social buttons -->
                 <li>
                   <div class="center" style="margin-top: 10px;">
