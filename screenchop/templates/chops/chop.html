@@ -69,7 +69,7 @@
                     <span id="add-tag-button"></span>
                     {% if session['username'] == chop.submitter %}
                     <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal"><i class="icon-tag"></i> Caption & Tags</button>
-                    <button class="btn btn-mini btn-danger" href="#delete-chop" data-toggle="modal"><i class="icon-trash"></i> Delete</button>
+                    <button class="btn btn-mini btn-danger" style="margin-left:5px;" href="#delete-chop" data-toggle="modal"><i class="icon-trash"></i> Delete</button>
                     {% else %}
                     <button class="btn btn-mini btn-warning" href="#report-chop" data-toggle="modal"><i class="icon-warning-sign"></i> Report</button>
                     <span>&nbsp;</span>
@@ -95,11 +95,25 @@
                 
                     <div class="pull-right">
                     
+                    <!--
                     <ul class="img-links">
                         <li><a class="no-underline" href="{{ s3FullURL }}{{ chop.filename }}" id="directFullLink" rel="tooltip" title="Direct Link - Full"><i class="icon-external-link"></i></a></li>
                         <li><a class="no-underline" href="{{ s3MediumURL }}{{ chop.filename }}" id="directMedLink" rel="tooltip" title="Direct Link - Medium"><i class="icon-external-link"></i></a></li>
                         <li><a class="no-underline" href="{{ s3ThumbsURL }}{{ chop.filename }}" id="directThumbLink" rel="tooltip" title="Direct Link - Thumb"><i class="icon-external-link"></i></a></li>
                     </ul>
+                    -->
+
+<div class="btn-group pull-left" style="top:2px;">
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+    Share Direct Link
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="{{ s3FullURL }}{{ chop.filename }}">Full Resolution</a></li>
+    <li><a href="{{ s3MediumURL }}{{ chop.filename }}">Medium</a></li>
+    <li><a href="{{ s3ThumbsURL }}{{ chop.filename }}">Small</a></li>
+  </ul>
+</div>
                     
                     <ul class="share-group">
                     <li class="primary-service">
