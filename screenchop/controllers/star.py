@@ -1,9 +1,5 @@
-#!/usr/bin/env python
+""" star.py - Controller to star and unstar posts/chops."""
 
-'''
-vote.py - Controller to upvote and downvote posts/chops.
-
-'''
 import os, sys
 from time import strftime
 
@@ -16,8 +12,8 @@ from screenchop.models import Post, Star
 
 app = Flask(__name__)
 
-
 def star():
+    """ Get or Create favorite when starred from a post. Ajax request made on custom.js """
     if 'username' not in session:
         return 'not logged in'
 
