@@ -73,7 +73,7 @@ app.add_url_rule('/u/<user>/unfollow', view_func=follow.unfollow, methods=['POST
 app.add_url_rule('/account/generateInvite', view_func=account.account_generate_code, methods=['POST', 'GET'])
 
 # APIs
-app.add_url_rule('/api/public/images.json', view_func=images.getMainImages, methods=['GET'])
+app.add_url_rule('/api/public/images.json', view_func=images.getImages_view, methods=['GET'])
 app.add_url_rule('/api/public/tags.json', view_func=tags.getTags_json, methods=['GET'])
 app.add_url_rule('/api/public/tagcloud.json', view_func=tagcloud.tagcloud_json, methods=['GET'])
 app.add_url_rule('/api/public/searchTags.json', view_func=tagcloud.searchTags_json, methods=['GET'])
@@ -101,3 +101,7 @@ def registration_level():
 @app.context_processor
 def google_analytics_account():
     return dict(google_analytics_account=config.GOOGLE_ANALYTICS_ACCOUNT)
+
+@app.context_processor
+def debug_enabled():
+    return dict(debug_enabled_account=config.DEBUG)
