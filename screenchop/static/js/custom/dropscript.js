@@ -1,3 +1,17 @@
+/*
+ * dropscript.js - Custom built js for interfacing with filedrop.js.
+ *
+ * Author: Alf
+ *
+ * Copyright (c) 2012 Screenchop
+ * 
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Project home:
+ *   http://www.github.com/alfg/screenchop
+ */
+
 $(function(){
 	
 	var dropbox = $('#dropbox'),

@@ -1,4 +1,16 @@
-/* Loads JGlance Photos as a gallery */
+/*
+ * gallery.js - Custom built js for displaying image jglance grid.
+ *
+ * Author: Alf
+ *
+ * Copyright (c) 2012 Screenchop
+ * 
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Project home:
+ *   http://www.github.com/alfg/screenchop
+ */
 
 // Requests json data for gallery images
 var photos = (function () {

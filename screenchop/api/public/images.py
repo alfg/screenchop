@@ -14,7 +14,6 @@ import json
 import datetime
 
 def getImages_view():
-    print request.url
     cached_url = request.url
 
     @cache.cached(timeout=config.CACHE_DEFAULT_TIMEOUT, key_prefix=cached_url)
