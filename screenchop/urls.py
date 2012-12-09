@@ -80,6 +80,12 @@ app.add_url_rule('/api/public/tagcloud.json', view_func=tagcloud.tagcloud_json, 
 app.add_url_rule('/api/public/searchTags.json', view_func=tagcloud.searchTags_json, methods=['GET'])
 app.add_url_rule('/api/public/following.json', view_func=getuser.userFollowing_json, methods=['GET'])
 
+# Redirects to home
+def redirect_to_home():
+    return redirect('/') 
+
+app.add_url_rule('/c/', view_func=redirect_to_home)
+
 # Error Pages
 @app.errorhandler(500)
 def error_page(e):
