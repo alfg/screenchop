@@ -16,7 +16,7 @@ class Post(Document):
     uid = SequenceField()
     submitter = StringField(required=True)
     caption = StringField(max_length=200)
-    tags = ListField(StringField(max_length=15))
+    tags = ListField(StringField(max_length=30))
     filename = StringField(max_length=30)
     date = DateTimeField(default=datetime.datetime.now)
     upvotes = IntField(default=0)
