@@ -113,12 +113,13 @@ def google_analytics_account():
 def debug_enabled():
     return dict(debug_enabled_account=config.DEBUG)
 
-ADMINS = ['alf.g.jr@gmail.com']
+# Exception email handler
+ADMINS = config.EXCEPTION_EMAIL 
 if not app.debug:
     import logging
     from logging.handlers import SMTPHandler
     mail_handler = SMTPHandler('127.0.0.1',
                                'server-error@screenchop.com',
-                               ADMINS, 'Screenchop Application Failed')
+                               ADMINS, 'Screenchop Exception')
     mail_handler.setLevel(logging.ERROR)
     app.logger.addHandler(mail_handler)

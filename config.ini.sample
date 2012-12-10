@@ -8,6 +8,7 @@ SESSION_KEY = supersecret ; Keep this secret
 DOMAIN_URL = http://localhost:5000/ ; Domain name. Requires trailing slash.
 SHORT_DOMAIN_URL = http://localhost/ ; Shorter domain name. Use same as DOMAIN if none. Requires trailing slash.
 ADMIN_EMAIL = your@email ; Used for contact form
+EXCEPTION_EMAIL = your@email ; Emails to send exceptions. Separated by comma, no spaces.
 
 [caching]
 CACHE_TYPE = memcached ; Set to null to disable

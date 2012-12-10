@@ -14,6 +14,7 @@ SESSION_KEY = config.get('app', 'SESSION_KEY')
 DOMAIN_URL = config.get('app', 'DOMAIN_URL')
 SHORT_DOMAIN_URL = config.get('app', 'SHORT_DOMAIN_URL')
 ADMIN_EMAIL = config.get('app', 'ADMIN_EMAIL')
+EXCEPTION_EMAIL = config.get('app', 'EXCEPTION_EMAIL').split(',')
 
 # Caching Configs
 CACHE_TYPE = config.get('caching', 'CACHE_TYPE')
