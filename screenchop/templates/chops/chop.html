@@ -68,7 +68,7 @@
                     {% endif %}
 
                     <span id="add-tag-button"></span>
-                    {% if session['username'] == chop.submitter %}
+                    {% if session['username'] == chop.submitter or user.rank == 'mod' %}
                     <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal"><i class="icon-tag"></i> Caption & Tags</button>
                     <button class="btn btn-mini btn-danger" style="margin-left:5px;" href="#delete-chop" data-toggle="modal"><i class="icon-trash"></i> Delete</button>
                     {% else %}

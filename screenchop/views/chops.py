@@ -36,6 +36,7 @@ def chop(filename):
     # Checking if username in session to check 2 things
     if 'username' in session:
         # Loading user vote and star data to object
+        user = User.objects.get(username=session['username'])
         vote = Vote.objects(username=session['username'], postuid=chop.uid)
         star = Star.objects(username=session['username'], postuid=chop.uid)
         
@@ -47,6 +48,7 @@ def chop(filename):
             tagable = 'false'
     else:
         # No votes and not taggable if user is not logged in
+        user = None
         vote = []
         star = []
         tagable = 'false'
@@ -71,7 +73,7 @@ def chop(filename):
                             fullURL=fullURL, shortURL=shortURL, score=score,
                             vote=vote, tagging=tagging, tagable=tagable,
                             s3FullURL=s3FullURL, s3MediumURL=s3MediumURL,
-                            s3ThumbsURL=s3ThumbsURL, star=star)
+                            s3ThumbsURL=s3ThumbsURL, star=star, user=user)
                             
 @requires_auth        
 def delete_chop(filename):
@@ -79,10 +81,11 @@ def delete_chop(filename):
     
     # Query post
     chop = Post.objects.get(filename = filename)
+    user = User.objects.get(username=session['username'])
     
-    # User session is the submitter, then delete the post
+    # User session is the submitter or a mod, then delete the post
     # otherwise, redirect with a flash message
-    if session['username'] == chop.submitter:
+    if session['username'] == chop.submitter or user.rank == 'mod':
         # Delete MongoDB post
         chop.delete()
         
@@ -116,13 +119,14 @@ def update_chop(filename):
 
     # Query post
     chop = Post.objects.get(filename = filename)
+    user = User.objects.get(username=session['username'])
 
     if request.method == 'POST' and form.validate():
 
 
         # User session is the submitter, then edit post
         # otherwise, redirect with flash message
-        if session['username'] == chop.submitter:
+        if session['username'] == chop.submitter or user.rank == 'mod':
             # Update post
             chop.caption = form.caption.data
             chop.tags = form.tags.data

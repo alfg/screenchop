@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """ MongoDB Models """
 
 from mongoengine import *
@@ -38,6 +37,7 @@ class User(Document):
     avatar = StringField(max_length=100)
     subscriptions = ListField(StringField(max_length=50))
     following = ListField(StringField(max_length=60))
+    rank = StringField(default='user', max_length=40)
 
     meta = {
         'indexes': ['userid', 'username', 'email']
