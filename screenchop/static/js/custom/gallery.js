@@ -92,8 +92,10 @@ var jg = new JGlance({
         maxPerRow: maxPerRow,
         enableLightBox: false,
         lightBoxInfoCallback: inLightBox,
-        photoClickCallback: click,
+        photoClickCallback: null, // Disabled click so link acts as an anchor tag
         enableHoverInfo: true,
+        hoverAnimateSpeed: 100,
+        hoverInterval: 0,
         hoverInfoCallback: hovered,
         photoErrorCallback: function (photo, img) {
             img.attr( 'src', 'http://placehold.it/350x150' ).addClass( 'broken-image' );

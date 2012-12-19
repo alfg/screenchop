@@ -260,7 +260,7 @@ var JGlance = function(args) {
      * @param imgElem jQuery object of the image causing the hover
      */
     var initHoverDiv = function(photo, index, imgElem) {
-        hoverDiv =  $('<div />')
+        hoverDiv =  $('<a href="/c/' + photo.filename + '" />')
                         .addClass( resultHoverClass )
                         .mouseleave( function () { imgElem.unbind('mouseleave'); mouseLeft(); } )
                         .append(
