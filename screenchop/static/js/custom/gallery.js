@@ -18,7 +18,9 @@ var photos = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': '/api/public/images.json?sort=' + sortType + '&user=' + user + '&tag=' + tag + '&t=' + time + '&showFollowing=' + showFollowing,
+        'url': '/api/public/images.json?sort=' + sortType + '&user=' +
+            user + '&tag=' + tag + '&t=' + time + '&showFollowing=' +
+            showFollowing,
         'dataType': "json",
         'success': function (data) {
             photos = data.images;
@@ -116,26 +118,28 @@ $(window).scroll(function(){
 
 // Run imagePaginate when loadmore bar is clicked
 $('#loadmore').click(function(){
-imagePaginate();
+    imagePaginate();
 });
 
 //Loads paginated images. Amount defined in template.
 function imagePaginate(){
     var photos = (function () {
-            var photos = null;
-            $.ajax({
-                'async': false,
-                'global': false,
-                'url': '/api/public/images.json?sort=' + sortType + '&page=' + page + '&user=' + user  + '&tag=' + tag  + '&t=' + time + '&showFollowing=' + showFollowing,
-                'dataType': "json",
-                'success': function (data) {
-                    photos = data.images;
-                }
-            });
-            page = page + pageInc;
-            return photos;
-        })(); 
-        jg.push( photos );
-        };
+        var photos = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': '/api/public/images.json?sort=' + sortType + '&page=' + page +
+                '&user=' + user  + '&tag=' + tag  + '&t=' + time +
+                '&showFollowing=' + showFollowing,
+            'dataType': "json",
+            'success': function (data) {
+                photos = data.images;
+            }
+        });
+        page = page + pageInc;
+        return photos;
+    })(); 
+    jg.push(photos);
+};
 
 
