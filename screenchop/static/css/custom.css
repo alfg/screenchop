@@ -19,6 +19,10 @@ body {
     background-repeat: no-repeat;
     background-size: 100% auto;
 }
+.s-logo-text {
+    font-family: 'Press Start 2P', cursive;
+    margin: 7px 0 0 20px;
+}
 .navbar .brand {
     padding: 0 !important;
 }
