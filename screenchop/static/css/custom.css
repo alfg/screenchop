@@ -720,7 +720,11 @@ ul.share-group {
     vertical-align: middle;
 }
 /* Account > Uploads page */
- li.account-uploads {
+li.account-uploads {
     width: 240px;
     height: 200px;
+}
+li.account-uploads p {
+    font-size: 11px;
+    margin: 10px 10px 10px 10px;
 }

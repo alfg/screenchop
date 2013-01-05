@@ -35,12 +35,10 @@
                             <ul class="thumbnails">
                                 {% for i in chops %}
                                 <li class="account-uploads">
-                                    <div class="thumbnail">
                                         <a href="/c/{{ i.filename }}" class="thumbnail">
                                         <img src="{{ s3ThumbsURL }}{{ i.filename }}" alt=""></a>
                                         {% if i.title %}<h5>{{ i.title }}</h5>{% endif %}
                                         {% if i.caption %}<p>{{ i.caption }}</p>{% endif %}
-                                    </div>
                                 </li>
                                 {% endfor %}
                                 

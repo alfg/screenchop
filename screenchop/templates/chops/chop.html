@@ -120,7 +120,7 @@
                          <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook" rel="tooltip" data-original-title="Share on Facebook!" data-placement="top">
                          </a>
                     </li><li class="primary-service">
-                         <a class="share-service-button" href="https://twitter.com/share?{% if chop.caption != None %}text={{ chop.caption }} &mdash;&{% endif %}url={{ shortURL }}{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+                    <a class="share-service-button" href="https://twitter.com/share?{% if chop.caption != None %}text={{ chop.caption }} &mdash;&{% endif %}url={{ shortURL }}{{ chop.filename }}{% if chop.tags != None %}&hashtags={% for c in chop.tags|join(", ") %}{{ c }}{% endfor %}{% endif %}" onclick="socialPopup(this.href); return false">
                          <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter" rel="tooltip" data-original-title="Share on Twitter!" data-placement="top">
                          </a>
                     </li><li class="primary-service">
