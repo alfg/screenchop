@@ -4,7 +4,7 @@ body {
 }
 .footer-links {
     margin: 10px auto 10px auto !important;
-    width: 880px;
+    /* width: 880px; */
 }
 .footer-links > li {
     display: inline;
