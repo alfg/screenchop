@@ -1,4 +1,3 @@
-
 from datetime import datetime, timedelta
 from math import log
 
@@ -19,3 +18,4 @@ def hot(ups, downs, date):
     sign = 1 if s > 0 else -1 if s < 0 else 0
     seconds = epoch_seconds(date) - 1134028003
     return round(order + sign * seconds / 45000, 7)
+

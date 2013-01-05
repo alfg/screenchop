@@ -18,7 +18,7 @@ class Post(Document):
     tags = ListField(StringField(max_length=30))
     filename = StringField(max_length=30)
     date = DateTimeField(default=datetime.datetime.now)
-    upvotes = IntField(default=0)
+    upvotes = IntField(default=1)
     downvotes = IntField(default=0)
     width = IntField(required=True)
     height = IntField(required=True)
@@ -38,6 +38,7 @@ class User(Document):
     subscriptions = ListField(StringField(max_length=50))
     following = ListField(StringField(max_length=60))
     rank = StringField(default='user', max_length=40)
+
 
     meta = {
         'indexes': ['userid', 'username', 'email']

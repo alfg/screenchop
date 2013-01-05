@@ -13,7 +13,7 @@ import requests
 from flask import Flask
 from flask import request, session
 from flask import abort, redirect, url_for, jsonify
-from flask import render_template, flash
+from flask import render_template, flash, Markup
 from werkzeug import secure_filename
 
 import boto
@@ -24,7 +24,7 @@ from PIL import Image
 from screenchop import config
 from screenchop.sessions import requires_auth
 from screenchop.models import Post
-from screenchop.util import short_url
+from screenchop.util import short_url, uploader_utils
 from screenchop.forms import AddFromURLForm, SingleFileForm 
 
 ALLOWED_EXTENSIONS = set(config.ALLOWED_FILE_TYPES)
@@ -99,7 +99,8 @@ def uploader():
                 tags=tags, 
                 width=width, 
                 height=height)
-
+        
+        uploader_utils.set_upvote(post.submitter, post.uid)
         post.save()
         
         # set url as a short url to store as filename to S3 and Post Document
@@ -154,7 +155,7 @@ def uploader():
 
 
         if uploadType == 'single-upload':
-            flash("Screenshot uploaded - View here. %sc/%s" % (config.DOMAIN_URL, url), 'uploaded')
+            flash(Markup('Screenshot uploaded - <a href="%sc/%s">View here</a>.' % (config.DOMAIN_URL, url)), 'uploaded')
             return redirect(url_for('upload'))
         else:
             return jsonify(result='success', url=('%sc/%s' % (config.DOMAIN_URL, url)))
@@ -231,6 +232,7 @@ def url_uploader():
                     width=width, 
                     height=height)
 
+            uploader_utils.set_upvote(post.submitter, post.uid)
             post.save()
             
             # set url as a short url to store as filename to S3 and Post Document
@@ -283,7 +285,7 @@ def url_uploader():
             # Atomically update Post document to Store url
             Post.objects(id=post.id).update_one(set__filename=url)
 
-            flash("Screenshot uploaded - View here. %sc/%s" % (config.DOMAIN_URL, url), 'uploaded')
+            flash(Markup('Screenshot uploaded - <a href="%sc/%s">View here</a>.' % (config.DOMAIN_URL, url)), 'uploaded')
             return redirect(url_for('upload'))
         except:
         
