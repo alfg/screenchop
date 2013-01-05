@@ -94,7 +94,6 @@ var jg = new JGlance({
         maxPerRow: maxPerRow,
         enableLightBox: false,
         lightBoxInfoCallback: inLightBox,
-        photoClickCallback: null, // Disabled click so link acts as an anchor tag
         enableHoverInfo: true,
         hoverAnimateSpeed: 100,
         hoverInterval: 0,
@@ -142,4 +141,38 @@ function imagePaginate(){
     jg.push(photos);
 };
 
+// Function to keep redraw() from firing rapidly as window is being resized
+function debouncer( func , timeout ) {
+   var timeoutID , timeout = timeout || 200;
+   return function () {
+      var scope = this , args = arguments;
+      clearTimeout( timeoutID );
+      timeoutID = setTimeout( function () {
+          func.apply( scope , Array.prototype.slice.call( args ) );
+      } , timeout );
+   }
+}
 
+// Redraw gallery when window is resized
+$(window).resize(debouncer(function() {
+    redraw()
+}));
+
+// Redraw gallery function
+function redraw(){
+    jg && jg.reset();
+    jg = new JGlance({
+        container: $('#results'),
+        maxPerRow: maxPerRow,
+        enableLightBox: false,
+        lightBoxInfoCallback: inLightBox,
+        enableHoverInfo: true,
+        hoverAnimateSpeed: 100,
+        hoverInterval: 0,
+        hoverInfoCallback: hovered,
+        photoErrorCallback: function (photo, img) {
+            img.attr( 'src', 'http://placehold.it/350x150' ).addClass( 'broken-image' );
+        }
+    });
+    jg.push(photos);
+}
