@@ -1,12 +1,10 @@
+{% extends "layout/base.html" %}
+
 {% set active_page = "home" %}
-{% set active_sub = "hot" %}
 {% set requires_loginForms = True %}
 
-{% include 'layout/header.html' %}
-
-
-<body>
-
+{% block title %}Home{% endblock %}
+{% block head %}
 <!-- Gallery config variables -->
 <script type="text/javascript"> 
     var maxPerRow = {{ maxPerRow }};
@@ -18,37 +16,21 @@
     var time = 'all';
     var showFollowing = 'false';
 </script>
-    {% include 'layout/nav.html' %}
-        <div class="container">
+{% endblock %}
 
-            <!-- Display flash message if any errors -->
-            {% with message = get_flashed_messages() %}
-            {% if message %}
-            <div class="alert">
-            <button class="close" data-dismiss="alert">×</button>
-                    {{ message[0] }}
-            </div>
-            {% endif %}
-            {% endwith %}
-            
-            <div class="row-fluid">
-                
-                <div id="contents">
-                
-                    {% include 'layout/subs.html' %}
+{% block content %}
+    {% set active_sub = "hot" %}
+    {% include 'shared/_subs.html' %}
 
-                    <!-- Gallery -->
-                    <div id="results"></div>
+    <!-- Gallery -->
+    <div id="results"></div>
 
-                </div>
-                {#
-                <div id="loadmore">
-                    <span>Load More</span>
-                </div>
-                #}
-            </div>
-        </div> <!-- /container -->
+    {# Disabled loadmore link for now
+    <div id="loadmore">
+      <span>Load More</span>
+    </div>
+    #}
+{% endblock %}
 
 
-{% include 'layout/footer.html' %}
 

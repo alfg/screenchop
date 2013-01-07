@@ -1,11 +1,12 @@
+{% extends 'layout/base.html' %}
+
 {% set active_page = "tags" %}
 {% set active_sub = "hot" %}
 {% set requires_loginForms = True %}
 
-{% include 'layout/header.html' %}
+{% block title %}Tags{% endblock %}
 
-<body>
-
+{% block head %}
 <!-- Gallery config variables -->
 <script type="text/javascript"> 
     var maxPerRow = {{ maxPerRow }};
@@ -17,93 +18,74 @@
     var time = 'all';
     var showFollowing = 'false';
 </script>
-
-    {% include 'layout/nav.html' %}
-        <div class="container">
-
-            <!-- Display flash message if any errors -->
-            {% with message = get_flashed_messages() %}
-            {% if message %}
-            <div class="alert">
-            <button class="close" data-dismiss="alert">×</button>
-                    {{ message[0] }}
+{% endblock %}
+          
+{% block content %}
+<div id="tag-toparea">
+    <!-- Tag Search Form -->
+    <div class="row">
+        <div class="controls">
+            <h5 class="help-block">Search a tag or game</h5>
+            <div class="input-append">
+                <form>
+                <input id="tagInput" size="16" type="text" data-provide="typeahead" autocomplete="off">
+                <button id="submit" class="btn" type="submit">Go!</button>
+                </form>
             </div>
+        </div>
+        <!-- Tag Cloud -->
+        <div id="tagCloud-area" class="well">
+            <h5 class="help-block">Trending</h5>
+            <div id="tagCloud"></div>
+        </div>
+    </div>
+                        
+    <div id="tag-bottomarea" class="row">
+        <h2 class="">Viewing #{{ tag }}</h2>
+        
+        {% if tag != 'all' %}
+            {% if tag in user.subscriptions %}
+            <a class="btn-subscribe btn btn-danger" href="/tags/{{ tag }}/unsubscribe">Unsubscribe</a><br />
+            {% else %}
+            <a class="btn-subscribe btn btn-success" href="/tags/{{ tag }}/subscribe">Subscribe</a><br />
             {% endif %}
-            {% endwith %}
-            
-            <div class="row-fluid">
-                
-                <div id="contents">
+        {% endif %}
+    </div>
+</div>
+<br />
                     
-                    <div id="tag-toparea">
-                        <!-- Tag Search Form -->
-                        <div class="row">
-                            <div class="controls span4">
-                                <h5 class="help-block">Search a tag</h5>
-                                <div class="input-append">
-                                    <form>
-                                    <input id="tagInput" size="16" type="text" data-provide="typeahead" autocomplete="off">
-                                    <button id="submit" class="btn" type="submit">Go!</button>
-                                    </form>
-                                </div>
-                            </div>
-                        <!-- Tag Cloud -->
-                        <div id="tagCloud-area" class="pull-right span8">
-                            <h5 class="help-block">Trending</h5>
-                            <div id="tagCloud"></div>
-                        </div>
-                        </div>
-                        
-                        
+{% if tagCount != 0 %}
+    
+{% include 'shared/_subs.html' %}
 
-                        <div id="tag-bottomarea" class="row">
-                        <h2 class="">Viewing #{{ tag }}</h2>
-                        
-                        {% if tag != 'all' %}
-                        {% if tag in user.subscriptions %}
-                        <a class="btn-subscribe btn btn-danger" href="/tags/{{ tag }}/unsubscribe">Unsubscribe</a><br />
-                        {% else %}
-                        <a class="btn-subscribe btn btn-success" href="/tags/{{ tag }}/subscribe">Subscribe</a><br />
-                        {% endif %}
-                        {% endif %}
-                        </div>
-                    </div>
-                    <br />
-                    
-                    {% if tagCount != 0 %}
-                    
-                    {% include 'layout/subs.html' %}
+<!-- Gallery -->
+<div id="results"></div>
 
-                    <!-- Gallery -->
-                    <div id="results"></div>
-
-                    
-                </div>
-                <div id="loadmore">
-                    <span>Load More</span>
-                </div>
-                {% else %}
-                <div id="no-results">
-                    <div id="no-results-msg">
-                    <span class="message">
-                        <i class="icon-info-sign"></i> Gasp! No screenchops for this tag! D:<br>
-                        <em>How about submitting some of your own?</em>
-                        {% if 'username' in session %}
-                        <a class="btn btn-success btn-mini" href="/upload" style="line-height: 10px;">Upload</a>
-                        {% else %}
-                        <a class="btn btn-success btn-mini" href="#login-form" data-toggle="modal" style="line-height: 10px;">Register</a>
-                        {% endif %}
-                    </span>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div> <!-- /container -->
+{% else %}
+<div id="no-results">
+    <div id="no-results-msg">
+        <span class="message">
+            <i class="icon-info-sign"></i> Gasp! No screenchops for this tag! D:<br>
+            <em>How about submitting some of your own?</em>
+            {% if 'username' in session %}
+            <a class="btn btn-success btn-mini" href="/upload" style="line-height: 10px;">Upload</a>
+            {% else %}
+            <a class="btn btn-success btn-mini" href="#login-form" data-toggle="modal" style="line-height: 10px;">Register</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
 
 
-{% include 'layout/footer.html' %}
+{% endblock %}
+
+{% block footer %}
 <script>
-
+    $(document).ready(function() {
+      tagcloud();
+    });
+    
     /* Controller-less input redirecting */
     $('#submit').click( function() { 
         var tagInput = $("#tagInput").val();
@@ -118,3 +100,4 @@
             });
      });
 </script>
+{% endblock %}

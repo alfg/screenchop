@@ -1,0 +1,141 @@
+{% extends "layout/base.html" %}
+
+{% set active_page = "chop" %}
+{% set requires_loginForms = True %}
+
+{% block title %}{% if chop.caption != None %}{{ chop.caption }}{% endif %}{% endblock %}
+
+{% block head %}
+<script type="text/javascript"> 
+    var votes = {{ score }};
+    var postUID = {{ chop.uid }};
+    var postfilename = '{{ chop.filename }}';
+    var tagable = {{ tagable }};
+    var sortType = null;
+</script>
+{% endblock %}
+
+{% block content %}         
+<div id="chop-image">
+    <img id="toAnnotate" src="{{ s3MediumURL }}{{ chop.filename }}" alt="">
+</div>
+
+<div class="well">                
+    <blockquote>
+        {% if chop.caption != None %}
+        <p>{{ chop.caption }}</p>
+        {% endif %}
+        
+        <small>
+            Submitted by <a class="no-underline" href="/u/{{ chop.submitter }}">
+            <span class="label label-info">{{ chop.submitter }}</span>
+            </a>
+        </small>
+    </blockquote>
+    
+    {% if chop.tags %}
+    <span class="pull-right">
+        {% for c in chop.tags %}
+        <a href="/tags/{{ c }}" class="no-underline">
+        <span class="label label-success">
+            {{ c }}
+        </span>
+        </a>&nbsp;
+        {% endfor %}
+    </span>
+    {% endif %}
+
+    <span id="add-tag-button"></span>
+    {% if session['username'] == chop.submitter or user.rank == 'mod' %}
+    <button class="btn btn-mini btn-info" href="#edit-chop" data-toggle="modal"><i class="icon-tag"></i> Caption & Tags</button>
+    <button class="btn btn-mini btn-danger" style="margin-left:5px;" href="#delete-chop" data-toggle="modal"><i class="icon-trash"></i> Delete</button>
+    {% else %}
+    <button class="btn btn-mini btn-warning" href="#report-chop" data-toggle="modal"><i class="icon-warning-sign"></i> Report</button>
+    <span>&nbsp;</span>
+    {% endif %}
+</div>
+
+<div id="social-area">
+    <div class="pull-left vote-icons">
+        <span class="votes">{{ score }}</span>
+        <span style="font-size: 28px;">
+            <a class="upvote-button {% for v in vote %}{% if v.upvoted %}highlighted{% endif %}{% endfor %}" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-up icon-large"></i></a>
+        </span>
+        <span style="font-size: 28px;">
+            <a class="downvote-button {% for v in vote %}{% if v.downvoted %}highlighted{% endif %}{% endfor %}" href="#" value="{{ chop.filename }}"><i class="icon-circle-arrow-down icon-large"></i></a>
+        </span>
+    </div>
+
+
+    <div class="pull-right">
+        <input class="share-url" value="{{ shortURL }}{{ chop.filename }}">
+    </div>
+
+    <div class="pull-right share-links">
+        <div>
+          <a href="#" class="no-underline star-button" value="{{ chop.filename }}" >
+            <i class="icon-star star-favorite {% for s in star %}{% if s.starred %}star-starred{% endif %}{% endfor %}" rel="tooltip" data-original-title="Star a favorite!" data-placement="left"></i>
+          </a>
+        </div>
+
+        <div class="btn-group pull-left" style="top:2px;">
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+            Share Direct Link
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ s3FullURL }}{{ chop.filename }}">Full Resolution</a></li>
+            <li><a href="{{ s3MediumURL }}{{ chop.filename }}">Medium</a></li>
+            <li><a href="{{ s3ThumbsURL }}{{ chop.filename }}">Small</a></li>
+          </ul>
+        </div>
+        
+        <ul class="share-group">
+        <li class="primary-service">
+             <a class="share-service-button" href="http://www.facebook.com/sharer.php?u={{ fullURL }}c/{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+             <img src="../static/img/pixel.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook" rel="tooltip" data-original-title="Share on Facebook!" data-placement="top">
+             </a>
+        </li><li class="primary-service">
+        <a class="share-service-button" href="https://twitter.com/share?{% if chop.caption != None %}text={{ chop.caption }} &mdash;&{% endif %}url={{ shortURL }}{{ chop.filename }}{% if chop.tags != None %}&hashtags={% for c in chop.tags|join(", ") %}{{ c }}{% endfor %}{% endif %}" onclick="socialPopup(this.href); return false">
+             <img src="../static/img/pixel.gif" alt="Twitter" class="share-service-icon share-service-icon-twitter" rel="tooltip" data-original-title="Share on Twitter!" data-placement="top">
+             </a>
+        </li><li class="primary-service">
+             <a class="share-service-button" href="https://plus.google.com/share?url={{ fullURL }}c/{{ chop.filename }}" onclick="socialPopup(this.href); return false">
+             <img src="../static/img/pixel.gif" alt="Google+" class="share-service-icon share-service-icon-googleplus" rel="tooltip" data-original-title="Share on Google Plus!" data-placement="top">
+             </a>
+        </li></ul>
+    </div>
+</div>
+
+<!-- Load Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'screenchop';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+{% endblock %}
+
+{% block footer %}
+{% include 'shared/_chop_actions.html' %}
+
+{% if session['username'] == chop.submitter or user.rank == 'mod' %}
+<script>
+    /* Add attribute to tags form hack */
+    $('#tags').attr('data-provide', "typeahead")
+
+    /* Search Tags Typeahead JSON */
+    $.getJSON("/api/public/searchTags.json", function(json) {
+          $('#tags').typeahead({
+            source: json.tags
+            });
+     });
+</script>
+{% endif %}
+
+{% endblock %}

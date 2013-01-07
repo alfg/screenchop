@@ -1,9 +1,10 @@
+{% extends "layout/base.html" %}
+
 {% set active_page = "following" %}
-{% set active_sub = "new" %}
-{% set requires_loginForms = False %}
 
-{% include 'layout/header.html' %}
+{% block title %}Following{% endblock %}
 
+{% block head %}
 <!-- Gallery config variables -->
 <script type="text/javascript"> 
     var maxPerRow = {{ maxPerRow }};
@@ -15,66 +16,37 @@
     var time = 'all';
     var showFollowing = 'true';
 </script>
+{% endblock %}
 
-    <body>
-    {% include 'layout/nav.html' %}
-        <div class="container">
+{% block content %}
 
-            <!-- Display flash message if any errors -->
-            {% with message = get_flashed_messages() %}
-            {% if message %}
-            <div class="alert">
-            <button class="close" data-dismiss="alert">×</button>
-                    {{ message[0] }}
-            </div>
-            {% endif %}
-            {% endwith %}
-            
-            <div class="row-fluid">
-                
-                <div id="contents">
-                
-                {% if followlist %}
-                <div id="following-box">
-                
-                <ul class="follow-avatars-list">
-                    {% for u in followlist %}
-                    <li>
-                        <a href="/u/{{ u.username }}">
-                        <div class="follow-avatar follow-user-popover" data-original-title="{{ u.username }}" rel="popover"
-                         data-content="{% if u.description %}{{ u.description }} {% else %} This user does not have a profile description. {% endif %}">
-                            {% if u.avatar %}
-                            <img src="{{ avatarURL }}{{ u.avatar }}"></img>
-                            {% endif %}
-                        </div>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                </div>
-                
-                
-                
-                
-                
-                
-                
-                    {% include 'layout/subs.html' %}
+{% set active_sub = "new" %}
 
-                    <!-- Gallery -->
-                    <div id="results"></div>
-
-                </div>
-                <div id="loadmore">
-                    <span>Load More</span>
-                </div>
-                {% else %}
-                You are not following any users
+{% if followlist %}
+<div id="following-box">
+    <ul class="follow-avatars-list">
+        {% for u in followlist %}
+        <li>
+            <a href="/u/{{ u.username }}">
+            <div class="follow-avatar follow-user-popover" data-original-title="{{ u.username }}" rel="popover"
+             data-content="{% if u.description %}{{ u.description }} {% else %} This user does not have a profile description. {% endif %}">
+                {% if u.avatar %}
+                <img src="{{ avatarURL }}{{ u.avatar }}"></img>
                 {% endif %}
-
             </div>
-        </div> <!-- /container -->
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+                
+{% include 'shared/_subs.html' %}
 
+<!-- Gallery -->
+<div id="results"></div>
 
-{% include 'layout/footer.html' %}
+{% else %}
+You are not following any users
+{% endif %}
 
+{% endblock %}

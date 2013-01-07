@@ -1,0 +1,45 @@
+<div id="mininav">
+  <ul>
+    <li><a href="/" {% if active_sub == 'hot' %} class="active"{% endif %}>Hot</a></li>
+    <li><a href="/top" {% if active_sub == 'top' %} class="active"{% endif %}>Top</a></li>
+    <li><a href="/new" {% if active_sub == 'new' %} class="active"{% endif %}>New</a></li>
+  </ul>
+</div>
+
+{% if active_sub == 'top' %}
+<div class="btn-group pull-left">
+    <a class="btn dropdown-toggle btn-mini btn-primary" style="line-height:11px; top:2px;" data-toggle="dropdown" href="#">
+      {% if timerange == 'hour' %}
+        Last Hour
+      {% elif timerange == '24h' %}
+        Last 24 Hours
+      {% elif timerange == '7d' %}
+        7 Days
+      {% elif timerange == '30d' %}
+        30 Days
+      {% elif timerange == 'all' %}
+        All Time
+      {% endif %}
+      {{ time }}
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" style="min-width: 50px;">
+      <li><a href="?t=hour">Last Hour</a></li>
+      <li><a href="?t=24h">Last 24 Hours</a></li>
+      <li><a href="?t=7d">7 Days</a></li>
+      <li><a href="?t=30d">30 Days</a></li>
+      <li><a href="?t=all">All Time</a></li>
+    </ul>
+</div>
+{% endif %}
+
+{# if user has subscriptions, then show them #}
+{% if user.subscriptions %}
+<div id="mininav-subscriptions">
+  <ul>
+    {% for t in user.subscriptions %}
+    <li><a href="/tags/{{ t }}" {% if t == tag %}class="active"{% endif %}>{{ t }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

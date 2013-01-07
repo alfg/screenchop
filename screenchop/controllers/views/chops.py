@@ -68,7 +68,7 @@ def chop(filename):
     # Calculate total score of post
     score = int(chop.upvotes) - int(chop.downvotes)
     
-    return render_template('chops/chop.html', chop=chop, regForm=regForm,
+    return render_template('main/chop.html', chop=chop, regForm=regForm,
                             loginForm=loginForm, editPostForm=editPostForm,
                             fullURL=fullURL, shortURL=shortURL, score=score,
                             vote=vote, tagging=tagging, tagable=tagable,

@@ -1,68 +1,37 @@
-    {% set active_page = "upload" %}
-    {% include 'layout/header.html' %}
+{% extends "layout/base.html" %}
 
-    <body>
+{% set active_page = "upload" %}
 
-    {% include 'layout/nav.html' %}
+{% block title %}My Uploads{% endblock %}
 
-    <div class="container">
-        <div class="row-fluid">
+{% block content %}
+<ul class="nav nav-pills">
+  <li><a href="/account">Profile</a></li>
+  <li class="active"><a href="/account/uploads">Uploads</a></li>
+  <li><a href="/account/password">Password</a></li>
+</ul>
 
-            <div>
-                <div id="contents">
-                    
-                    <!-- Display flash message if any errors -->
-                    {% with message = get_flashed_messages() %}
-                    {% if message %}
-                    <div class="alert">
-                        <button class="close" data-dismiss="alert">×</button>
-                        <strong>{{ message[0] }}</strong>
-                    </div>
-                    {% endif %}
-                    {% endwith %}
-                    
+<div class="well">
+    {% if chops %}
+    <ul class="thumbnails">
+        {% for i in chops %}
+        <li class="account-uploads">
+                <a href="/c/{{ i.filename }}" class="thumbnail">
+                <img src="{{ s3ThumbsURL }}{{ i.filename }}" alt=""></a>
+                {% if i.title %}<h5>{{ i.title }}</h5>{% endif %}
+                {% if i.caption %}<p>{{ i.caption }}</p>{% endif %}
+        </li>
+        {% endfor %}
+        
+        {% else %}
+        <center>
+            <h3>
+                <i class="icon-asterisk"></i>
+                You have not uploaded any screenshots yet! <a href="/upload">Get started!
+            </h3>
+        </center>
+        {% endif %}
+    </ul>
 
-                        <ul class="nav nav-pills">
-                          <li><a href="/account">Profile</a></li>
-                          <li class="active"><a href="/account/uploads">Uploads</a></li>
-                          {# <li><a href="#">Comments</a></li> #}
-                          <li><a href="#">Friends</a></li>
-                          <li><a href="/account/password">Password</a></li>
-                        </ul>
-
-                        <div class="well">
-                            {% if chops %}
-                            <ul class="thumbnails">
-                                {% for i in chops %}
-                                <li class="account-uploads">
-                                        <a href="/c/{{ i.filename }}" class="thumbnail">
-                                        <img src="{{ s3ThumbsURL }}{{ i.filename }}" alt=""></a>
-                                        {% if i.title %}<h5>{{ i.title }}</h5>{% endif %}
-                                        {% if i.caption %}<p>{{ i.caption }}</p>{% endif %}
-                                </li>
-                                {% endfor %}
-                                
-                                {% else %}
-                                <center>
-                                    <h3>
-                                        <i class="icon-asterisk"></i>
-                                        You have not uploaded any screenchops yet! <a href="/upload">Get started!
-                                    </h3>
-                                </center>
-                                {% endif %}
-                            </ul>
-                        
-                        </div>
-                        
-                        
-
-
-
-                </div>
-            </div>
-
-
-        </div>
-    </div> <!-- /container -->
-
-    {% include 'layout/footer.html' %}
+</div>
+{% endblock %}

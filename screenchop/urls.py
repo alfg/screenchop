@@ -9,7 +9,7 @@ from flask.ext.assets import Environment, Bundle
 from screenchop import config
 
 #import views
-from screenchop.views import home, chops, account, user
+from screenchop.controllers.views import home, chops, account, user
 from screenchop.controllers import uploader, vote, star, subscriptions, follow
 from screenchop.api.public import images, tags, tagcloud, getuser
 from screenchop.sessions import login, logout, register

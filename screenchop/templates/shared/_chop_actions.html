@@ -1,0 +1,47 @@
+<div class="modal hide" id="edit-chop">
+
+    <div class="modal-header">
+        <h3>Editing Post</h3>
+    </div>
+    <div class="modal-body">
+
+        {% from "main/_formhelpers.html" import render_field %}          
+        <form method="post" action="/c/{{ chop.filename }}/update">                           
+            {{ render_field(editPostForm.caption) }}                         
+            {{ render_field(editPostForm.tags, autocomplete="off") }}
+        
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-info">Update</button>
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </form>
+    </div>
+
+</div>
+
+<div class="modal hide" id="delete-chop"> 
+    <div class="modal-header">
+        <h3>Delete Post?</h3>
+    </div>
+    <div class="modal-body">
+    <p>Are you sure you want to delete this post? This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/c/{{ chop.filename }}/delete" class="btn btn-danger">Delete</a>
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+</div>
+
+<div class="modal hide" id="report-chop"> 
+    <div class="modal-header">
+        <h3>Report Post?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to report this post? Does it go against the <a href="/help/">rules and/or terms</a>?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/c/{{ chop.filename }}/report" class="btn btn-warning">Confirm</a>
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+
+</div>

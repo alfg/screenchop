@@ -34,8 +34,6 @@ def account():
     chops = Post.objects(submitter=session['username'])
     form = ProfileForm(request.form, description=user.description)
     codes = Invite_code.objects(created_by=session['username'])
-    for code in codes:
-        print code.code
     
     avatarURL = config.S3_AVATAR_URL
     

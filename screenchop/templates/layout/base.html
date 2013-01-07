@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Gaming screenshot sharing and ranking!">
+    <meta name="keywords" content="gaming, screenshots, sharing, ranking, video games, mmorpg, games, pc gaming, gallery">
+    <meta name="author" content="Alfred Gutierrez, alfg.co">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="content-language" content="en"> 
+    <title>{% block title %}{% endblock %} - Screenchop!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="image_src" href="http://screenchop.com/static/img/screenshot_samples/screenchop_site.png" />
+
+    {# load Open Graph tags for Chops and social sharing #}
+    {% if chop %}
+    <!-- Social Open Graph Meta -->
+    <meta property="og:title" content="Screenchop"/>
+    <meta property="og:image" content="{{ s3MediumURL }}{{ chop.filename }}"/>
+    <meta property="og:description" content="{% if chop.caption %} {{ chop.caption}} {% else %} &nbsp; {% endif %}"/>
+    {% else %}
+    <meta property="og:title" content="Screenchop"/>
+    <meta property="og:url" content="http://screenchop.com"/>
+    <meta property="og:description" content="Gaming screenshot sharing and ranking!"/>
+    <meta property="og:image" content="http://screenchop.com/static/img/screenshot_samples/screenchop_site.png"/>
+    {% endif %}
+
+    <!-- styles -->
+    <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link href="/static/css/jglance.css" rel="stylesheet">
+    <link href="/static/css/jquery.fancybox.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    {% if tagging == True %}
+    <link rel="stylesheet" href="/static/css/annotation.css">
+    {% endif %}
+    
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        min-width: 800px;
+      }
+    </style>
+    <!-- <link href="../static/css/bootstrap-responsive.css" rel="stylesheet"> -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/static/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
+    
+    {% block head %}
+    {% endblock %}
+    
+    {# Google Analytics Tracking Code if account exists in config #}
+    {% if google_analytics_account %}
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{ google_analytics_account }}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    {% endif %}        
+
+    <!-- onClick popup windows for facebook share -->
+    <script>
+    function socialPopup (url) {
+        popup = window.open(url, "social_popup",
+            "width=660,height=400,status=no,scrollbars=no,resizable=no");
+            popup.focus();
+            }
+    </script>
+    
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/"><h3 class="s-logo-text">Screenchop</h3><!-- <div class="s-logo"></div> --></a>
+          <ul class="nav">
+            <li {% if active_page=='home' %}class="active" {% endif %}><a href="/">Screenshots</a></li>
+            <li {% if active_page=='tags' %}class="active" {% endif %}><a href="/tags">Games</a></li>
+            <li {% if active_page=='following' %}class="active" {% endif %}><a href="/following">Following</a></li>
+          </ul>
+          <ul class="nav pull-right navbarupload">
+            <!-- Social buttons -->
+            <li class="social-nav">
+              <a href="http://www.facebook.com/sharer.php?u=http://screenchop.com" title="Share on Facebook!" onclick="socialPopup(this.href); return false">
+              <i class="icon-facebook-sign"></i></a>
+            </li>
+            <li class="social-nav">
+              <a href="https://twitter.com/share?text=Gaming%20screenshot%20sharing%20and%20ranking!&url=http://screenchop.com"
+                 onclick="socialPopup(this.href); return false" title="Share on Twitter!">
+              <i class="icon-twitter-sign"></i></a>
+            </li>
+            <li class="social-nav">
+              <a href="https://plus.google.com/share?url=http://screenchop.com" title="Share on Google+!" onclick="socialPopup(this.href); return false">
+              <i class="icon-google-plus-sign"></i></a>
+            </li>
+            <li class="social-nav" style="margin-right: 15px;">
+              <a href="http://github.com/alfg/screenchop" title="Fork on Github!"><i class="icon-github-sign"></i></a>
+            </li>
+            <li {% if active_page=='help' %}class="active" {% endif %}>
+              <a href="/help"><i class="icon-question-sign"></i> Help</a>
+            </li>
+            
+            {% if 'username' in session %}
+            <li>
+              <div>
+                <a class="btn btn-success" href="/upload"><i class="icon-upload-alt"></i> Upload</a>
+              </div>
+            </li>
+            
+            <li>
+              <div class="user-nav btn-group">
+                <a class="btn btn-primary" href="/account"><i class="icon-user icon-white"></i> {{ session.username }}</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/account"><i class="icon-user"></i> Profile</a></li>
+                  <li><a href="/account/uploads"><i class="icon-picture"></i> Uploads</a></li>
+                  <li><a href="/account/password"><i class="icon-lock"></i> Update Password</a></li>
+                  <li><a href="/help"><i class="icon-question-sign"></i> Help</a></li>
+                  <li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>
+                </ul>
+              </div>
+            </li>
+            {% else %}
+            <li>
+              <div>
+                <a class="btn btn-primary user-nav" href="#login-form" data-toggle="modal">Login</a>
+                <a class="btn btn-success user-nav" href="#login-form" data-toggle="modal">Register</a>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <!-- Display flash message if any errors -->
+      {% with message = get_flashed_messages() %}
+      {% if message %}
+      <div class="alert">
+        <button class="close" data-dismiss="alert">×</button>
+        {{ message[0] }}
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <div id="contents">
+        <!-- content -->
+        
+        {% block content %}
+        {% endblock %}
+               
+
+      
+      </div> <!-- /content -->
+
+    </div> <!-- /container -->
+  
+    <!-- js
+    ================================================== -->
+    <script src="{{ url_for('static', filename='js/lib/jquery-1.7.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jglance-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.17.js') }}"></script>
+    {% if tagging == True %}
+    <script src="{{ url_for('static', filename='js/lib/jquery.annotate.js') }}"></script>
+    <script src="/static/js/custom/annotations.js"></script>
+    {% endif %}
+    {% if active_page == 'upload' %}
+    <script src="{{ url_for('static', filename='js/lib/jquery.filedrop.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom/dropscript.js') }}"></script>
+    {% endif %}
+    {% if active_page == 'home' or active_page == 'tags' or active_page == 'following' %}
+    <script src="{{ url_for('static', filename='js/custom/gallery.js') }}"></script>
+    {% endif %}
+    <script src="/static/js/custom/custom.js?v=2"></script>
+
+    <!-- init dynamic JS -->
+    <script>
+      $(document).ready(function() {
+        {% if active_page == 'tags' %}
+        tagcloud();
+        {% endif %}
+      });
+    </script>
+
+    {% if requires_loginForms == True %}
+      <!-- Login/Register Modal -->
+      {% include 'shared/_login_register.html' %}
+    {% endif %}
+
+    <ul class="footer-links center">
+      <li><a href="/help/">Help</a></li>
+      <li><a href="/tos/">Terms</a></li>
+      <li><a href="https://github.com/alfg/screenchop/">Code</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      {% if registration_level == 'invite' and 'username' not in session %}
+      <li><a href="/request-invite/" style="color:red;">Request Invite</a></li>
+      {% endif %}
+    </ul> 
+
+    <!-- End of Document -->
+    <!-- UserVoice -->
+    <script type="text/javascript">
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/6XsgX7DdHzIcHIk4Lf6FuQ.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
+    </script>
+    
+    {% block footer %}
+    {% endblock %}
+  
+  </body>
+</html>

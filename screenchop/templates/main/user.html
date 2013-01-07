@@ -1,88 +1,63 @@
+{% extends "layout/base.html" %}
+
 {% set active_page = "home" %}
 {% set active_sub = "hot" %}
 {% set requires_loginForms = True %}
 
-{% include 'layout/header.html' %}
+{% block title %}Request Invitation{% endblock %}
 
-<body>
-
-<!-- Gallery config variables -->
-<script type="text/javascript"> 
-    var maxPerRow = {{ maxPerRow }};
-    var sortType = 'hot';
-    var page = {{ pageIncr }};
-    var pageInc = {{ pageIncr }};
-    var user = '{{ user.username }}';
-    var tag = 'all';
-    var time = 'all';
-    var showFollowing = 'false';
-</script>
-
-    {% include 'layout/nav.html' %}
-        <div class="container">
-
-            <!-- Display flash message if any errors -->
-            {% with message = get_flashed_messages() %}
-            {% if message %}
-            <div class="alert">
-            <button class="close" data-dismiss="alert">×</button>
-                    {{ message[0] }}
-            </div>
+{% block head %}
+    <!-- Gallery config variables -->
+    <script type="text/javascript"> 
+        var maxPerRow = {{ maxPerRow }};
+        var sortType = 'hot';
+        var page = {{ pageIncr }};
+        var pageInc = {{ pageIncr }};
+        var user = '{{ user.username }}';
+        var tag = 'all';
+        var time = 'all';
+        var showFollowing = 'false';
+    </script>
+{% endblock %}
+{% block content %}
+<div id="user-profile">
+    <div class="user-avatar">
+        {% if user.avatar %}
+        <img src="{{ avatarURL }}{{ user.avatar }}"></img>
+        {% endif %}
+    </div>
+    <div class="user-info-group">
+        <div class="user-name">
+            {% if 'username' in session %}
+            {% if user.username in sessionUser.following %}
+            <h2>{{ user.username }} <a class="btn btn-mini btn-danger" href="/u/{{ user.username }}/unfollow" style="margin-bottom:3px;">Unfollow</a></h2>
+            {% else %}
+            <h2>{{ user.username }} <a class="btn btn-mini btn-success" href="/u/{{ user.username }}/follow" style="margin-bottom:3px;">Follow</a></h2>
             {% endif %}
-            {% endwith %}
-            
-            <div class="row-fluid">
-                
-                <div id="contents">
-                
-                    <div id="user-profile">
-                        <div class="user-avatar">
-                            {% if user.avatar %}
-                            <img src="{{ avatarURL }}{{ user.avatar }}"></img>
-                            {% endif %}
-                        </div>
-                        <div class="user-info-group">
-                            <div class="user-name">
-                                {% if 'username' in session %}
-                                {% if user.username in sessionUser.following %}
-                                <h2>{{ user.username }} <a class="btn btn-mini btn-danger" href="/u/{{ user.username }}/unfollow" style="margin-bottom:3px;">Unfollow</a></h2>
-                                {% else %}
-                                <h2>{{ user.username }} <a class="btn btn-mini btn-success" href="/u/{{ user.username }}/follow" style="margin-bottom:3px;">Follow</a></h2>
-                                {% endif %}
-                                {% else %}
-                                <h2>{{ user.username }}</h2>
-                                {% endif %}
-                            </div>
-                            <div class="user-title">
-                                <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
-                            </div>
-                        </div>
-                        <div class="user-followers">
-                            <span class="user-stat-number"><h2>{{ followerCount }}</h2></span>
-                            <span class="user-stat-name">Followers</span>
-                        </div>
-                        <div class="user-following">
-                            <span class="user-stat-number"><h2>{{ followingCount }}</h2></span>
-                            <span class="user-stat-name">Following</span>
-                        </div>
-                        <div class="user-views">
-                            <span class="user-stat-number"><h2>{{ score }}</h2></span>
-                            <span class="user-stat-name">Chop Score</span>
-                        </div>
-                    </div>
-                
-                    {% include 'layout/subs.html' %}
+            {% else %}
+            <h2>{{ user.username }}</h2>
+            {% endif %}
+        </div>
+        <div class="user-title">
+            <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
+        </div>
+    </div>
+    <div class="user-followers">
+        <span class="user-stat-number"><h2>{{ followerCount }}</h2></span>
+        <span class="user-stat-name">Followers</span>
+    </div>
+    <div class="user-following">
+        <span class="user-stat-number"><h2>{{ followingCount }}</h2></span>
+        <span class="user-stat-name">Following</span>
+    </div>
+    <div class="user-views">
+        <span class="user-stat-number"><h2>{{ score }}</h2></span>
+        <span class="user-stat-name">Chop Score</span>
+    </div>
+</div>
 
-                    <!-- Gallery -->
-                    <div id="results"></div>
+{% include 'shared/_subs.html' %}
 
-                </div>
-                <div id="loadmore">
-                    <span>Load More</span>
-                </div>
-            </div>
-        </div> <!-- /container -->
-
-
-{% include 'layout/footer.html' %}
-
+<!-- Gallery -->
+<div id="results"></div>
+{% endblock %}

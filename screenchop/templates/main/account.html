@@ -1,93 +1,74 @@
-    {% set active_page = "account" %}
-    {% include 'layout/header.html' %}
+{% extends "layout/base.html" %}
 
-    <body>
+{% set active_page = "account" %}
 
-    {% include 'layout/nav.html' %}
+{% block title %}{{ user.username }}{% endblock %}
 
-    <div class="container">
-                    
-                    <!-- Display flash message if any errors -->
-                    {% with message = get_flashed_messages() %}
-                    {% if message %}
-                    <div class="alert">
-                        <button class="close" data-dismiss="alert">×</button>
-                        <strong>{{ message[0] }}</strong>
-                    </div>
-                    {% endif %}
-                    {% endwith %}
-                    
+{% block content %}
+<ul class="nav nav-pills">
+  <li class="active"><a href="/account">Profile</a></li>
+  <li><a href="/account/uploads">Uploads</a></li>
+  <li><a href="/account/password">Password</a></li>
+</ul>
 
-                        <ul class="nav nav-pills">
-                          <li class="active"><a href="/account">Profile</a></li>
-                          <li><a href="account/uploads">Uploads</a></li>
-                          {# <li><a href="#">Comments</a></li> #}
-                          {# <li><a href="#">Friends</a></li> #}
-                          <li><a href="/account/password">Password</a></li>
-                        </ul>
+<div id="user-profile">
+    <div class="user-avatar">
+        {% if user.avatar %}
+        <img src="{{ avatarURL }}{{ user.avatar }}"></img>
+        {% endif %}
+    </div>
+    <div class="user-info-group">
+        <div class="user-name"><h2>{{ user.username }}</h2></div>
+        <div class="user-title">
+            <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
+        </div>
+    </div>
+    <div class="user-followers">
+        <span class="user-stat-number"><h2>{{ followerCount }}</h2></span>
+        <span class="user-stat-name">Followers</span>
+    </div>
+    <div class="user-following">
+        <span class="user-stat-number"><h2>{{ followingCount }}</h2></span>
+        <span class="user-stat-name">Following</span>
+    </div>
+    <div class="user-views">
+        <span class="user-stat-number"><h2>{{ score }}</h2></span>
+        <span class="user-stat-name">Chop Score</span>
+    </div>
+</div>
 
-                    <div id="user-profile">
-                        <div class="user-avatar">
-                            {% if user.avatar %}
-                            <img src="{{ avatarURL }}{{ user.avatar }}"></img>
-                            {% endif %}
-                        </div>
-                        <div class="user-info-group">
-                            <div class="user-name"><h2>{{ user.username }}</h2></div>
-                            <div class="user-title">
-                                <h4>{% if user.description %} {{ user.description }} {% else %} {% endif %}</h4>
-                            </div>
-                        </div>
-                        <div class="user-followers">
-                            <span class="user-stat-number"><h2>{{ followerCount }}</h2></span>
-                            <span class="user-stat-name">Followers</span>
-                        </div>
-                        <div class="user-following">
-                            <span class="user-stat-number"><h2>{{ followingCount }}</h2></span>
-                            <span class="user-stat-name">Following</span>
-                        </div>
-                        <div class="user-views">
-                            <span class="user-stat-number"><h2>{{ score }}</h2></span>
-                            <span class="user-stat-name">Chop Score</span>
-                        </div>
-                    </div>
-                    
-                    <div class="well row" style="margin-left: 0px;">
-                        <div class="pull-left">
-                            <form method="post" action="/account/avatar" enctype="multipart/form-data">
-                                <dl>
-                                <dt><label>Avatar</label></dt>
-                                <dd><input class="account-avatar-input" type="file" name="avatar" /></dd>
-                                <button type="submit" class="btn btn-success">Upload</button>
-                                </dl>
-                            </form>
-                            
-                            {% from "auth/_formhelpers.html" import render_field %}
-                            <form method="post" action="/account">
-                                {{ render_field(form.description) }}
-                                <button type="submit" class="btn btn-success">Update</button>
-                            </form>
-                        </div>
-                        {% if registration_level == 'invite' %}
-                        <div class="pull-right">
-                            <dl>
-                                <dt>Invite codes</dt>
-                                {% for c in codes %}
-                                <dd><code>
-                                    {% if c.valid == False %}<del>{% endif %}
-                                        {{ c.code }}
-                                    {% if c.valid == False %}</del>{% endif %}
-                                </code></dd><br />
-                                {% endfor %}
-                            </dl>
-                            <form method="post" action="/account/generateInvite">
-                                <button type="submit" class="btn btn-success">Generate Invite Code</button>
-                            </form>
-                        </div>
-                        {% endif %}
-                    </div>
-
-
-    </div> <!-- /container -->
-
-    {% include 'layout/footer.html' %}
+<div class="well row" style="margin-left: 0px;">
+    <div class="pull-left">
+        <form method="post" action="/account/avatar" enctype="multipart/form-data">
+            <dl>
+            <dt><label>Avatar</label></dt>
+            <dd><input class="account-avatar-input" type="file" name="avatar" /></dd>
+            <button type="submit" class="btn btn-success">Upload</button>
+            </dl>
+        </form>
+        
+        {% from "auth/_formhelpers.html" import render_field %}
+        <form method="post" action="/account">
+            {{ render_field(form.description) }}
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+    {% if registration_level == 'invite' %}
+    <div class="pull-right">
+        <dl>
+            <dt>Invite codes</dt>
+            {% for c in codes %}
+            <dd><code>
+                {% if c.valid == False %}<del>{% endif %}
+                    {{ c.code }}
+                {% if c.valid == False %}</del>{% endif %}
+            </code></dd><br />
+            {% endfor %}
+        </dl>
+        <form method="post" action="/account/generateInvite">
+            <button type="submit" class="btn btn-success">Generate Invite Code</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
