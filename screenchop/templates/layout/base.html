@@ -193,15 +193,6 @@
     {% endif %}
     <script src="/static/js/custom/custom.js?v=2"></script>
 
-    <!-- init dynamic JS -->
-    <script>
-      $(document).ready(function() {
-        {% if active_page == 'tags' %}
-        tagcloud();
-        {% endif %}
-      });
-    </script>
-
     {% if requires_loginForms == True %}
       <!-- Login/Register Modal -->
       {% include 'shared/_login_register.html' %}
