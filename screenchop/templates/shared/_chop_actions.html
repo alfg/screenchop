@@ -37,11 +37,14 @@
         <h3>Report Post?</h3>
     </div>
     <div class="modal-body">
+        <form method="post" action="/c/{{ chop.filename }}/report">                           
+            {{ render_field(reportPostForm.reason) }}                         
         <p>Are you sure you want to report this post? Does it go against the <a href="/help/">rules and/or terms</a>?</p>
     </div>
     <div class="modal-footer">
-        <a href="/c/{{ chop.filename }}/report" class="btn btn-warning">Confirm</a>
+        <button type="submit" class="btn btn-warning">Report</button>
         <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </form>
     </div>
 
 </div>

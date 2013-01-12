@@ -45,6 +45,11 @@ class EditPost(Form):
             ])
     tags = TagListField('Tags')
 
+class ReportPost(Form):
+    reason = TextAreaField('Reason', [
+        validators.Length(max=1000, message='Max 1000 characters')
+            ])
+
 class AddFromURLForm(Form):
     caption = TextField()
     tags = TagListField()

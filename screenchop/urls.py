@@ -65,7 +65,7 @@ app.add_url_rule('/tags/delete', view_func=tags.deleteTag, methods=['POST', 'GET
 app.add_url_rule('/account/avatar', view_func=account.account_avatar_uploader, methods=['POST'])
 app.add_url_rule('/c/<filename>/delete', view_func=chops.delete_chop, methods=['POST', 'GET'])
 app.add_url_rule('/c/<filename>/update', view_func=chops.update_chop, methods=['POST', 'GET'])
-app.add_url_rule('/c/<filename>/report', view_func=chops.report_chop, methods=['POST', 'GET'])
+app.add_url_rule('/c/<filename>/report', view_func=chops.report_chop, methods=['POST'])
 app.add_url_rule('/star', view_func=star.star, methods=['POST', 'GET'])
 app.add_url_rule('/tags/<tag>/subscribe', view_func=subscriptions.subscribe, methods=['POST', 'GET'])
 app.add_url_rule('/tags/<tag>/unsubscribe', view_func=subscriptions.unsubscribe, methods=['POST', 'GET'])

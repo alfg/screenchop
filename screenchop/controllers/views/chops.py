@@ -7,7 +7,7 @@ from flask import render_template, flash
 
 from screenchop.models import *
 from screenchop import config
-from screenchop.forms import RegistrationForm, LoginForm, EditPost
+from screenchop.forms import RegistrationForm, LoginForm, EditPost, ReportPost
 from screenchop.sessions import *
 from screenchop.cache import cache
 from screenchop.util import mailer
@@ -56,11 +56,11 @@ def chop(filename):
     # For registration/login wtf validation
     regForm = RegistrationForm(request.form)
     loginForm = LoginForm(request.form)
+    reportPostForm = ReportPost(request.form)
     editPostForm = EditPost(request.form,
                             caption=chop.caption,
                             tags=chop.tags)
 
-    
     # For image linking, short url sharing.
     fullURL = config.DOMAIN_URL
     shortURL = config.SHORT_DOMAIN_URL
@@ -73,7 +73,8 @@ def chop(filename):
                             fullURL=fullURL, shortURL=shortURL, score=score,
                             vote=vote, tagging=tagging, tagable=tagable,
                             s3FullURL=s3FullURL, s3MediumURL=s3MediumURL,
-                            s3ThumbsURL=s3ThumbsURL, star=star, user=user)
+                            s3ThumbsURL=s3ThumbsURL, star=star, user=user,
+                            reportPostForm=reportPostForm)
                             
 @requires_auth        
 def delete_chop(filename):
@@ -143,7 +144,17 @@ def update_chop(filename):
     return redirect('/c/%s' % filename) 
 
 def report_chop(filename):
-    mailer.report_chop(filename)
-    flash('Thank you for reporting this post. A moderator has been notified.')
-    return redirect('/c/%s' % filename)
+    """ Controller to report post """
+    # Initiate form for validation
+    form = ReportPost(request.form)
+
+    if request.method == 'POST' and form.validate():
+        reason = form.reason.data
+        mailer.report_chop(filename, reason)
+        flash('Thank you for reporting this post. A moderator has been notified.')
+        return redirect('/c/%s' % filename)
+    else:
+        errors = form.errors
+        flash(errors)
+        return redirect('/c/%s' % filename)
 

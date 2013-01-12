@@ -33,12 +33,13 @@ def send_request_invite_email(email):
         template,
         [config.ADMIN_EMAIL])
 
-def report_chop(chop):
+def report_chop(chop, reason):
     """ Mailer for reporting a post. """
 
     template = """
                 Post reported: %sc/%s \n
-               """ % (config.DOMAIN_URL, chop)
+                Reason: %s \n
+               """ % (config.DOMAIN_URL, chop, reason)
     
     conn.send_email(
         config.ADMIN_EMAIL,
